@@ -1,0 +1,25 @@
+{
+  "name": "info30005_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+      "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mingjunp/info30005-2019-lf-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mingjunp/info30005-2019-lf-/issues"
+  },
+  "homepage": "https://github.com/mingjunp/info30005-2019-lf-#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.0",
+    "nodemon": "^1.18.11"
+  }
+}
