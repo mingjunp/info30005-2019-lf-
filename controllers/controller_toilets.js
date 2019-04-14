@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Toilet = require("../models/toilet");
 
 module.exports.getToilet = function (req, res) {
