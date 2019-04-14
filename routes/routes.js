@@ -8,9 +8,9 @@ const controller_reviews = require("../controllers/controller_reviews");
 router.get('/getToilet',controller_toilets.getToilet);
 
 //get create page
-router.get('/createToilet',function (req,res) {
-    res.render('createToilet.pug');
-});
+//router.get('/createToilet',function (req,res) {
+    //res.render('createToilet.pug');
+//});
 //post toilet
 router.post('/createToilet', controller_toilets.createToilet);
 
