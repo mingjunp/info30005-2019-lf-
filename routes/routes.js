@@ -32,16 +32,14 @@ router.post('/createUser', controller_users.createUser);
 router.get('/getReview',controller_reviews.getReview);
 
 //get create page
-// router.get('/createToilet',function (req,res) {
-//     res.render('createToilet.pug');
-// });
+
+
 //post review
 router.post('/createReview', controller_reviews.createReview);
 
 
-router.get('/', function (req, res) {
-    res.render('index.pug', { title: 'Home', message: 'Les Filles'});
-});
+router.get('/test', controller_toilets.autoSearch);
+
 
 module.exports = router;
 
