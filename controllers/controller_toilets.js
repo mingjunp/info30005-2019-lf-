@@ -82,16 +82,40 @@ module.exports.maleSearch = function (req, res) {
 };
 
 module.exports.femaleSearch = function (req, res) {
-
+    Toilet.find({female: 'yes'}, null, function (err, toilet) {
+        if (!err) {
+            res.send(toilet);
+        } else {
+            res.sendStatus(404);
+        }
+    });
 };
 module.exports.wheelchairSearch = function (req, res) {
-
+    Toilet.find({wheelchair: 'yes'}, null, function (err, toilet) {
+        if (!err) {
+            res.send(toilet);
+        } else {
+            res.sendStatus(404);
+        }
+    });
 };
 module.exports.babyFacilSearch = function (req, res) {
-
+    Toilet.find({babyFacil: 'yes'}, null, function (err, toilet) {
+        if (!err) {
+            res.send(toilet);
+        } else {
+            res.sendStatus(404);
+        }
+    });
 };
 module.exports.showerSearch = function (req, res) {
-
+    Toilet.find({shower: 'yes'}, null, function (err, toilet) {
+        if (!err) {
+            res.send(toilet);
+        } else {
+            res.sendStatus(404);
+        }
+    });
 };
 
 
