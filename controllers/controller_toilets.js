@@ -1,5 +1,5 @@
 const Toilet = require("../models/toilet");
-
+const FuzzySearch = require('fuzzy-search');
 
 module.exports.getToilet = function (req, res) {
     Toilet.find(function (err, toilets) {
@@ -43,8 +43,8 @@ module.exports.autoSearch = function (req, res) {
     };
 
 
-    let lng = parseFloat(req.body.lng);
-    let lat = parseFloat(req.body.lat);
+    let lng = parseFloat(req.query.lng);
+    let lat = parseFloat(req.query.lat);
     //let lng = -37.792820;
     //let lat = 144.969070;
     let maxDistance = 1000;
@@ -62,56 +62,35 @@ module.exports.autoSearch = function (req, res) {
     }
 };
 
-
 // based on searching box content & "Check Detail" linked
 module.exports.contentSearch = function (req, res) {
-    let content = req.body.content;
-    //模糊搜索
-};
+    let toiletName = req.query.toiletName;
+    Toilet.find(function (err, toilets) {
+        if (!err) {
+            const searcher = new FuzzySearch(toilets, ['toiletName'], {
+                caseSensitive: false,
+            });
+            const result = searcher.search(toiletName);
 
+            res.send(result);
+        } else {
+            res.sendStatus(404);
+        }
+    });
+};
 
 // searching and sorting by key words
-module.exports.maleSearch = function (req, res) {
-    Toilet.find({male: 'yes'}, null, function (err, toilet) {
-        if (!err) {
-            res.send(toilet);
-        } else {
-            res.sendStatus(404);
+module.exports.keywordSearch = function (req, res) {
+    let keywords = {};
+    for (let key of Object.keys(req.query)) {
+        if (req.query[key] === 'true') {
+            keywords[key] = 'yes';
         }
-    });
-};
+    }
 
-module.exports.femaleSearch = function (req, res) {
-    Toilet.find({female: 'yes'}, null, function (err, toilet) {
+    Toilet.find(keywords, null, function (err, toilets) {
         if (!err) {
-            res.send(toilet);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
-module.exports.wheelchairSearch = function (req, res) {
-    Toilet.find({wheelchair: 'yes'}, null, function (err, toilet) {
-        if (!err) {
-            res.send(toilet);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
-module.exports.babyFacilSearch = function (req, res) {
-    Toilet.find({babyFacil: 'yes'}, null, function (err, toilet) {
-        if (!err) {
-            res.send(toilet);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
-module.exports.showerSearch = function (req, res) {
-    Toilet.find({shower: 'yes'}, null, function (err, toilet) {
-        if (!err) {
-            res.send(toilet);
+            res.send(toilets);
         } else {
             res.sendStatus(404);
         }

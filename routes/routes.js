@@ -33,20 +33,17 @@ router.get('/getReview',controller_reviews.getReview);
 //post review
 router.post('/createReview', controller_reviews.createReview);
 
-
+// searching and sorting based on current location
 router.get('/autoSearch', controller_toilets.autoSearch);
 
+// based on searching box content & "Check Detail" linked
 router.get('/contentSearch', controller_toilets.contentSearch);
 
-router.get('/maleSearch', controller_toilets.maleSearch);
+// searching and sorting by key words
+router.get('/keywordSearch', controller_toilets.keywordSearch);
 
-router.get('/femaleSearch', controller_toilets.femaleSearch);
 
-router.get('/wheelchairSearch', controller_toilets.wheelchairSearch);
-
-router.get('/babyFacilSearch', controller_toilets.babyFacilSearch);
-
-router.get('/showerSearch', controller_toilets.showerSearch);
+// router.get('/', controller_toilet.);
 
 module.exports = router;
 
