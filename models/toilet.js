@@ -6,7 +6,7 @@ const toiletSchema = new mongoose.Schema({
     "toiletPicture": String,
     "location": {
         "type": {
-            "type": String,
+            type: String,
             enum: ['Point'],
             required: true
         },

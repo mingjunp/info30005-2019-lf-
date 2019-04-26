@@ -125,8 +125,8 @@ module.exports.createToilet = function (req, res) {
         "toiletName": req.body.toiletName,
         "toiletPicture": req.body.toiletPicture,
         "location": {
-            type: {type: "Point"},
-            coordinates: [req.body.lng, req.body.lat],
+            "type": "Point",
+            "coordinates": req.body.location.coordinates,
         },
         "female": req.body.female,
         "male": req.body.male,
@@ -137,22 +137,21 @@ module.exports.createToilet = function (req, res) {
     });
 
     // test example
-    // const toilet = new Toilet({
-    //     "userName": req.body.userName,
-    //     "toiletName": req.body.toiletName,
-    //     "toiletPicture": req.body.toiletPicture,
+    // {
+    //     "userName": "username",
+    //     "toiletName": "toiletName",
+    //     "toiletPicture": "109900898",
     //     "location": {
-    //         "type": "Point",
-    //         "coordinates": ["-37.793832", "144.968322"]
-    //     },
-    //     "female": req.body.female,
-    //     "male": req.body.male,
-    //     "wheelchair": req.body.wheelchair,
-    //     "babyFacil": req.body.babyFacil,
-    //     "shower": req.body.shower,
-    //     "aveRating": req.body.aveRating
-    // });
-
+    //     "type": "Point",
+    //         "coordinates": [-37.792, 144.962]
+    //      },
+    //     "female": "yes",
+    //     "male": "yes",
+    //     "wheelchair":"yes",
+    //     "babyFacil": "yes",
+    //     "shower": "yes",
+    //     "aveRating": 4.0
+    // }
     //
     toilet.save(function (err, newToilet) {
         if (!err) {

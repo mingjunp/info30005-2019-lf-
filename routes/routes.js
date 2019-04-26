@@ -7,10 +7,8 @@ const controller_reviews = require("../controllers/controller_reviews");
 //find all toilet
 router.get('/getToilet',controller_toilets.getToilet);
 
-//get create page
-//router.get('/createToilet',function (req,res) {
-    //res.render('createToilet.pug');
-//});
+// get create page
+
 //post toilet
 router.post('/createToilet', controller_toilets.createToilet);
 
@@ -20,9 +18,7 @@ router.post('/createToilet', controller_toilets.createToilet);
 router.get('/getUser',controller_users.getUser);
 
 //get create page
-// router.get('/createToilet',function (req,res) {
-//     res.render('createToilet.pug');
-// });
+
 //post user
 router.post('/createUser', controller_users.createUser);
 
@@ -38,8 +34,19 @@ router.get('/getReview',controller_reviews.getReview);
 router.post('/createReview', controller_reviews.createReview);
 
 
-router.get('/test', controller_toilets.autoSearch);
+router.get('/autoSearch', controller_toilets.autoSearch);
 
+router.get('/contentSearch', controller_toilets.contentSearch);
+
+router.get('/maleSearch', controller_toilets.maleSearch);
+
+router.get('/femaleSearch', controller_toilets.femaleSearch);
+
+router.get('/wheelchairSearch', controller_toilets.wheelchairSearch);
+
+router.get('/babyFacilSearch', controller_toilets.babyFacilSearch);
+
+router.get('/showerSearch', controller_toilets.showerSearch);
 
 module.exports = router;
 

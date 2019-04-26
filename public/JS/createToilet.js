@@ -1,4 +1,4 @@
- let url = "/createToilet";
+let url = "/createToilet";
 const Data = {
     location: "12,11",
     picture: "test"
