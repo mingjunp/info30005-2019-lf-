@@ -33,6 +33,9 @@ router.get('/getReview',controller_reviews.getReview);
 //post review
 router.post('/createReview', controller_reviews.createReview);
 
+//load reviews of certain toilet
+router.get('/loadReviews', controller_reviews.loadReviews);
+
 // searching and sorting based on current location
 router.get('/autoSearch', controller_toilets.autoSearch);
 
