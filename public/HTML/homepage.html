@@ -5,54 +5,9 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Find Toilets</title>
-    <style type="text/css">
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        body{
-            background-color: #F5F5F5;
-        }
-        .header{
-            height: 40px;
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../CSS/homepage.css">
 
-        }
-        .header ul li{
-            height: 40px;
-            line-height: 40px;
-            width: 50px;
-            float: right;
-            list-style:none;
-        }
-
-        .content{
-            margin:0 auto;
-            text-align: center;
-        }
-        .image{
-            margin: 50px 0px auto;
-
-        }
-        .content div{
-
-            margin-top: 10px;
-        }
-
-        #searchbox{
-            width: 400px;
-            height: 35px;
-        }
-        #map{
-            height: 100%;
-            width: 60%;
-            margin: 0 auto;
-        }
-        .mapContainer{
-            margin-top: 50px;
-            height: 500px;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
 <div class="header">
@@ -68,121 +23,48 @@
     <div>
         <h2>Really need to go!!</h2>
     </div>
-
     <div class="search">
-        <span><input id="searchbox" class="btn btn-default" type="text" placeholder="Enter your location"></span>
-        <span><input type="button" class="btn btn-info" name="search" value="search"></span>
+        <input id="pac-input" class="controls" type="text" placeholder="Enter location">
+        <input type="button" class="btn btn-info" name="search" value="search">
     </div>
 
 
     <div class="filter checkbox-custom checkbox-default">
         <p>Please select filter from below</p>
-        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="female" name="filter" value="female">female</label>
-        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="male" name="filter" value="male">male</label>
-        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="wheelchair" name="filter" value="wheelchair">wheelchair</label>
-        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="shower" name="filter" value="shower">shower</label>
-        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="babyFacility" name="filter" value="babyFacility">baby facility</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="female" name="filter" value="female">female
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="male" name="filter" value="male">male
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="shower" name="filter" value="shower">shower
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="babyFacility" name="filter" value="babyFacility">baby facility
+        </label>
     </div>
 
 </div>
 
-<div class="mapContainer col-lg-11">
+<div id="mapHolder" class="mapContainer col-lg-11">
     <div id="map"></div>
 </div>
-<script>
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 13,
-            center: {lat: -37.812326, lng: 144.961971}
-        });
-
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'T';
-
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = locations.map(function(location, i) {
-            return new google.maps.Marker({
-                position: location,
-                label: labels[i % labels.length],
-                icon: '../images/restroom.png'
-            });
-        });
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-        infoWindow = new google.maps.InfoWindow;
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Your current location!');
-                infoWindow.open(map);
-                map.setCenter(pos);
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-
-    }
-
-    //all toilet get from open melbourne
-    var allToilet;
-    $.ajax({url:"https://data.melbourne.vic.gov.au/resource/ru3z-44we.json",async:false,success:function(result){
-            allToilet = result;
-        }});
+<div class="footer">
+    <h5>Group Name: Les Filles</h5>
+    <div>Group Member: Yang Zhao, Jingwen Fu, Siyuan Duan, Mingjun Pan</div>
+</div>
 
 
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-    }
 
-    var toiletLocation = [];
-    for (var i=0; i<allToilet.length; i++){
-        var tem={lat:0,lng:0};
-        tem.lat=Number(allToilet[i].lat);
-        tem.lng=Number(allToilet[i].lon);
-        toiletLocation.push(tem);
-    }
-    var locations = toiletLocation;
+<script src="./js/mapcontrol.js"></script>
+<!--<script-->
+        <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgVsFlP_aer-Ld0xCH1dqvGTN5rz-omCo&callback=initMap">-->
+<!--</script>-->
 
-
-</script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgVsFlP_aer-Ld0xCH1dqvGTN5rz-omCo&callback=initMap">
-</script>
-
-<script>
-    function filterResult() {
-        filterToilet = []
-        var obj = document.getElementsByName("filter");
-        var check_val = [];
-        for(item in obj){
-            if(obj[item].checked){
-                check_val.push(obj[item].value);
-            }
-        }
-
-    }
-</script>
 </body>
 </html>
