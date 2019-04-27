@@ -7,10 +7,8 @@ const controller_reviews = require("../controllers/controller_reviews");
 //find all toilet
 router.get('/getToilet',controller_toilets.getToilet);
 
-//get create page
-router.get('/createToilet',function (req,res) {
-    res.render('createToilet.pug');
-});
+// get create page
+
 //post toilet
 router.post('/createToilet', controller_toilets.createToilet);
 
@@ -20,9 +18,7 @@ router.post('/createToilet', controller_toilets.createToilet);
 router.get('/getUser',controller_users.getUser);
 
 //get create page
-// router.get('/createToilet',function (req,res) {
-//     res.render('createToilet.pug');
-// });
+
 //post user
 router.post('/createUser', controller_users.createUser);
 
@@ -32,16 +28,22 @@ router.post('/createUser', controller_users.createUser);
 router.get('/getReview',controller_reviews.getReview);
 
 //get create page
-// router.get('/createToilet',function (req,res) {
-//     res.render('createToilet.pug');
-// });
+
+
 //post review
 router.post('/createReview', controller_reviews.createReview);
 
+// searching and sorting based on current location
+router.get('/autoSearch', controller_toilets.autoSearch);
 
-router.get('/', function (req, res) {
-    res.render('index.pug', { title: 'Home', message: 'Les Filles'});
-});
+// based on searching box content & "Check Detail" linked
+router.get('/contentSearch', controller_toilets.contentSearch);
+
+// searching and sorting by key words
+router.get('/keywordSearch', controller_toilets.keywordSearch);
+
+
+// router.get('/', controller_toilet.);
 
 module.exports = router;
 

@@ -4,7 +4,7 @@ const routes = require("./routes/routes.js");
 const bodyParser = require('body-parser');//用于处理Json数据
 app.use(bodyParser.json());
 
-app.set('view engine', 'pug');
+
 app.use(express.static(__dirname + '/public'));
 
 // Database setup
