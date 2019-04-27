@@ -40,7 +40,7 @@
 
         #searchbox{
             width: 400px;
-            height: 30px;
+            height: 35px;
         }
         #map{
             height: 100%;
@@ -76,13 +76,12 @@
 
 
     <div class="filter checkbox-custom checkbox-default">
-        <p>Select filter from below</p>
-        <label class="checkbox-inline"><input type="checkbox" id="distance" name="filter" value="distance">distance</label>
-        <label class="checkbox-inline"><input type="checkbox" id="female" name="filter" value="female">female</label>
-        <label class="checkbox-inline"><input type="checkbox" id="male" name="filter" value="male">male</label>
-        <label class="checkbox-inline"><input type="checkbox" id="male/female" name="filter" value="male/female">male/female</label>
-        <label class="checkbox-inline"><input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair</label>
-        <label class="checkbox-inline"><input type="checkbox" id="shower" name="filter" value="shower">shower</label>
+        <p>Please select filter from below</p>
+        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="female" name="filter" value="female">female</label>
+        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="male" name="filter" value="male">male</label>
+        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="wheelchair" name="filter" value="wheelchair">wheelchair</label>
+        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="shower" name="filter" value="shower">shower</label>
+        <label class="checkbox-inline"><input type="checkbox" onclick="filterResult()" id="babyFacility" name="filter" value="babyFacility">baby facility</label>
     </div>
 
 </div>
@@ -91,10 +90,7 @@
     <div id="map"></div>
 </div>
 <script>
-
-
     function initMap() {
-
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 13,
             center: {lat: -37.812326, lng: 144.961971}
@@ -110,10 +106,10 @@
         var markers = locations.map(function(location, i) {
             return new google.maps.Marker({
                 position: location,
-                label: labels[i % labels.length]
+                label: labels[i % labels.length],
+                icon: '../images/restroom.png'
             });
         });
-
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
@@ -139,6 +135,7 @@
             // Browser doesn't support Geolocation
             handleLocationError(false, infoWindow, map.getCenter());
         }
+
     }
 
     //all toilet get from open melbourne
@@ -165,11 +162,27 @@
         toiletLocation.push(tem);
     }
     var locations = toiletLocation;
+
+
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgVsFlP_aer-Ld0xCH1dqvGTN5rz-omCo&callback=initMap">
+</script>
+
+<script>
+    function filterResult() {
+        filterToilet = []
+        var obj = document.getElementsByName("filter");
+        var check_val = [];
+        for(item in obj){
+            if(obj[item].checked){
+                check_val.push(obj[item].value);
+            }
+        }
+
+    }
 </script>
 </body>
 </html>
