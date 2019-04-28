@@ -4,12 +4,12 @@
 ## Run : 
 ### node app.js
 
-## Requires:
-### node 10.15.3
-### express 4.16.0
-### mongoose 5.5.4
-### fuzzy-search 3.0.1
-
+## "dependencies":
+### "body-parser": "^1.18.3",
+### "express": "^4.16.4",
+### "mongoose": "^5.5.0",
+### "fuzzy-search": "^3.0.1",
+### "nodemon": "^1.18.11",
 ---
 
 ## Team info
