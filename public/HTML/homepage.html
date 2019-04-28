@@ -7,28 +7,29 @@
     <title>Find Toilets</title>
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="../CSS/homepage.css">
-
 </head>
+
 <body>
+<!--header-->
 <div class="header">
     <ul>
         <li><a href="#">Signup</a></li>
         <li><a href="#">Login</a></li>
     </ul>
 </div>
-
+<!--content-->
 <div class="content">
+    <!--logo and slogan-->
     <div class="image"><img id="image" src=" ../images/1.png" alt="logo"></div>
-
     <div>
         <h2>Really need to go!!</h2>
     </div>
+    <!--search box-->
     <div class="search">
         <input id="pac-input" class="controls" type="text" placeholder="Enter location">
         <input type="button" class="btn btn-info" name="search" value="search">
     </div>
-
-
+    <!--filter selections-->
     <div class="filter checkbox-custom checkbox-default">
         <p>Please select filter from below</p>
         <label class="checkbox-inline">
@@ -47,24 +48,17 @@
             <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
         </label>
     </div>
-
 </div>
-
+<!--google map part-->
 <div id="mapHolder" class="mapContainer col-lg-11">
     <div id="map"></div>
 </div>
+<!--group information-->
 <div class="footer">
     <h5>Group Name: Les Filles</h5>
     <div>Group Member: Yang Zhao, Jingwen Fu, Siyuan Duan, Mingjun Pan</div>
 </div>
-
-
-
-
+<!--link javascript at bottom to increase loading speed-->
 <script src="./JS/mapcontrol.js"></script>
-<!--<script-->
-        <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgVsFlP_aer-Ld0xCH1dqvGTN5rz-omCo&callback=initMap">-->
-<!--</script>-->
-
 </body>
 </html>
