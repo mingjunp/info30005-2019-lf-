@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Find Toilets</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../CSS/homepage.css">
+
 </head>
 <body>
+<div class="header">
+    <ul>
+        <li><a href="#">Signup</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+</div>
+
+<div class="content">
+    <div class="image"><img id="image" src=" ../images/1.png" alt="logo"></div>
+
+    <div>
+        <h2>Really need to go!!</h2>
+    </div>
+    <div class="search">
+        <input id="pac-input" class="controls" type="text" placeholder="Enter location">
+        <input type="button" class="btn btn-info" name="search" value="search">
+    </div>
+
+
+    <div class="filter checkbox-custom checkbox-default">
+        <p>Please select filter from below</p>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="female" name="filter" value="female">female
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="male" name="filter" value="male">male
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="shower" name="filter" value="shower">shower
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
+        </label>
+    </div>
+
+</div>
+
+<div id="mapHolder" class="mapContainer col-lg-11">
+    <div id="map"></div>
+</div>
+<div class="footer">
+    <h5>Group Name: Les Filles</h5>
+    <div>Group Member: Yang Zhao, Jingwen Fu, Siyuan Duan, Mingjun Pan</div>
+</div>
+
+
+
+
+<script src="./JS/mapcontrol.js"></script>
+<!--<script-->
+        <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgVsFlP_aer-Ld0xCH1dqvGTN5rz-omCo&callback=initMap">-->
+<!--</script>-->
 
 </body>
 </html>
