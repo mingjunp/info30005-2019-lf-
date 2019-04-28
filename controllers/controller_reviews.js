@@ -18,7 +18,7 @@ module.exports.createReview = function (req, res) {
         "reviewPictures":req.body.reviewPictures,
         "rating":req.body.rating
     });
-    Review.save(function(err,newReview){
+    review.save(function(err,newReview){
         if(!err){
             res.send(newReview);
         }else{
