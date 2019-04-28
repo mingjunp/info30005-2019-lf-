@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const toiletSchema = new mongoose.Schema({
     "userName": String,
     "toiletName": String,
