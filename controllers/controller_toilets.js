@@ -62,23 +62,6 @@ module.exports.autoSearch = function (req, res) {
     }
 };
 
-// based on searching box content & "Check Detail" linked
-module.exports.contentSearch = function (req, res) {
-    let toiletName = req.query.toiletName;
-    Toilet.find(function (err, toilets) {
-        if (!err) {
-            const searcher = new FuzzySearch(toilets, ['toiletName'], {
-                caseSensitive: false,
-            });
-            const result = searcher.search(toiletName);
-
-            res.send(result);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
-
 // searching and sorting by key words
 module.exports.keywordSearch = function (req, res) {
     let keywords = {};
@@ -96,6 +79,25 @@ module.exports.keywordSearch = function (req, res) {
         }
     });
 };
+
+
+// based on searching box content & "Check Detail" linked
+module.exports.contentSearch = function (req, res) {
+    let toiletName = req.query.toiletName;
+    Toilet.find(function (err, toilets) {
+        if (!err) {
+            const searcher = new FuzzySearch(toilets, ['toiletName'], {
+                caseSensitive: false,
+            });
+            const result = searcher.search(toiletName);
+
+            res.send(result);
+        } else {
+            res.sendStatus(404);
+        }
+    });
+};
+
 
 
 module.exports.createToilet = function (req, res) {
