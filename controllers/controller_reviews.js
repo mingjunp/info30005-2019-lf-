@@ -1,14 +1,5 @@
 const Review = require("../models/review");
 
-module.exports.getReview = function (req, res) {
-    Review.find(function(err,reviews){
-        if(!err){
-            res.send(reviews);
-        }else{
-            res.sendStatus(404);
-        }
-    });
-};
 
 module.exports.createReview = function (req, res) {
     const review = new Review({
@@ -30,6 +21,17 @@ module.exports.createReview = function (req, res) {
     });
 
 };
+
+module.exports.getReview = function (req, res) {
+    Review.find(function(err,reviews){
+        if(!err){
+            res.send(reviews);
+        }else{
+            res.sendStatus(404);
+        }
+    });
+};
+
 
 //load reviews of certain toilet
 module.exports.loadReviews = function (req,res) {
