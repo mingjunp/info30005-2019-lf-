@@ -8,6 +8,10 @@ const controller_reviews = require("../controllers/controller_reviews");
 router.get('/',function (req, res) {
     res.sendfile('./public/HTML/homepage.html');
 });
+// map toiletpage.html to '/toiletDetail' path
+router.get('/toiletDetail',function (req, res) {
+    res.sendfile('./public/HTML/toiletpage.html');
+});
 
 //find all toilet
 router.get('/getToilet',controller_toilets.getToilet);
