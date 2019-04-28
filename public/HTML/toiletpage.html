@@ -8,7 +8,7 @@
 <body>
 <header>
 	<div class="container">
-		<span class="star">4.5</span>Toilet Name <a href="#" class="btn">go</a>
+		<span class="star">4.5</span>Toilet14-Flinders Street <a href="#" class="btn">Go</a>
 	</div>
 </header>
 
@@ -200,28 +200,6 @@ $(function(){
 
 });
 
-$(function(){
-	$.get("http://localhost:3000/getToilet",function(result){
-	    
-	    if(result['code']==0){
-			$('.location').html(result['data'][0]['location'][0]+','+result['data'][0]['location'][1]);
-			change('chair',result['data'][0]['wheelchair']);
-			change('shower',result['data'][0]['shower']);
-			change('female',result['data'][0]['female']);
-			change('male',result['data'][0]['male']);
-			change('baby',result['data'][0]['babyFacil']);
-	    }else{
-	    	alert('Fail to get data');
-	    }
-
-	    function change(obj,bol){
-	    	if(bol=="yes"){
-	    		$('.'+obj).attr('checked','checked');
-	    	}
-
-	    }
-	});
-});
 
 
 </script>
