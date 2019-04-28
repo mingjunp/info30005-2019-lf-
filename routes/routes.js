@@ -4,7 +4,7 @@ const controller_toilets = require("../controllers/controller_toilets");
 const controller_users = require("../controllers/controller_users");
 const controller_reviews = require("../controllers/controller_reviews");
 
-// map homepage to '/'
+// map homepage.html to '/' path
 router.get('/',function (req, res) {
     res.sendfile('./public/HTML/homepage.html');
 });

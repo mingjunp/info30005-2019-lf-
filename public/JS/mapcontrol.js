@@ -1,9 +1,7 @@
 /*
 * @author Yang Zhao
 * description: creat a map to #map node
-*
 * */
-
 
 var map;
 function initAutocomplete() {
@@ -51,10 +49,6 @@ function initAutocomplete() {
         });
     }
 
-    // Add a marker clusterer to manage the markers.
-    // var markerCluster = new MarkerClusterer(map, markers,
-    //     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
     infoWindow = new google.maps.InfoWindow;
 
     // Try HTML5 geolocation.
@@ -69,7 +63,6 @@ function initAutocomplete() {
             infoWindow.setContent("Your are here!<img src='../images/3.png'>");
             // infoWindow.open(map);
             map.setCenter(pos);
-
 
             var marker = new google.maps.Marker({
                 position: pos,
@@ -96,6 +89,8 @@ function initAutocomplete() {
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
+    //add listener for clicking filter button
+    //and do some logical operation for filter
     google.maps.event.addDomListener(document.getElementById("female"), 'click', function() {
         for(var i=0;i<allMarks.length;i++){
             allMarks[i].setMap(null);
@@ -237,7 +232,6 @@ function initAutocomplete() {
         }
     });
 
-
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -305,8 +299,6 @@ $.ajax({url:"https://data.melbourne.vic.gov.au/resource/ru3z-44we.json",async:fa
         allToilet = result;
     }});
 
-
-
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
@@ -324,7 +316,7 @@ for (var i=0; i<allToilet.length; i++){
 }
 var locations = toiletLocation;
 
-
+// load google map
 new_element=document.createElement("script");
 new_element.setAttribute("type","text/javascript");
 new_element.setAttribute("src","https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&libraries=places&callback=initAutocomplete");
