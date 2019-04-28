@@ -1,5 +1,5 @@
 # info30005-2019-lf-
-# Try www.zhaoyang.cf
+# Try https://polar-peak-30495.herokuapp.com/
 
 ## Run : 
 ### node app.js
@@ -16,7 +16,7 @@
  
  | Team member  | Role      |
  | ------------ | --------- |
- | Yang Zhao    | front-end |
- | Jingwen Fu   | front-end | 
  | Mingjun Pan  | back-end  |
  | Siyuan Duan  | back-end  |
+ | Yang Zhao    | front-end |
+ | Jingwen Fu   | front-end | 
