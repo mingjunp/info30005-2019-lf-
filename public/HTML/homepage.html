@@ -13,19 +13,84 @@
 <!--header-->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img src="../images/restroom.png">
-            </a>
-        </div>
-
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Signup</a></li>
+            <li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
         </ul>
-
     </div>
 </nav>
+<!--Signup popup window-->
+<div id="register" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">Sign up</h1>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" action="">
+                    <div class="form-group">
+                        <label for="">User Name</label>
+                        <input class="form-control" type="text" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input class="form-control" type="password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Enter password again</label>
+                        <input class="form-control" type="password" placeholder="Enter your password">
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label for="">Email</label>-->
+                        <!--<input class="form-control" type="email" placeholder="例如:123@123.com">-->
+                    <!--</div>-->
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">Already having an account? Click here to login</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Login -->
+<div id="login" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">Login</h1>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" action="">
+                    <div class="form-group">
+                        <label for="">User Name</label>
+                        <input class="form-control" type="text" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input class="form-control" type="password" placeholder="">
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">Don't have an account? Click here to sign up</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--content-->
 <div class="content">
