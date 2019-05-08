@@ -11,12 +11,22 @@
 
 <body>
 <!--header-->
-<div class="header">
-    <ul>
-        <li><a href="#">Signup</a></li>
-        <li><a href="#">Login</a></li>
-    </ul>
-</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="../images/restroom.png">
+            </a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Signup</a></li>
+        </ul>
+
+    </div>
+</nav>
+
 <!--content-->
 <div class="content">
     <!--logo and slogan-->
@@ -26,8 +36,7 @@
     </div>
     <!--search box-->
     <div class="search">
-        <input id="pac-input" class="controls" type="text" placeholder="Enter location">
-        <input type="button" class="btn btn-info" name="search" value="search">
+        <input id="pac-input" class="controls" type="text" placeholder="Enter location to search">
     </div>
     <!--filter selections-->
     <div class="filter checkbox-custom checkbox-default">
