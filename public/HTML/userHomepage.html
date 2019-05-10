@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User homepage</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    </script>
+    <style>
+        .jumbotron {
+            margin-top: -20px;
+        }
+        .panel {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!--header-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-home"></span></a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Hi <a href="#" class="navbar-link">Username!</a></p></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--page header-->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hi, <span>username!</span></h1>
+            <p>Welcome to visiting public toilet website</p>
+        </div>
+    </div>
+
+    <!--content-->
+    <div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#collection" aria-controls="collection" role="tab" data-toggle="tab">Collection</a></li>
+            <li role="presentation"><a href="#myToilet" aria-controls="myToilet" role="tab" data-toggle="tab">My Toilet</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="collection">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Toilet Name: Public Toilet - Toilet 131 - Royal Park (Flemington Rd - Near North Park Tennis Club)
+                    </div>
+                    <div class="panel-body">
+                        facility: Wheelchair, male&female
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="myToilet">
+
+                <div class="shareToilet">
+                    <h4><span class="glyphicon glyphicon-hand-down"></span>Click button below to share your toilet!</h4>
+                    <button type="button" class="btn btn-info">Share your own toilet</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
