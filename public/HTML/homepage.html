@@ -7,9 +7,46 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
     <script src="./JS/signup.js"></script>
+    <script src="./JS/checkLogin.js"></script>
     <title>Find Toilets</title>
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="../CSS/homepage.css">
+    <script>
+        checkLogin()
+        function login(){
+            var formObject = {};
+            var formArray =$("#login-form").serializeArray();
+            $.each(formArray,function(i,item){
+                formObject[item.name] = item.value;
+            });
+            $.ajax({
+                url:'http://192.168.1.106:3000/api/users/login',
+                type:'post',
+                contentType: "application/json; charset=utf-8",
+                dataType:'json',
+                data:JSON.stringify(formObject),
+                success:function(result){
+                    // login fail
+                    if (result.errno == -1){
+                        alert(result.message);
+                    }
+                    // login success
+                    if (result.errno == 0){
+                        $('#nav-right').children('li').remove();
+                        $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="#" class="navbar-link">`+ result.data.userName +`</a></p></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
+
+                        $('#login').modal('hide');
+                    }
+                    console.log(result);
+                },
+                error:function(e){
+                    console.log(e);
+                },
+            });
+
+        }
+    </script>
 </head>
 
 <body>
@@ -21,7 +58,7 @@
                 <a href="#"><span class="glyphicon glyphicon-home"></span></a>
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul id="nav-right" class="nav navbar-nav navbar-right">
             <li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
         </ul>
@@ -94,14 +131,14 @@
                 <h1 class="text-center">Login</h1>
             </div>
             <div class="modal-body">
-                <form class="form-group" action="">
+                <form id="login-form" class="form-group" action="">
                     <div class="form-group">
                         <label for="">User Name</label>
-                        <input class="form-control" type="text" placeholder="Username">
+                        <input class="form-control" name="userName" type="text" placeholder="Username">
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="password" placeholder="Password">
+                        <input class="form-control" name="password" type="password" placeholder="Password">
                     </div>
                     <div class="text-right">
                         <input class="btn btn-primary" onclick="login()" value="Login">
