@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="../CSS/homepage.css">
     <script>
-        checkLogin()
+        checkLogin();
         function login(){
             var formObject = {};
             var formArray =$("#login-form").serializeArray();
@@ -20,7 +20,7 @@
                 formObject[item.name] = item.value;
             });
             $.ajax({
-                url:'http://192.168.1.106:3000/api/users/login',
+                url:'http://localhost:3000/api/users/login',
                 type:'post',
                 contentType: "application/json; charset=utf-8",
                 dataType:'json',

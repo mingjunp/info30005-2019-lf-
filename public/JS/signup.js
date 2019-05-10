@@ -27,7 +27,7 @@ function formValidator() {
                     },
                     threshold: 2,//2 chars send ajax request
                     remote: {//ajax验证。server result:{"valid",true or false}
-                        url: "http://192.168.1.106:3000/api/users/checkUserName",
+                        url: "http://localhost:3000/api/users/checkUserName",
                         message: 'username exist, please try again',
                         delay: 1000,//ajax request every 1 second
                         type: 'GET',
@@ -71,7 +71,7 @@ function singup(){
             formObject[item.name] = item.value;
         });
         $.ajax({
-            url:'http://192.168.1.106:3000/api/users/createUser',
+            url:'http://localhost:3000/api/users/createUser',
             type:'post',
             contentType: "application/json; charset=utf-8",
             dataType:'json',

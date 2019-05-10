@@ -1,6 +1,6 @@
 function checkLogin() {
     $.ajax({
-        url:'http://192.168.1.106:3000/api/users/checkLogin',
+        url:'http://localhost:3000/api/users/checkLogin',
         type:'get',
         contentType: "application/json; charset=utf-8",
         dataType:'json',
