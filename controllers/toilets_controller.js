@@ -1,5 +1,7 @@
 const toilet = require("../models/toilets");
 const { SuccessModel, ErrorModel } = require('../models/resModel');
+const fs = require('fs');
+const path = require('path');
 
 const getAllToilets = (req, res, next) => {
     toilet.find((err, toilets) => {
@@ -54,13 +56,12 @@ const  updateToilet = (req, res, next) => {
         "location_state": req.body.location_state,
         "location_zip": req.body.location_zip,
         "rate": req.body.rate
-    }
+    };
     toilet.updateOne({'_id': id}, updateData, (err, updateToilet) => {
         if (err) res.json(new ErrorModel('Mongodb Error!'));
         res.json(new SuccessModel(updateToilet));
     });
 };
-
 
 const deletToilet = (req, res, next) => {
     id = req.body.id;
@@ -70,10 +71,30 @@ const deletToilet = (req, res, next) => {
     });
 };
 
+const uploadToiletPhoto = (req, res, next) => {
+    // no file
+    if (!req.file) {
+        res.json({ ok: false });
+        return;
+    }
+    // output file info
+    console.log('====================================================');
+    console.log('fieldname: ' + req.file.fieldname);
+    console.log('originalname: ' + req.file.originalname);
+    console.log('encoding: ' + req.file.encoding);
+    console.log('mimetype: ' + req.file.mimetype);
+    console.log('size: ' + (req.file.size / 1024).toFixed(2) + 'KB');
+    console.log('destination: ' + req.file.destination);
+    console.log('filename: ' + req.file.filename);
+    console.log('path: ' + req.file.path);
+    return res.json(new SuccessModel(req.file.destination+req.file.filename));
+};
+
 module.exports = {
     getAllToilets,
     creatToilet,
     getById,
     updateToilet,
     deletToilet,
+    uploadToiletPhoto,
 };

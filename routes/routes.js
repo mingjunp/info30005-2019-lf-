@@ -46,6 +46,10 @@ router.get('/',function (req, res) {
 router.get('/toiletDetail',function (req, res) {
     res.sendfile('./public/HTML/toiletpage.html');
 });
+// map userHomepage.html to '/toiletDetail' path
+router.get('/user',function (req, res) {
+    res.sendfile('./public/HTML/userHomepage.html');
+});
 
 
 // searching and sorting based on current location

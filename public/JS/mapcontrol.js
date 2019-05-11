@@ -115,7 +115,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail'>check detail</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
@@ -143,7 +143,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail'>check detail</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
@@ -171,7 +171,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail'>check detail</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
@@ -199,7 +199,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail'>check detail</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });

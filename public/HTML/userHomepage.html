@@ -21,6 +21,13 @@
         .panel {
             margin-top: 20px;
         }
+        #map {
+            height: 100%;
+        }
+        #mapHolder{
+            height: 400px;
+            width: 550px;
+        }
     </style>
 </head>
 <body>
@@ -68,11 +75,85 @@
 
                 <div class="shareToilet">
                     <h4><span class="glyphicon glyphicon-hand-down"></span>Click button below to share your toilet!</h4>
-                    <button type="button" class="btn btn-info">Share your own toilet</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#shareToilet">Share your own toilet</button>
                 </div>
             </div>
         </div>
-
     </div>
+    <!--Share toilet pop-up window-->
+    <div id="shareToilet" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-title">
+                    <h1 class="text-center">Share your toilet</h1>
+                </div>
+                <div class="modal-body">
+                    <form id="review-form" class="form-group" action="">
+
+                        <div class="form-group">
+                            <label for="">Toilet Name</label>
+                            <input class="form-control" name="rating" type="text" placeholder="Enter your toilet name">
+                        </div>
+                        <div class="checkbox-custom checkbox-default">
+                            <p>Please select tags from below</p>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="female" name="filter" value="female">female
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="male" name="filter" value="male">male
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
+                            </label>
+                        </div>
+                        <div id="mapHolder" class="mapContainer">
+                            <div id="map"></div>
+                            <input type="hidden" id="lat">
+                            <input type="hidden" id="lng">
+                        </div>
+
+
+                        <br>
+                        <div class="text-right">
+                            <input class="btn btn-primary" onclick="sendComment()" value="Submit">
+                            <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: {lat: -37.812326, lng: 144.961971}
+            });
+            var marker= new google.maps.Marker();
+            map.addListener('click', function(e) {
+                marker.setMap(null);
+                marker = new google.maps.Marker({
+                    position: e.latLng,
+                    map: map
+                });
+                console.log("---------");
+                console.log(e.latLng.lat());
+                console.log(e.latLng.lng());
+                $('#lat').val(e.latLng.lat());
+                $('#lng').val(e.latLng.lng());
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&callback=initMap">
+    </script>
 </body>
 </html>
