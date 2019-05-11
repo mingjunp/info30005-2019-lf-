@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../JS/checkLogin.js"></script>
 	<meta charset="UTF-8">
 	<title>Toiletinfo</title>
 	<link rel="stylesheet" href="../CSS/toiletpage.css">
 </head>
 <body>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="/"><span class="glyphicon glyphicon-home"></span></a>
+			</li>
+		</ul>
+		<ul id="nav-right" class="nav navbar-nav navbar-right">
+			<li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			<li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
+		</ul>
+	</div>
+</nav>
 <header>
 	<div class="container">
-		<span class="star">4.5</span>Toilet14-Flinders Street <a href="#" class="btn">Go</a>
+		<span id="toilet-rate" class="star">5</span><span id="toilet-name"></span> <a href="#"><img src="../images/like.png"></a>
 	</div>
 </header>
 
@@ -31,35 +48,184 @@
 </div>
 
 <div class="container detail">
-	<p><span>Opening hours:</span><span>May-Sep 6:30am-9pm, Oct-Apr 6:30am-10pm</span></p>
-	<p><span>Location:</span><span class="location"></span></p>
-	<p><span>Wheelchair:</span><input type="checkbox" class="chair" disabled></p>
-	<p><span>Shower:</span><input type="checkbox" class="shower" disabled></p>
-	<p><span>Female:</span><input type="checkbox" class="female" disabled></p>
-	<p><span>male:</span><input type="checkbox" class="male" disabled></p>
-	<p><span>babyFacil:</span><input type="checkbox" class="baby" disabled></p>
-	<a href="" class="btn fix">Fix</a>
+	<p></p>
+	<p><span>Operator:</span><span id="toilet-operator"></span></p>
+	<p>
+		<span>Facilities:</span>
+		<span><img src="../images/wheelchairLarge.png">: <span id="toilet-wheelchair"></span></span>
+		<span><img src="../images/girl.png">: <span id="toilet-female"></span></span>
+		<span><img src="../images/boy.png">: <span id="toilet-male"></span></span>
+		<span><img src="../images/babyLarge.png">: <span id="toilet-baby"></span></span>
+		<a href="" class="mybtn fix" id="toilet-fix">Fix</a>
+	</p>
 </div>
 
 <div class="container comments">
 	<h2 class="clearfix"><span>Comments</span> <span class="btn-down"></span></h2>
-	<div class="main">
-		<a href="" class="addc">Add my comments +</a>
-		<div class="comm">
-			<p>John Snow <span class="time">2019/4/26</span></p>
-			<p>The toilet paper towels are used up but no one cares. The government should consider having more staff. </p>
+	<div id="show-comments" class="main">
+		<div id="click-add-comment">
+			<a href="" class="addc btn btn-info" data-toggle="modal" data-target="#addReview">Add my comments +</a>
 		</div>
-		<div class="comm">
-			<p>Lily Gilbert <span class="time">2019/4/26</span></p>
-			<p>This toilet is very clean and easy to find. I think it is quite good. </p>
+		<!--<div class="comm">-->
+			<!--<p>John Snow <span class="time">2019/4/26</span></p>-->
+			<!--<p>The toilet paper towels are used up but no one cares. The government should consider having more staff. </p>-->
+		<!--</div>-->
+		<!--<div class="comm">-->
+			<!--<p>Lily Gilbert <span class="time">2019/4/26</span></p>-->
+			<!--<p>This toilet is very clean and easy to find. I think it is quite good. </p>-->
+		<!--</div>-->
+	<!--</div>-->
+</div>
+<div id="addReview" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-title">
+				<h1 class="text-center">Add your comment</h1>
+			</div>
+			<div class="modal-body">
+				<form id="review-form" class="form-group" action="">
+					<div class="form-group">
+						<label for=""></label>
+						<input id="form-toiletId" class="form-control" name="toiletID" type="hidden" value="">
+					</div>
+					<div class="form-group">
+						<label for="">Rating</label>
+						<input class="form-control" name="rating" type="text" placeholder="rating from 1-5">
+					</div>
+					<div class="form-group">
+						<label for="">Your comment</label>
+						<textarea class="form-control" name="comments" rows="6" cols="20" placeholder="Enter your comment"></textarea>
+					</div>
+					<div class="text-right">
+						<input class="btn btn-primary" onclick="sendComment()" value="Submit">
+						<input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
 
 
 
-<script src="../JS/jquery.js"></script>
+<!--<script src="../JS/jquery.js"></script>-->
 <script>
+
+	checkLogin();
+
+	function getQueryVariable(variable)
+	{
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i=0;i<vars.length;i++) {
+			var pair = vars[i].split("=");
+			if(pair[0] == variable){return pair[1];}
+		}
+		return(false);
+	}
+	toiletID = getQueryVariable("id");
+	function loadToiletDetail(toiletID){
+		$.ajax({
+			url:'http://localhost:3000/api/toilets/getById',
+			type:'get',
+			contentType: "application/json; charset=utf-8",
+			dataType:'json',
+			data:"id="+toiletID,
+			success:function(result){
+				if (result.errno == -1){
+				}
+				if (result.errno == 0){
+					//$('#toilet-rate').text(result.data.rate);
+					$('#toilet-name').text(result.data.name);
+					$('#toilet-operator').text(result.data.operator);
+					$('#toilet-wheelchair').text(result.data.wheelchair);
+					$('#toilet-female').text(result.data.female);
+					$('#toilet-male').text(result.data.male);
+					$('#toilet-baby').text(result.data.baby_facil);
+					$('#form-toiletId').val(result.data._id);
+				}
+				console.log(result);
+			},
+			error:function(e){
+				console.log(e);
+			},
+		});
+	}
+	function loadComments(toiletID) {
+		$.ajax({
+			url:'http://localhost:3000/api/reviews/getReviewsByToilet',
+			type:'get',
+			contentType: "application/json; charset=utf-8",
+			dataType:'json',
+			data:"toiletID="+toiletID,
+			success:function(result){
+				if (result.errno == -1){
+				}
+				if (result.errno == 0){
+					$(".comm").empty();
+					$(".comm").removeClass("comm");
+					var totalRate = 0;
+					for (var i=0;i<result.data.length;i++){
+						$('#show-comments').append($(`
+					<div class="comm">
+						<p>`+ result.data[i].userName +`<span> rate: `+ result.data[i].rating +`</span><span class="time">`+ result.data[i].date +`</span></p>
+						<p>`+ result.data[i].comments +`</p>
+					</div>
+					`));
+						totalRate += Number(result.data[i].rating);
+					}
+					$('#toilet-rate').text((totalRate/result.data.length).toFixed(2));
+				}
+				console.log(result);
+			},
+			error:function(e){
+				console.log(e);
+			},
+		});
+	}
+	loadComments(toiletID);
+	loadToiletDetail(toiletID);
+
+	function sendComment(){
+		var formObject = {};
+		var formArray =$("#review-form").serializeArray();
+		$.each(formArray,function(i,item){
+			formObject[item.name] = item.value;
+		});
+		console.log(formObject);
+		$.ajax({
+			url:'http://localhost:3000/api/reviews/createReview',
+			type:'post',
+			contentType: "application/json; charset=utf-8",
+			dataType:'json',
+			data:JSON.stringify(formObject),
+			success:function(result){
+				if (result.errno == -1){
+					alert(result.message);
+				}
+				if (result.errno == 0){
+					$('#addReview').modal('hide');
+					// $('#click-add-comment').after($(`
+					// <div class="comm">
+					// 	<p>`+ result.data.userName +`<span> rate: `+ result.data.rating +`</span><span class="time">`+ result.data.date +`</span></p>
+					// 	<p>`+ result.data.comments +`</p>
+					// </div>
+					// `));
+					loadComments(toiletID);
+				}
+				console.log(result);
+			},
+			error:function(e){
+				console.log(e);
+			},
+		});
+	}
+
 $(function(){
 	var index= 2;
 	var length = $('.logo_item').length;

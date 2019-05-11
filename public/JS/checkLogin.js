@@ -17,7 +17,7 @@ function checkLogin() {
             if (result.errno == 0){
                 $('#nav-right').children('li').remove();
                 $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="#" class="navbar-link">`+ result.message +`</a></p></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
+                            <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
             }
             console.log(result);
         },

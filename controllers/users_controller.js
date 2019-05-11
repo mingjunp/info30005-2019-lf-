@@ -52,13 +52,22 @@ const checkUserName = (req, res, next) => {
 const checkLogin = (req, res, next) => {
     console.log(req.session);
     if (req.session.userName) {
-        res.json(
+        return res.json(
             new SuccessModel(req.session.userName)
         );
     }else{
-        res.json(
+        return res.json(
             new ErrorModel('not login')
         );
+    }
+};
+
+const logout = (req, res, next) => {
+    delete req.session.userName;
+    if (req.session.userName){
+        res.json(new ErrorModel("logout fail!"))
+    } else{
+        res.json(new SuccessModel("logout success!"))
     }
 };
 
@@ -67,4 +76,5 @@ module.exports = {
     login,
     checkUserName,
     checkLogin,
+    logout,
 };

@@ -11,8 +11,8 @@ const getAllToilets = (req, res, next) => {
 const getById = (req, res, next) => {
     id = req.query.id;
     toilet.findById(id, (err, toilet) =>{
-        if (err) res.json(new ErrorModel("Mongodb Error!"));
-        res.json(new SuccessModel(toilet));
+        if (err) return res.json(new ErrorModel("Mongodb Error!"));
+        return res.json(new SuccessModel(toilet));
     });
 };
 

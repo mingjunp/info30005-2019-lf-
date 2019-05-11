@@ -6,13 +6,13 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
-    <script src="./JS/signup.js"></script>
-    <script src="./JS/checkLogin.js"></script>
+    <script src="../JS/signup.js"></script>
+    <script src="../JS/checkLogin.js"></script>
     <title>Find Toilets</title>
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="../CSS/homepage.css">
     <script>
-        checkLogin();
+            checkLogin();
         function login(){
             var formObject = {};
             var formArray =$("#login-form").serializeArray();
@@ -34,7 +34,7 @@
                     if (result.errno == 0){
                         $('#nav-right').children('li').remove();
                         $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="#" class="navbar-link">`+ result.data.userName +`</a></p></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
+                            <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
 
                         $('#login').modal('hide');
                     }
@@ -44,7 +44,30 @@
                     console.log(e);
                 },
             });
-
+        }
+        function logout() {
+            $.ajax({
+                url:'http://localhost:3000/api/users/logout',
+                type:'get',
+                contentType: "application/json; charset=utf-8",
+                dataType:'json',
+                success:function(result){
+                    // login fail
+                    if (result.errno == -1){
+                        alert(result.message);
+                    }
+                    // login success
+                    if (result.errno == 0){
+                        $('#nav-right').children('li').remove();
+                        $('#nav-right').append($(`<li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign up</a></li>`));
+                    }
+                    console.log(result);
+                },
+                error:function(e){
+                    console.log(e);
+                },
+            });
         }
     </script>
 </head>
@@ -55,7 +78,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#"><span class="glyphicon glyphicon-home"></span></a>
+                <a href="/"><span class="glyphicon glyphicon-home"></span></a>
             </li>
         </ul>
         <ul id="nav-right" class="nav navbar-nav navbar-right">
@@ -64,7 +87,7 @@
         </ul>
     </div>
 </nav>
-<!---->
+<!--sign up success pop-up window-->
 <div class="modal fade" id="infoModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -174,9 +197,6 @@
         </label>
         <label class="checkbox-inline">
             <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" id="shower" name="filter" value="shower">shower
         </label>
         <label class="checkbox-inline">
             <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility

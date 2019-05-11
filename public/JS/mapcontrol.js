@@ -31,7 +31,7 @@ function initAutocomplete() {
             map: map
         });
         allMarks.push(myMarker);
-        var toiletInfo = "<h5>Toilet Name: </h5>"+allToilet[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+allToilet[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+allToilet[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+allToilet[i].male+"<br/>"+"<image src='../images/female.png'> : "+allToilet[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail'>check detail</a>";
+        var toiletInfo = "<h5>Toilet Name: </h5>"+allToilet[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+allToilet[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+allToilet[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+allToilet[i].male+"<br/>"+"<image src='../images/female.png'> : "+allToilet[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ allToilet[i]._id +"'>check detail</a>";
         attachSecretMessage(myMarker, toiletInfo)
     }
 
@@ -175,34 +175,6 @@ function initAutocomplete() {
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
-    google.maps.event.addDomListener(document.getElementById("shower"), 'click', function() {
-        for(var i=0;i<allMarks.length;i++){
-            allMarks[i].setMap(null);
-        }
-        allMarks.slice(0,allMarks.length);
-        var obj = document.getElementsByName("filter");
-        var check_val = [];
-        for(k in obj){
-            if(obj[k].checked)
-                check_val.push(obj[k].value);
-        }
-        var temAllToile = allToilet.concat();
-        for(var i=0; i<check_val.length;i++){
-            temAllToile = temAllToile.filter(function(item){
-                return item[check_val[i]] != "no";
-            });
-        }
-        for(var i=0;i<temAllToile.length;i++){
-            var myMarker = new google.maps.Marker({
-                position: {lat:Number(temAllToile[i].lat),lng:Number(temAllToile[i].lon)},
-                icon: '../images/restroom.png',
-                map: map
-            });
-            allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail'>check detail</a>";
-            attachSecretMessage(myMarker, toiletInfo)
-        }
-    });
     google.maps.event.addDomListener(document.getElementById("babyFacility"), 'click', function() {
         for(var i=0;i<allMarks.length;i++){
             allMarks[i].setMap(null);
@@ -295,8 +267,8 @@ function initAutocomplete() {
 
 //all toilet get from open melbourne
 var allToilet;
-$.ajax({url:"https://data.melbourne.vic.gov.au/resource/ru3z-44we.json",async:false,success:function(result){
-        allToilet = result;
+$.ajax({url:"http://localhost:3000/api/toilets/getAllToilets",async:false,success:function(result){
+        allToilet = result.data;
     }});
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {

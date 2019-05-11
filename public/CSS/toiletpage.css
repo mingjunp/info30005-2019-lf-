@@ -4,7 +4,9 @@
 	padding:0;
 	color:#333;
 }
-
+body{
+	background-color: #F5F5F5;
+}
 .clearfix:after{
 	content:'';
 	display: block;
@@ -19,19 +21,19 @@
 	margin:0 auto;
 }
 
-.btn{
-	padding:4px 10px;
+.mybtn{
+	padding:7px 16px;
 	border-radius:4px;
-	background:#ef3420;
+	background-color: #5bc0de;
+	border-color: #46b8da;
 	line-height: 1;
 	color:#fff;
-	
 	transform: translateY(50%);
 }
 
 header{
 	height:60px;
-	box-shadow: 0 0 5px #e5e5e5;
+	/*box-shadow: 0 0 5px #e5e5e5;*/
 	text-align: center;
 	line-height: 60px;
 	font-size:20px;
@@ -50,9 +52,9 @@ header .star{
 }
 header a{
 	float:right;
-	
+
 	text-decoration: none;
-	
+
 }
 
 
