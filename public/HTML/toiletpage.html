@@ -6,11 +6,90 @@
 	<link rel="stylesheet" href="../CSS/toiletpage.css">
 </head>
 <body>
+		<style>
+				body {font-family: Arial, Helvetica, sans-serif;}
+				* {box-sizing: border-box;}
+.open-button {
+	background-color: #555;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	opacity: 0.8;
+	position: fixed;
+	bottom: 23px;
+	right: 28px;
+	width: 280px;
+	}
+	
+	/* The popup form - hidden by default */
+	.form-popup {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	right: 15px;
+	border: 3px solid #f1f1f1;
+	z-index: 9;
+	}
+	
+	/* Add styles to the form container */
+	.form-container {
+	max-width: 300px;
+	padding: 10px;
+	background-color: white;
+	}
+	
+	/* Full-width input fields */
+	.form-container input[type=text], .form-container input[type=password] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	border: none;
+	background: #f1f1f1;
+	}
+
+	.form-container textarea[type=text], .form-container textarea[type=password] { 
+	width: 100%;
+	height: 80px; 
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	border: none;
+	background: #f1f1f1;
+	}
+	/* When the inputs get focus, do something */
+	.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+	background-color: #ddd;
+	outline: none;
+	}
+	
+	/* Set a style for the submit/login button */
+	.form-container .btn {
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom:10px;
+	opacity: 0.8;
+	}
+	
+	/* Add a red background color to the cancel button */
+	.form-container .cancel {
+	background-color: red;
+	}
+	
+	/* Add some hover effects to buttons */
+	.form-container .btn:hover, .open-button:hover {
+	opacity: 1;
+	}
+</style>
 <header>
 	<div class="container">
-		<span class="star">4.5</span>Toilet14-Flinders Street <a href="#" class="btn">Go</a>
+		<span class="star">4.5</span>Toilet14-Flinders Street &nbsp;&nbsp;&nbsp;&nbsp;<img id="imgClickAndChange" src="../images/heart_t.PNG" onclick="addToFavorite()" alt="like"></img> <a href="#" class="btn">Go</a>
 	</div>
 </header>
+
 
 <div class="container slider">
 	<div class="slider_wrapper">
@@ -32,14 +111,54 @@
 
 <div class="container detail">
 	<p><span>Opening hours:</span><span>May-Sep 6:30am-9pm, Oct-Apr 6:30am-10pm</span></p>
-	<p><span>Location:</span><span class="location"></span></p>
-	<p><span>Wheelchair:</span><input type="checkbox" class="chair" disabled></p>
-	<p><span>Shower:</span><input type="checkbox" class="shower" disabled></p>
-	<p><span>Female:</span><input type="checkbox" class="female" disabled></p>
-	<p><span>male:</span><input type="checkbox" class="male" disabled></p>
-	<p><span>babyFacil:</span><input type="checkbox" class="baby" disabled></p>
-	<a href="" class="btn fix">Fix</a>
+	<p><span>Location:</span>Toilet14-Flinders Street<span class="location"></span></p>
+	<span>Wheelchair:</span><input type="checkbox" class="chair" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span>Shower:</span><input type="checkbox" class="shower" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span>Female:</span><input type="checkbox" class="female" disabled>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span>male:</span><input type="checkbox" class="male" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span>babyFacil:</span><input type="checkbox" class="baby" disabled>
+	<!-- <a href="" class="btn fix">Fix</a> -->
 </div>
+
+<button class="open-button" onclick="openForm()">Fix</button>
+
+<div class="form-popup" id="myForm">
+		<form action="alert(success)" class="form-container">
+		  <input placeholder="Name" type="text" required />
+
+		  <input placeholder="Email" type="text" required />
+
+		  <textarea placeholder="Comment" type="text" required>  </textarea>
+
+		  <!-- <button type="submit" class="btn">Submit</button> -->
+		  <button type="button" class="btn" onclick="submitForm()">Submit</button>
+		  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+		</form>
+	  </div>
+
+<script>
+		function addToFavorite() {
+			var fullPath = document.getElementById("imgClickAndChange").src;
+			 var filename = fullPath.replace(/^.*[\\\/]/, '');
+			if (filename == "heart_t.PNG") {
+				document.getElementById("imgClickAndChange").src="../images/heart_t_full.PNG";
+			}
+			else {
+				document.getElementById("imgClickAndChange").src="../images/heart_t.PNG";
+			}
+		  
+		}
+		function submitForm() {
+			alert("Thank you for submitting successfully!")
+		}
+		function openForm() {
+			document.getElementById("myForm").style.display = "block";
+			}
+		function closeForm() {
+  			document.getElementById("myForm").style.display = "none";
+		}
+
+</script>
 
 <div class="container comments">
 	<h2 class="clearfix"><span>Comments</span> <span class="btn-down"></span></h2>
