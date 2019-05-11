@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');//用于处理Json数据
 const toilets_routes = require('./routes/toilets_routes');
 const users_routes = require('./routes/users_routes');
 const reviews_routes = require('./routes/reviews_routes');
+const likes_routes = require('./routes/likes_routes');
 // npm i morgan
 const logger = require('morgan'); //log
 // npm i express-session
@@ -61,6 +62,9 @@ app.use("/api/users",users_routes);
 
 //
 app.use("/api/reviews",reviews_routes);
+
+//
+app.use("/api/likes",likes_routes);
 
 app.listen(process.env.PORT || 3000, function () {
     console.log("let's do something fun.")

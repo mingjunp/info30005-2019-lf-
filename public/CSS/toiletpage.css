@@ -215,6 +215,18 @@ input[type="checkbox"]:checked:after{
 	border:1px solid #e5e5e5;
 	text-decoration: none;
 }
+.like {
+	height: 50px;
+}
+.fav {
+	float: right;
+}
 
-
+.glyphicon-heart-empty{
+	font-size:28px;
+}
+.glyphicon-heart {
+	color: red;
+	font-size:28px;
+}
 
