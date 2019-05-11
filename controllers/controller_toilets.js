@@ -11,17 +11,6 @@ module.exports.getToilet = function (req, res) {
     });
 };
 
-module.exports.getOneToilet = function(req, res){
-    let toiletName = req.query.toiletName;
-    Toilet.find({name:toiletName},function(err,toilets){
-        if(!err){
-            res.send(toilets);
-        }else{
-            res.sendStatus(404);
-        }
-    });
-};
-
 // searching and sorting based on current location
 module.exports.autoSearch = function (req, res) {
 
@@ -73,23 +62,6 @@ module.exports.autoSearch = function (req, res) {
     }
 };
 
-// based on searching box content & "Check Detail" linked
-module.exports.contentSearch = function (req, res) {
-    let toiletName = req.query.toiletName;
-    Toilet.find(function (err, toilets) {
-        if (!err) {
-            const searcher = new FuzzySearch(toilets, ['toiletName'], {
-                caseSensitive: false,
-            });
-            const result = searcher.search(toiletName);
-
-            res.send(result);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
-
 // searching and sorting by key words
 module.exports.keywordSearch = function (req, res) {
     let keywords = {};
@@ -108,6 +80,23 @@ module.exports.keywordSearch = function (req, res) {
     });
 };
 
+
+// based on searching box content & "Check Detail" linked
+module.exports.contentSearch = function (req, res) {
+    let toiletName = req.query.toiletName;
+    Toilet.find(function (err, toilets) {
+        if (!err) {
+            const searcher = new FuzzySearch(toilets, ['toiletName'], {
+                caseSensitive: false,
+            });
+            const result = searcher.search(toiletName);
+
+            res.send(result);
+        } else {
+            res.sendStatus(404);
+        }
+    });
+};
 
 
 
@@ -145,6 +134,33 @@ module.exports.createToilet = function (req, res) {
     //     "aveRating": 4.0
     // }
     //
+    toilet.save(function (err, newToilet) {
+        if (!err) {
+            res.send(newToilet);
+        } else {
+            res.sendStatus(400);
+        }
+    });
+};
+
+
+//share my own toilet
+module.exports.shareMyToilet = function (req, res) {
+ 	const toilet = new Toilet({
+        "userName": req.body.userName,
+        "toiletName": req.body.toiletName,
+        "toiletPicture": req.body.toiletPicture,
+        "location": {
+            "type": "Point",
+            "coordinates": req.body.location.coordinates,
+        },
+        "female": req.body.female,
+        "male": req.body.male,
+        "wheelchair": req.body.wheelchair,
+        "babyFacil": req.body.babyFacil,
+        "shower": req.body.shower
+    });
+
     toilet.save(function (err, newToilet) {
         if (!err) {
             res.send(newToilet);

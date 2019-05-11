@@ -4,10 +4,7 @@ const controller_toilets = require("../controllers/controller_toilets");
 const controller_users = require("../controllers/controller_users");
 const controller_reviews = require("../controllers/controller_reviews");
 
-// map homepage.html to '/' path
-router.get('/',function (req, res) {
-    res.sendfile('./public/HTML/homepage.html');
-});
+
 
 //find all toilet
 router.get('/getToilet',controller_toilets.getToilet);
@@ -17,8 +14,7 @@ router.get('/getToilet',controller_toilets.getToilet);
 //post toilet
 router.post('/createToilet', controller_toilets.createToilet);
 
-//get one toilet
-router.get('/getOneToilet', controller_toilets.getOneToilet);
+
 
 //find all user
 router.get('/getUser',controller_users.getUser);
@@ -28,6 +24,14 @@ router.get('/getUser',controller_users.getUser);
 //post user
 router.post('/createUser', controller_users.createUser);
 
+//user login
+router.post('/userLogin', controller_users.userLogin);
+
+//user logout
+router.get('/userLogout', controller_users.userLogout);
+
+//user signup
+router.post('/userSignUp', controller_users.userSignUp);
 
 
 //find all review
@@ -42,6 +46,17 @@ router.post('/createReview', controller_reviews.createReview);
 //load reviews of certain toilet
 router.get('/loadReviews', controller_reviews.loadReviews);
 
+
+// map homepage.html to '/' path
+router.get('/',function (req, res) {
+    res.sendfile('./public/HTML/homepage.html');
+});
+// map toiletpage.html to '/toiletDetail' path
+router.get('/toiletDetail',function (req, res) {
+    res.sendfile('./public/HTML/toiletpage.html');
+});
+
+
 // searching and sorting based on current location
 router.get('/autoSearch', controller_toilets.autoSearch);
 
@@ -50,6 +65,9 @@ router.get('/contentSearch', controller_toilets.contentSearch);
 
 // searching and sorting by key words
 router.get('/keywordSearch', controller_toilets.keywordSearch);
+
+//share my own toilet
+router.post('/shareMyToilet', controller_toilets.shareMyToilet);
 
 
 // router.get('/', controller_toilet.);
