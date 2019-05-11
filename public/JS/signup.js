@@ -61,7 +61,7 @@ function formValidator() {
 
 function singup(){
 
-    var flag = $('#register').data('bootstrapValidator').isValid()//验证是否通过true/false
+    var flag = $('#register').data('bootstrapValidator').isValid() //true/false
     if (flag == false){
         return;
     } else{

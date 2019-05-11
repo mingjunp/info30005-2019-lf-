@@ -1,4 +1,7 @@
 function login(){
+    if(!$('#login-erro-info').hasClass("hide")){
+        $('#login-erro-info').addClass("hide");
+    }
     var formObject = {};
     var formArray =$("#login-form").serializeArray();
     $.each(formArray,function(i,item){
@@ -13,7 +16,7 @@ function login(){
         success:function(result){
             // login fail
             if (result.errno == -1){
-                alert(result.message);
+                $('#login-erro-info').removeClass("hide");
             }
             // login success
             if (result.errno == 0){
