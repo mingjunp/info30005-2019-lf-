@@ -4,6 +4,9 @@ const toiletSchema = new mongoose.Schema({
     "userName": String,
     "toiletName": String,
     "toiletPicture": String,
+    "reviewPictures":{
+        type:[String],
+    },
     "location": {
         "type": {
             type: String,

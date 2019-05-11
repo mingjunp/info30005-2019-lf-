@@ -1,5 +1,5 @@
 const Review = require("../models/review");
-//require toilets
+const Toilet = require("../models/toilet");
 
 module.exports.createReview = function (req, res) {
     const review = new Review({
@@ -9,11 +9,15 @@ module.exports.createReview = function (req, res) {
         "reviewPictures":req.body.reviewPictures,
         "rating":req.body.rating
     });
-    //upload and formalize pics
-    //https://gist.github.com/bingeboy/5589501
-
+    
     review.save(function(err,newReview){
+        console.log(newReview._id);
         if(!err){
+            Toilet.findOneAndUpdate({toiletName: newReview.toiletName},  { $push: { reviewPictures: newReview._id }},function(err,toilet) {
+                if(!err){
+                    console.log(toilet);
+                }
+            });
             res.send(newReview);
         }else{
             res.sendStatus(400);
