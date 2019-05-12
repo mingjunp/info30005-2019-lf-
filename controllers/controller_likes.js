@@ -3,17 +3,18 @@ const like = require("../models/like");
 module.exports.getByUserToilet = function (req, res) {
     console.log("--------");
     console.log(req.session.userName);
-    if (req.session.userName) {
+    if (!req.session.userName) {
         return res.json({errno: 0, data: "no"});
+    } else {
+        let toiletID = req.query.toiletID;
+        like.findOne({"userName": req.session.userName, "toiletID": toiletID}, ['isLike'], function (err, like) {
+            if (err) {
+                return res.json({errno: -1, message: "MongoDb Error"});
+            } else {
+                return res.json({errno: 0, data: like.isLike});
+            }
+        });
     }
-    let toiletID = req.query.toiletID;
-    like.findOne({"userName": req.session.userName, "toiletID": toiletID}, ['isLike'], function (err, like) {
-        if (err) {
-            return res.json({errno: -1, message: "MongoDb Error"});
-        } else {
-            return res.json({errno: 0, data: like.isLike});
-        }
-    });
 };
 
 module.exports.setLike = function (req, res) {
