@@ -1,15 +1,17 @@
 const Review = require("../models/review");
 const Toilet = require("../models/toilet");
 
+
+
 module.exports.createReview = function (req, res) {
     const review = new Review({
         "userName":req.body.userName,
         "toiletName":req.body.toiletName,
         "comments":req.body.comments,
-        "reviewPictures":req.body.reviewPictures,
+        //"reviewPictures":req.body.reviewPictures,
         "rating":req.body.rating
     });
-    
+
     review.save(function(err,newReview){
         console.log(newReview._id);
         if(!err){

@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const upload = multer({dest: __dirname + '/uploads/images'});
 const controller_toilets = require("../controllers/controller_toilets");
 const controller_users = require("../controllers/controller_users");
 const controller_reviews = require("../controllers/controller_reviews");
+
 
 //find all user
 router.get('/getUser',controller_users.getUser);
@@ -15,7 +18,7 @@ router.post('/createUser', controller_users.createUser);
 router.get('/getReview',controller_reviews.getReview);
 //get create page
 //post review
-router.post('/createReview', controller_reviews.createReview);
+router.post('/createReview',  upload.single('reviewPictures'), controller_reviews.createReview);
 
 //load reviews of certain toilet
 router.get('/loadReviews', controller_reviews.loadReviews);
