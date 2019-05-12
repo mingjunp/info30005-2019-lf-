@@ -1,31 +1,44 @@
 const express = require("express");
 const router = express.Router();
+
 const multer = require('multer');
-const upload = multer({dest: __dirname + '/uploads/images'});
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, __dirname + '/uploads/images');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+const upload = multer({storage: storage});
+
 const controller_toilets = require("../controllers/controller_toilets");
 const controller_users = require("../controllers/controller_users");
 const controller_reviews = require("../controllers/controller_reviews");
 
 
 //find all user
-router.get('/getUser',controller_users.getUser);
+router.get('/getUser', controller_users.getUser);
 //get create page
 //post user
 router.post('/createUser', controller_users.createUser);
 
 
 //find all review
-router.get('/getReview',controller_reviews.getReview);
+router.get('/getReview', controller_reviews.getReview);
 //get create page
+router.get('/createReview', function (req, res) {
+    res.sendfile('./public/HTML/reviewTest.html');
+});
 //post review
-router.post('/createReview',  upload.single('reviewPictures'), controller_reviews.createReview);
+router.post('/createReview', upload.single('reviewPictures'), controller_reviews.createReview);
 
 //load reviews of certain toilet
 router.get('/loadReviews', controller_reviews.loadReviews);
 
 
 //find all toilet
-router.get('/getToilet',controller_toilets.getToilet);
+router.get('/getToilet', controller_toilets.getToilet);
 
 // get create page
 
@@ -45,12 +58,12 @@ router.get('/keywordSearch', controller_toilets.keywordSearch);
 // router.get('/', controller_toilet.);
 
 // map homepage.html to '/' path
-router.get('/',function (req, res) {
-    res.sendFile('./public/HTML/homepage.html');
+router.get('/', function (req, res) {
+    res.sendfile('./public/HTML/homepage.html');
 });
 // map toiletpage.html to '/toiletDetail' path
-router.get('/toiletDetail',function (req, res) {
-    res.sendFile('./public/HTML/toiletpage.html');
+router.get('/toiletDetail', function (req, res) {
+    res.sendfile('./public/HTML/toiletpage.html');
 });
 
 module.exports = router;

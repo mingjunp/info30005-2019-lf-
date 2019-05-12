@@ -99,7 +99,6 @@ module.exports.contentSearch = function (req, res) {
 };
 
 
-
 module.exports.createToilet = function (req, res) {
     const toilet = new Toilet({
         "userName": req.body.userName,
