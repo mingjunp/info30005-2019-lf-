@@ -3,6 +3,7 @@ const router = express.Router();
 const controller_toilets = require("../controllers/controller_toilets");
 const controller_users = require("../controllers/controller_users");
 const controller_reviews = require("../controllers/controller_reviews");
+const controller_likes = require("../controllers/controller_likes");
 
 
 
@@ -32,6 +33,9 @@ router.get('/userLogout', controller_users.userLogout);
 
 //user signup
 router.post('/userSignUp', controller_users.userSignUp);
+
+//check login
+router.get('/checkLogin', controller_users.checkLogin);
 
 
 //find all review
@@ -68,6 +72,11 @@ router.get('/keywordSearch', controller_toilets.keywordSearch);
 
 //share my own toilet
 router.post('/shareMyToilet', controller_toilets.shareMyToilet);
+
+
+
+//like toilet
+router.get('/setLike', controller_likes.setLike);
 
 
 // router.get('/', controller_toilet.);

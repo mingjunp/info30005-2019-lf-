@@ -1,0 +1,36 @@
+const like = require("../models/like");
+
+module.exports.setLike = function(req, res, next) {
+    if (!req.session.userName) {
+       console.log("please login first!");
+    }
+    isLike = req.query.isLike;
+    toiletID = req.query.toiletID;
+
+    like.findOneAndUpdate(
+        {
+        "userName": req.session.userName,
+        "toiletID": toiletID
+        },
+        {"isLike":isLike},
+        {upsert: true, new: true, setDefaultsOnInsert: true},
+        (err, like) => {
+        if (err) console.log("Mongodb Error!");
+        res.send(like);
+    });
+};
+
+module.exports.getByUserToilet = function(req, res, next) {
+    console.log("--------")
+    console.log(req.session.userName);
+    if (typeof(req.session.userName) == undefined) {
+        console.log("no");
+    }
+    toiletID = req.query.toiletID;
+    like.findOne({"userName":req.session.userName,"toiletID":toiletID},['isLike'],(err, like) => {
+        if (err) console.log("Mongodb Error!");
+        console.log(like);
+        if (like) res.send(like.isLike);
+        console.log("no");
+    });
+};

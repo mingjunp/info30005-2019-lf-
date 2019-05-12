@@ -29,7 +29,7 @@ module.exports.createUser = function (req, res) {
 
 
 //user log in function
-module.exports.userLogin = function (req, res) {
+module.exports.userLogin = function (req, res, next) {
 	
      User.findOne({
     	"userName": req.body.userName,
@@ -52,13 +52,17 @@ module.exports.userLogin = function (req, res) {
 
 //logout function
 module.exports.userLogout = function(req, res, next) {
-	req.session.userName = null;
-	res.redirect('/login');
+	delete req.session.userName;
+	if (req.session.userName){
+		console.log("logout fail!");
+	}else {
+		console.log("logout successfully!");
+	}
 };
 
 
 //user sign up function
-module.exports.userSignUp = function(req, res) {
+module.exports.userSignUp = function(req, res, next) {
 	
      User.findOne({
     	"userName": req.body.userName,
@@ -80,6 +84,19 @@ module.exports.userSignUp = function(req, res) {
     });
     
 };
+
+//check login
+module.exports.checkLogin = function(req, res, next) {
+	console.log(req.session);
+	if(req.session.userName) {
+		console.log("login successfully");
+	}else{
+		console.log("not login");
+	}
+};
+
+
+
 
 
 
