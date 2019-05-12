@@ -1,11 +1,12 @@
-<<<<<<< HEAD
 @charset "utf-8";
 *{
 	margin:0;
 	padding:0;
 	color:#333;
 }
-
+body{
+	background-color: #F5F5F5;
+}
 .clearfix:after{
 	content:'';
 	display: block;
@@ -20,19 +21,19 @@
 	margin:0 auto;
 }
 
-.btn{
-	padding:4px 10px;
+.mybtn{
+	padding:7px 16px;
 	border-radius:4px;
-	background:#ef3420;
+	background-color: #5bc0de;
+	border-color: #46b8da;
 	line-height: 1;
 	color:#fff;
-	
 	transform: translateY(50%);
 }
 
 header{
 	height:60px;
-	box-shadow: 0 0 5px #e5e5e5;
+	/*box-shadow: 0 0 5px #e5e5e5;*/
 	text-align: center;
 	line-height: 60px;
 	font-size:20px;
@@ -51,9 +52,9 @@ header .star{
 }
 header a{
 	float:right;
-	
+
 	text-decoration: none;
-	
+
 }
 
 
@@ -214,226 +215,18 @@ input[type="checkbox"]:checked:after{
 	border:1px solid #e5e5e5;
 	text-decoration: none;
 }
-
-
-
-=======
-@charset "utf-8";
-*{
-	margin:0;
-	padding:0;
-	color:#333;
-}
-
-.clearfix:after{
-	content:'';
-	display: block;
-	line-height: 0;
-	height:0;
-	visibility: hidden;
-	clear: both;
-}
-
-.container{
-	width:800px;
-	margin:0 auto;
-}
-
-.btn{
-	padding:4px 10px;
-	border-radius:4px;
-	background:#ef3420;
-	line-height: 1;
-	color:#fff;
-	
-	transform: translateY(50%);
-}
-
-header{
-	height:60px;
-	box-shadow: 0 0 5px #e5e5e5;
-	text-align: center;
-	line-height: 60px;
-	font-size:20px;
-}
-
-header .star{
-	width:60px;
-	height:60px;
-	display: inline-block;
-	float: left;
-	line-height:65px;
-	background: url(../images/star.png) no-repeat center / 100% 100%;
-	text-align: center;
-	font-size: 12px;
-	color:#666;
-}
-header a{
-	float:right;
-	
-	text-decoration: none;
-	
-}
-
-
-.slider_wrapper{
-	position:relative;
-	width:800px;
-	margin:50px auto 20px;
-	height:240px;
-}
-.diff_logo{
-	position:absolute;
-	background:red;
-	left:50%;
-	transform:translateX(-50%);
-	width:400px;
-}
-.logo_item{
-	position:absolute;
-	width:100%;
-	box-shadow: 0 0 30px 2px rgba(180, 166, 166, 0.3);
-	border-radius:6px;
-	transition:all .5s;
-}
-.logo_item img{
-	display:block;
-	width:100%;
-}
-
-
-.slider{
-	position:relative;
-}
-
-
-.lrbtn{
-	position: absolute;
-	width:40px;
-	height:60px;
-	background:rgba(0,0,0,0.4) url(../images/left.png) no-repeat center / 80% auto;
-	top:50%;
-	transform: translateY(-50%);
-}
-.rbtn{
-	right:0;
-	background-image: url(../images/right.png);
-}
-
-.detail{
-	position: relative;
-}
-.detail p{
-	line-height:40px;
-}
-
-.detail p span:first-child{
-	display: inline-block;
-	width:20%;
-	text-align: right;
-	padding-right: 10px;
-	color:#888;
-	font-style: italic;
-}
-
-input[type="checkbox"]{
-	visibility: none;
-	position: relative;
-}
-
-input[type="checkbox"]:before{
-	content:' ';
-	display: block;
-	width:15px;
-	height:15px;
-	background:#fff;
-	border:1.5px solid #333;
-	border-radius:3px;
-
-}
-
-input[type="checkbox"]:checked:after{
-	position:absolute;
-	content:' ';
-	display: block;
-	top:36%;
-	left:30%;
-	transform:rotate(-45deg);
-	width:9px;
-	height:5px;
-	background:none;
-	border:1.5px solid #333;
-	border-top: 0;
-	border-right:0; 
-}
-
-.fix{
-	position: absolute;
-
-	right:0px;
-	top:0;
-	padding:7px 16px;
-	text-decoration:none;
-}
-.comments{
-	margin-top:20px;
-	padding-bottom: 50px;
-}
-
-.comments h2{
-	border-bottom:1px solid #e5e5e5;
-	line-height: 50px;
-	text-indent: 20px;
-}
-.comments h2 span{
-	float: left;
-}
-.comments .btn-down{
-	width:50px;
+.like {
 	height: 50px;
-	display: inline-block;
-	background: url(../images/toright.png) no-repeat center / 40% auto;
-	transition:all 0.5s ease;
 }
-.comments .btn-down.active{
-	transform: rotate(90deg);
-}
-.comments .main{
-	display: none;
+.fav {
+	float: right;
 }
 
-.comments .comm{
-	margin:25px 0 0 50px;
-	padding:10px;
-	border-radius:4px;
-	border-left:3px solid #eee;
+.glyphicon-heart-empty{
+	font-size:28px;
 }
-.comments .comm p:first-child{
-	line-height: 40px;
-}
-.comments .comm p:first-child span{
-	margin-left:35px;
-	font-size:12px;
-	color:#666;
+.glyphicon-heart {
+	color: red;
+	font-size:28px;
 }
 
-.comments .comm p:last-child{
-	line-height:1.4;
-	font-size:13px;
-	color:#555;
-}
-
-.addc{
-	text-align:center;
-	display: block;
-	width:30%;
-	margin:10px auto;
-	padding:5px 0;
-	border-radius:4px;
-	border:1px solid #e5e5e5;
-	text-decoration: none;
-}
-
-
-
->>>>>>> sddua

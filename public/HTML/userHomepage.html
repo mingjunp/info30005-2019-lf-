@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User homepage</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../JS/checkLogin.js"></script>
+    <script>
+        checkLogin();
+        $('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        });
+    </script>
+    <style>
+        .jumbotron {
+            margin-top: -20px;
+        }
+        .panel {
+            margin-top: 20px;
+        }
+        #map {
+            height: 100%;
+        }
+        #mapHolder{
+            height: 400px;
+            width: 550px;
+        }
+    </style>
+</head>
+<body>
+    <!--header-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-home"></span></a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Hi <a href="#" class="navbar-link">Username!</a></p></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--page header-->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hi, <span>username!</span></h1>
+            <p>Welcome to visiting public toilet website</p>
+        </div>
+    </div>
+
+    <!--content-->
+    <div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#collection" aria-controls="collection" role="tab" data-toggle="tab">Collection</a></li>
+            <li role="presentation"><a href="#myToilet" aria-controls="myToilet" role="tab" data-toggle="tab">My Toilet</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="collection">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Toilet Name: Public Toilet - Toilet 131 - Royal Park (Flemington Rd - Near North Park Tennis Club)
+                    </div>
+                    <div class="panel-body">
+                        facility: Wheelchair, male&female
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="myToilet">
+
+                <div class="shareToilet">
+                    <h4><span class="glyphicon glyphicon-hand-down"></span>Click button below to share your toilet!</h4>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#shareToilet">Share your own toilet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Share toilet pop-up window-->
+    <div id="shareToilet" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-title">
+                    <h1 class="text-center">Share your toilet</h1>
+                </div>
+                <div class="modal-body">
+                    <form id="review-form" class="form-group" action="">
+
+                        <div class="form-group">
+                            <label for="">Toilet Name</label>
+                            <input class="form-control" name="rating" type="text" placeholder="Enter your toilet name">
+                        </div>
+                        <div class="checkbox-custom checkbox-default">
+                            <p>Please select tags from below</p>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="female" name="filter" value="female">female
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="male" name="filter" value="male">male
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
+                            </label>
+                        </div>
+                        <div id="mapHolder" class="mapContainer">
+                            <div id="map"></div>
+                            <input type="hidden" id="lat">
+                            <input type="hidden" id="lng">
+                        </div>
+
+
+                        <br>
+                        <div class="text-right">
+                            <input class="btn btn-primary" onclick="sendComment()" value="Submit">
+                            <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: {lat: -37.812326, lng: 144.961971}
+            });
+            var marker= new google.maps.Marker();
+            map.addListener('click', function(e) {
+                marker.setMap(null);
+                marker = new google.maps.Marker({
+                    position: e.latLng,
+                    map: map
+                });
+                console.log("---------");
+                console.log(e.latLng.lat());
+                console.log(e.latLng.lng());
+                $('#lat').val(e.latLng.lat());
+                $('#lng').val(e.latLng.lng());
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&callback=initMap">
+    </script>
+</body>
+</html>
+
+<!--<input type="file" name="file" id="file" />-->
+<!--<button id="upload">上传</button>-->
+<!--<span id="progress">0</span>-->
+<!--<img id="image" src="" width="200" />-->
+<!--<script>-->
+<!--(function () {-->
+<!--'use strict';-->
+
+<!--var file = document.querySelector('#file');-->
+<!--var upload = document.querySelector('#upload');-->
+<!--var progress = document.querySelector('#progress');-->
+<!--var image = document.querySelector('#image');-->
+<!--var xhr = new XMLHttpRequest();-->
+
+<!--upload.addEventListener('click', uploadFile, false);-->
+<!--file.addEventListener('change', previewImage, false);-->
+
+<!--// 点击上传-->
+<!--function uploadFile(event) {-->
+<!--var formData = new FormData();-->
+<!--formData.append('test-upload', file.files[0]);-->
+<!--xhr.onload = uploadSuccess;-->
+<!--xhr.upload.onprogress = setProgress;-->
+<!--xhr.open('post', '/api/toilets/uploadToiletPhoto', true);-->
+<!--xhr.send(formData);-->
+<!--}-->
+
+<!--// 成功上传-->
+<!--function uploadSuccess(event) {-->
+<!--if (xhr.readyState === 4) {-->
+<!--console.log(xhr.responseText);-->
+<!--}-->
+<!--}-->
+
+<!--// 进度条-->
+<!--function setProgress(event) {-->
+<!--if (event.lengthComputable) {-->
+<!--var complete = Number.parseInt(event.loaded / event.total * 100);-->
+<!--progress.innerHTML = complete + '%';-->
+<!--}-->
+<!--}-->
+
+<!--// 图片预览-->
+<!--function previewImage(event) {-->
+<!--var reader = new FileReader();-->
+<!--reader.onload = function (event) {-->
+<!--image.src = event.target.result;-->
+<!--};-->
+<!--reader.readAsDataURL(event.target.files[0]);-->
+<!--}-->
+<!--})();-->
+<!--</script>-->
