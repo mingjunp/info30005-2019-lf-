@@ -4,10 +4,11 @@ const router = express.Router();
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-    destination:'./public/uploads/',
-    filename(req,file,cb){
+    destination: './public/uploads/',
+    filename(req, file, cb) {
         const filenameArr = file.originalname.split('.');
-        cb(null,Date.now() + '.' + filenameArr[filenameArr.length-1]);
+        console.log(filenameArr);
+        cb(null, Date.now() + '.' + filenameArr[filenameArr.length - 1]);
     }
 });
 
@@ -17,7 +18,6 @@ const controller_toilets = require("../controllers/controller_toilets");
 const controller_users = require("../controllers/controller_users");
 const controller_reviews = require("../controllers/controller_reviews");
 const controller_likes = require("../controllers/controller_likes");
-
 
 
 //find all user
@@ -34,9 +34,7 @@ router.get('/api/users/logout', controller_users.logout);
 //check login
 router.get('/api/users/checkLogin', controller_users.checkLogin);
 
-router.get('/api/users/checkUserName',controller_users.checkUserName);
-
-
+router.get('/api/users/checkUserName', controller_users.checkUserName);
 
 
 //get create page
@@ -44,7 +42,9 @@ router.get('/api/reviews/createReview', function (req, res) {
     res.sendfile('./public/HTML/reviewTest.html');
 });
 //post review
-router.post('/api/reviews/createReview', upload.single('reviewPictures'), controller_reviews.createReview);
+router.post('/api/reviews/createReview', controller_reviews.createReview);
+// upload review picture
+router.post('/api/reviews/uploadReviewPicture', upload.single('reviewPictures'), controller_reviews.uploadReviewPicture);
 //load reviews of certain toilet
 router.get('/api/reviews/getReviewsByToilet', controller_reviews.getReviewsByToilet);
 
@@ -71,7 +71,7 @@ router.post('/api/toilets/updateToilet', controller_toilets.updateToilet);
 
 router.delete('/api/toilets/deletToilet', controller_toilets.deletToilet);
 
-router.post('/api/toilets/uploadToiletPhoto',upload.single('test-upload') , controller_toilets.uploadToiletPhoto);
+router.post('/api/toilets/uploadToiletPhoto', upload.single('test-upload'), controller_toilets.uploadToiletPhoto);
 
 // router.get('/', controller_toilet.);
 
@@ -86,12 +86,10 @@ router.get('/toiletDetail', function (req, res) {
 });
 
 
-
 //like toilet
 router.get('/api/likes/setLike', controller_likes.setLike);
 
 router.get('/api/likes/getByUserToilet', controller_likes.getByUserToilet);
-
 
 
 // router.get('/', controller_toilet.);

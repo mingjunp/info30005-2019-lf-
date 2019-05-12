@@ -113,7 +113,7 @@ module.exports.contentSearch = function (req, res) {
 };
 
     // test example
-// {       "toiletPicture": "toiletPicture",
+// {       "toiletPictures": "toiletPictures",
 //     "name": "name",
 //     "operator": "re",
 //     "female": "yes",
@@ -134,7 +134,7 @@ module.exports.contentSearch = function (req, res) {
 //share my own toilet
 module.exports.creatToilet = function (req, res) {
  	const toilet = new Toilet({
-        "toiletPicture": req.body.toiletPicture,
+        "toiletPictures": req.body.toiletPictures,
         "name": req.body.name,
         "operator": req.body.operator,
         "female": req.body.female,
@@ -159,9 +159,9 @@ module.exports.creatToilet = function (req, res) {
 };
 
 module.exports.updateToilet = function(req, res) {
-    id = req.body._id;
-    updateData = {
-        "toiletPicture": req.body.toiletPicture,
+    let id = req.body._id;
+    let updateData = {
+        "toiletPictures": req.body.toiletPictures,
         "name": req.body.name,
         "operator": req.body.operator,
         "female": req.body.female,
@@ -187,7 +187,7 @@ module.exports.updateToilet = function(req, res) {
 };
 
 module.exports.deletToilet = function(req, res){
-    id = req.body.id;
+    let id = req.body.id;
     Toilet.remove({'_id': id}, function(err, deletToilet){
         if (err){
             return res.json({errno: -1, message: "MongoDb Error"});

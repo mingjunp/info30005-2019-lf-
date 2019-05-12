@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 const reviewSchema = new mongoose.Schema({
     "comments": String,
-    "userName":String,
-    "toiletName":String,
+    "userName": String,
+    "toiletName": String,
 
-    "rating":Number,
-    "date":{
+    "rating": Number,
+    "date": {
         type: Date,
         Default: Date.now
-    }
-    //"reviewPictures":String,
+    },
+    "reviewPictures": String,
 });
 
 

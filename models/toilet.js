@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const toiletSchema = new mongoose.Schema({
-    "toiletPicture": String,
+    "toiletPictures": String,
     "reviewPictures":{
         type:[String],
     },
