@@ -267,7 +267,7 @@ function initAutocomplete() {
 
 //all toilet get from open melbourne
 var allToilet;
-$.ajax({url:"http://localhost:3000/api/toilets/getAllToilets",async:false,success:function(result){
+$.ajax({url:"/api/toilets/getAllToilets",async:false,success:function(result){
         allToilet = result.data;
     }});
 

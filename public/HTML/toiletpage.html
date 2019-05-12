@@ -234,7 +234,7 @@
 			isLike = "no";
 		}
 		$.ajax({
-			url:'http://localhost:3000/api/likes/setLike',
+			url:'/api/likes/setLike',
 			type:'get',
 			contentType: "application/json; charset=utf-8",
 			dataType:'json',
@@ -256,7 +256,7 @@
 
 	function loadLike(toiletID) {
 		$.ajax({
-			url:'http://localhost:3000/api/likes/getByUserToilet',
+			url:'/api/likes/getByUserToilet',
 			type:'get',
 			contentType: "application/json; charset=utf-8",
 			dataType:'json',
@@ -294,7 +294,7 @@
 	}
 	function loadToiletDetail(toiletID){
 		$.ajax({
-			url:'http://localhost:3000/api/toilets/getById',
+			url:'/api/toilets/getById',
 			type:'get',
 			contentType: "application/json; charset=utf-8",
 			dataType:'json',
@@ -321,7 +321,7 @@
 	}
 	function loadComments(toiletID) {
 		$.ajax({
-			url:'http://localhost:3000/api/reviews/getReviewsByToilet',
+			url:'/api/reviews/getReviewsByToilet',
 			type:'get',
 			contentType: "application/json; charset=utf-8",
 			dataType:'json',
@@ -367,7 +367,7 @@
 		});
 		console.log(formObject);
 		$.ajax({
-			url:'http://localhost:3000/api/reviews/createReview',
+			url:'/api/reviews/createReview',
 			type:'post',
 			contentType: "application/json; charset=utf-8",
 			dataType:'json',

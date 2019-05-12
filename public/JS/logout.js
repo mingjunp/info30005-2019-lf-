@@ -1,6 +1,6 @@
 function logout() {
     $.ajax({
-        url:'http://localhost:3000/api/users/logout',
+        url:'/api/users/logout',
         type:'get',
         contentType: "application/json; charset=utf-8",
         dataType:'json',

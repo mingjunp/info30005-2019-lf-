@@ -8,7 +8,7 @@ function login(){
         formObject[item.name] = item.value;
     });
     $.ajax({
-        url:'http://localhost:3000/api/users/login',
+        url:'/api/users/login',
         type:'post',
         contentType: "application/json; charset=utf-8",
         dataType:'json',
