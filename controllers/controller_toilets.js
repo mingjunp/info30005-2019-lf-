@@ -1,13 +1,27 @@
 const Toilet = require("../models/toilet");
 const FuzzySearch = require('fuzzy-search');
+const path = require('path');
 
-module.exports.getToilet = function (req, res) {
+module.exports.getAllToilets = function (req, res) {
     Toilet.find(function (err, toilets) {
         if (!err) {
-            res.send(toilets);
+            return res.json({errno: 0, data:toilets});
         } else {
-            res.sendStatus(404);
+            return res.json({errno: -1, message: "MongoDb Error!"});
         }
+    });
+};
+
+module.exports.getById = function(req, res){
+    id = req.query.id;
+    Toilet.findById(id, function (err, toilet) {
+        if (err) {
+            return res.json({errno: -1, message: "MongoDb Error!"})
+        }
+        else{
+            return res.json({errno: 0, data:toilet});
+        }
+
     });
 };
 
@@ -98,76 +112,108 @@ module.exports.contentSearch = function (req, res) {
     });
 };
 
-
-
-module.exports.createToilet = function (req, res) {
-    const toilet = new Toilet({
-        "userName": req.body.userName,
-        "toiletName": req.body.toiletName,
-        "toiletPicture": req.body.toiletPicture,
-        "location": {
-            "type": "Point",
-            "coordinates": req.body.location.coordinates,
-        },
-        "female": req.body.female,
-        "male": req.body.male,
-        "wheelchair": req.body.wheelchair,
-        "babyFacil": req.body.babyFacil,
-        "shower": req.body.shower,
-        "aveRating": req.body.aveRating
-    });
-
     // test example
-    // {
-    //     "userName": "username",
-    //     "toiletName": "toiletName",
-    //     "toiletPicture": "109900898",
-    //     "location": {
-    //     "type": "Point",
-    //         "coordinates": [-37.792, 144.962]
-    //      },
-    //     "female": "yes",
-    //     "male": "yes",
-    //     "wheelchair":"yes",
-    //     "babyFacil": "yes",
-    //     "shower": "yes",
-    //     "aveRating": 4.0
-    // }
+// {       "toiletPicture": "toiletPicture",
+//     "name": "name",
+//     "operator": "re",
+//     "female": "yes",
+//     "male": "yes",
+//     "baby_facil": "yes",
+//     "wheelchair":"yes",
+//     "lat": -88,
+//     "lon": -94,
+//     "location_address": "toiletPicture",
+//     "location_city": "toiletPicture",
+//     "location_state":"toiletPicture",
+//     "location_zip": "toiletPicture"
+//
+// }
     //
-    toilet.save(function (err, newToilet) {
-        if (!err) {
-            res.send(newToilet);
-        } else {
-            res.sendStatus(400);
-        }
-    });
-};
 
 
 //share my own toilet
-module.exports.shareMyToilet = function (req, res) {
+module.exports.creatToilet = function (req, res) {
  	const toilet = new Toilet({
-        "userName": req.body.userName,
-        "toiletName": req.body.toiletName,
         "toiletPicture": req.body.toiletPicture,
-        "location": {
-            "type": "Point",
-            "coordinates": req.body.location.coordinates,
-        },
+        "name": req.body.name,
+        "operator": req.body.operator,
         "female": req.body.female,
         "male": req.body.male,
+        "baby_facil": req.body.baby_facil,
         "wheelchair": req.body.wheelchair,
-        "babyFacil": req.body.babyFacil,
-        "shower": req.body.shower
+        "lat": req.body.lat,
+        "lon": req.body.lon,
+        "location_address": req.body.location_address,
+        "location_city": req.body.location_city,
+        "location_state": req.body.location_state,
+        "location_zip": req.body.location_zip
     });
 
     toilet.save(function (err, newToilet) {
         if (!err) {
-            res.send(newToilet);
+            return res.json({errno: 0, data: newToilet});
         } else {
-            res.sendStatus(400);
+            return res.json({errno: -1, message: "MongoDb Error!"});
         }
     });
 };
 
+module.exports.updateToilet = function(req, res) {
+    id = req.body._id;
+    updateData = {
+        "toiletPicture": req.body.toiletPicture,
+        "name": req.body.name,
+        "operator": req.body.operator,
+        "female": req.body.female,
+        "male": req.body.male,
+        "baby_facil": req.body.baby_facil,
+        "wheelchair": req.body.wheelchair,
+        "lat": req.body.lat,
+        "lon": req.body.lon,
+        "location_address": req.body.location_address,
+        "location_city": req.body.location_city,
+        "location_state": req.body.location_state,
+        "location_zip": req.body.location_zip,
+
+    };
+    Toilet.updateOne({'_id': id}, updateData, function(err, updateToilet) {
+        if (err){
+            return res.json({errno: -1, message: "MongoDb Error"});
+        }
+        else{
+            return res.json({errno: 0, data:updateToilet});
+        }
+    });
+};
+
+module.exports.deletToilet = function(req, res){
+    id = req.body.id;
+    Toilet.remove({'_id': id}, function(err, deletToilet){
+        if (err){
+            return res.json({errno: -1, message: "MongoDb Error"});
+        }
+        else{
+            return res.json({errno: 0, data:deletToilet});
+        }
+    });
+};
+
+module.exports.uploadToiletPhoto = function(req, res){
+    // no file
+    if (!req.file) {
+        res.json({ ok: false });
+        return;
+    }
+    // output file info
+    console.log('====================================================');
+    console.log('fieldname: ' + req.file.fieldname);
+    console.log('originalname: ' + req.file.originalname);
+    console.log('encoding: ' + req.file.encoding);
+    console.log('mimetype: ' + req.file.mimetype);
+    console.log('size: ' + (req.file.size / 1024).toFixed(2) + 'KB');
+    console.log('destination: ' + req.file.destination);
+    console.log('filename: ' + req.file.filename);
+    console.log('path: ' + req.file.path);
+    return res.json({errno: 0, data: req.file.destination+req.file.filename});
+};
 

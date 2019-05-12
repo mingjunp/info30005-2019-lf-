@@ -1,18 +1,19 @@
 const Review = require("../models/review");
 const Toilet = require("../models/toilet");
+const path = require("path");
 
 
 module.exports.createReview = function (req, res) {
-    const host = req.host;
-    // const filePath = req.protocol + "://" + host + '/' + req.file.path;
-    const filePath = req.file.path;
+    //const host = req.host;
+    //const filePath = req.protocol + "://" + host + '/' + req.file.path;
+    //const filePath = req.file.path;
 
     const review = new Review({
         "userName": req.body.userName,
         "toiletName": req.body.toiletName,
         "comments": req.body.comments,
-        "reviewPictures": filePath,
-        "rating": req.body.rating
+        "rating": req.body.rating,
+        //"reviewPictures": filePath,
     });
 
 
@@ -23,62 +24,22 @@ module.exports.createReview = function (req, res) {
                     // console.log(toilet);
                 }
             });
-            res.send(newReview);
+            return res.json({errno: 0, data: newReview});
         } else {
-            res.send(400);
+            return res.json({errno: -1, message: "MongoDb Error"});
         }
     });
 }
 
 
-module.exports.createReview = function (req, res) {
-    const review = new Review({
-        "userName": req.body.userName,
-        "toiletName": req.body.toiletName,
-        "comments": req.body.comments,
-        "reviewPictures": req.body.reviewPictures,
-        "rating": req.body.rating
-    });
-    //upload and formalize pics
-    //https://gist.github.com/bingeboy/5589501
-
-    review.save(function (err, newReview) {
-        if (!err) {
-            res.send(newReview);
-        } else {
-
-            res.sendStatus(400);
-        }
-    });
-
-};
-
-module.exports.getReview = function (req, res) {
-    Review.find(function (err, reviews) {
-        if (!err) {
-            res.send(reviews);
-        } else {
-            Review.find(function (err, reviews) {
-                if (!err) {
-                    res.send(reviews);
-                } else {
-                    res.sendStatus(404);
-                }
-            });
-        }
-    });
-};
-
-
 //load reviews of certain toilet
-module.exports.loadReviews = function (req, res) {
+module.exports.getReviewsByToilet = function (req, res) {
     let toiletName = req.body.toiletName;
     Review.find({toiletName: toiletName}, null, function (err, result) {
         if (!err) {
-            res.send(result);
+            return res.json({errno: 0, data:result});
         } else {
-
-            res.sendStatus(400);
+            return res.json({errno: -1, message: "MongoDb Error"});
         }
     });
 }

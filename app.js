@@ -15,10 +15,6 @@ require('./models/db.js');
 
 app.use("/", routes);   // 鏈�/鐨勬椂鍊檆all router
 
-const redisClient = require('./db/redis');
-const sessionStore = new RedisStore({
-    client: redisClient
-});
 app.use(session({
         secret: 'DDD',
         cookie: {

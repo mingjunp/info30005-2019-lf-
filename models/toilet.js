@@ -1,30 +1,31 @@
 const mongoose = require("mongoose");
 
 const toiletSchema = new mongoose.Schema({
-    "userName": String,
-    "toiletName": String,
     "toiletPicture": String,
     "reviewPictures":{
         type:[String],
     },
-    "location": {
-        "type": {
-            type: String,
-            enum: ['Point'],
-            required: true
-        },
-        "coordinates": {
-            type: [Number],
-            required: true
-        },
-    },
-    //yes/no
+    "name": String,
+
+    // who own this toilet
+    "operator": String,
+
+    // toilet's property : yes or no
     "female": String,
     "male": String,
+    "baby_facil": String,
     "wheelchair": String,
-    "babyFacil": String,
-    "shower": String,
-    "aveRating": Number
+
+    // location of this toilet
+    "lat": Number,
+    "lon": Number,
+    "location_address": String,
+    "location_city": String,
+    "location_state": String,
+    "location_zip": String,
+
+    // toilet average rate
+    "rate": {type: Number, default: 0}
 });
 
 // toiletSchema.index({location: "2dsphere"}) ;

@@ -2,94 +2,95 @@ const User = require("../models/user");
 
 
 module.exports.getUser = function (req, res) {
-    User.find(function(err,users){
-        if(!err){
-            res.send(users);
-        }else{
-            res.sendStatus(404);
+    User.find(function (err, users) {
+        if (!err) {
+            return res.json({errno: 0, data: users});
+        } else {
+            return res.json({errno: -1, message: "wrong!"});
         }
     });
 };
 
 
-
-
 //user log in function
 module.exports.login = function (req, res) {
-	
-     User.findOne({
-    	"userName": req.body.userName,
-  	}).then(function (userInfo) {
-    	 if (!userInfo) {
-     	  	console.log("no such user!");
-     	  	res.sendStatus(404);
-      	  }else {
-      	  	if(req.body.password != userInfo.password){
-      	  		console.log("wrong password!");
-      			res.sendStatus(404);
-   	  		}else {
-   	  			console.log("log in successfully!");
-   	  			res.sendStatus(200);
-   	  	  	 }
-   	  	  }
-   	  });
+
+    User.findOne({
+        "userName": req.body.userName,
+    }).then(function (userInfo) {
+        if (!userInfo) {
+            console.log("no such user!");
+            return res.json({errno: -1, message: "no such user!"});
+        } else {
+            if (req.body.password != userInfo.password) {
+                console.log("wrong password!");
+                return res.json({errno: -1, message: "wrong password!"});
+            } else {
+                console.log("log in successfully!");
+                return res.json({errno: 0, data: userInfo.userName});
+            }
+        }
+    });
 };
 
 
 //logout function
-module.exports.logout = function(req, res) {
-	delete req.session.userName;
-	if (req.session.userName){
-		console.log("logout fail!");
-	}else {
-		console.log("logout successfully!");
-	}
+module.exports.logout = function (req, res) {
+    delete req.session.userName;
+    if (req.session.userName) {
+        return res.json({errno: -1, message: "logout fail!"});
+    } else {
+        return res.json({errno: 0, data:"logout successfully!"});
+    }
 };
 
 
 //user sign up function
-module.exports.createUser = function(req, res) {
-	
-     User.findOne({
-    	"userName": req.body.userName,
-  	}).then(function (userInfo) {
-	
-		if(!userInfo) {
-			// insert new user if they don't exist
-			const user = new User({
-        		"userName":req.body.userName,
-        		"password":req.body.password,
-    		});
-    		user.save();
-    		res.send(user);
-			
-		} else {
-			console.log("That user already exists!");
-			res.sendStatus(400);
-    	}
+module.exports.createUser = function (req, res) {
+
+    User.findOne({
+        "userName": req.body.userName,
+    }).then(function (userInfo) {
+
+        if (!userInfo) {
+            // insert new user if they don't exist
+            const user = new User({
+                "userName": req.body.userName,
+                "password": req.body.password,
+            });
+            user.save();
+            res.send(user);
+
+        } else {
+            return res.json({errno: -1, message: "That user already exists!"});
+        }
     });
-    
+
 };
 
 //check login
-module.exports.checkLogin = function(req, res) {
-	console.log(req.session);
-	if(req.session.userName) {
-		console.log("login successfully");
-	}else{
-		console.log("not login");
-	}
+module.exports.checkLogin = function (req, res) {
+    userName = req.query.userName;
+    console.log(req.session);
+    if (req.session.userName) {
+        return res.json({errno: 0, data: req.session.userName});
+    } else {
+        return res.json({errno: -1, message: "login failed"});
+    }
 };
-module.exports.checkUserName = function(req, res){
-	userName = req.query.userName;
-	user.find({"userName":userName},(err, user) =>{
-		if (err) res.json(new ErrorModel("Mongodb Error!"));
-		if (user.length > 0) {
-			res.json({"valid":false});
-		}else {
-			res.json({"valid":true});
-		}
-	});
+
+module.exports.checkUserName = function (req, res) {
+    userName = req.query.userName;
+    User.find({"userName": userName}, (err, user) => {
+        if (err) {
+            return res.json({errno: -1, message: "MongoDB Error!"});
+        };
+        if (user.length > 0) {
+            res.json({"valid": false});
+        } else {
+            res.json({"valid": true});
+        }
+    });
 }
 
 
