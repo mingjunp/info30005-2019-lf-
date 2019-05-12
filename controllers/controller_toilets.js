@@ -99,10 +99,7 @@ module.exports.contentSearch = function (req, res) {
 };
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> sddua
 module.exports.createToilet = function (req, res) {
     const toilet = new Toilet({
         "userName": req.body.userName,
@@ -147,8 +144,6 @@ module.exports.createToilet = function (req, res) {
 };
 
 
-<<<<<<< HEAD
-=======
 //share my own toilet
 module.exports.shareMyToilet = function (req, res) {
  	const toilet = new Toilet({
@@ -175,6 +170,4 @@ module.exports.shareMyToilet = function (req, res) {
     });
 };
 
-
->>>>>>> sddua
 

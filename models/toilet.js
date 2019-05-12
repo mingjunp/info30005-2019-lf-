@@ -4,12 +4,9 @@ const toiletSchema = new mongoose.Schema({
     "userName": String,
     "toiletName": String,
     "toiletPicture": String,
-<<<<<<< HEAD
     "reviewPictures":{
         type:[String],
     },
-=======
->>>>>>> sddua
     "location": {
         "type": {
             type: String,

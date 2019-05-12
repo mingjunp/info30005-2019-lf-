@@ -11,25 +11,11 @@ module.exports.getUser = function (req, res) {
     });
 };
 
-module.exports.createUser = function (req, res) {
-	console.log(req.body);
- 	const user = new User({
-        "userName":req.body.userName,
-        "password":req.body.password,
-       
-    });
-    user.save(function(err,newUser){
-        if(!err){
-            res.send(newUser);
-        }else{
-            res.sendStatus(400);
-        }
-    });
-};
+
 
 
 //user log in function
-module.exports.userLogin = function (req, res, next) {
+module.exports.login = function (req, res) {
 	
      User.findOne({
     	"userName": req.body.userName,
@@ -51,7 +37,7 @@ module.exports.userLogin = function (req, res, next) {
 
 
 //logout function
-module.exports.userLogout = function(req, res, next) {
+module.exports.logout = function(req, res) {
 	delete req.session.userName;
 	if (req.session.userName){
 		console.log("logout fail!");
@@ -62,7 +48,7 @@ module.exports.userLogout = function(req, res, next) {
 
 
 //user sign up function
-module.exports.userSignUp = function(req, res, next) {
+module.exports.createUser = function(req, res) {
 	
      User.findOne({
     	"userName": req.body.userName,
@@ -86,7 +72,7 @@ module.exports.userSignUp = function(req, res, next) {
 };
 
 //check login
-module.exports.checkLogin = function(req, res, next) {
+module.exports.checkLogin = function(req, res) {
 	console.log(req.session);
 	if(req.session.userName) {
 		console.log("login successfully");
@@ -94,7 +80,17 @@ module.exports.checkLogin = function(req, res, next) {
 		console.log("not login");
 	}
 };
-
+module.exports.checkUserName = function(req, res){
+	userName = req.query.userName;
+	user.find({"userName":userName},(err, user) =>{
+		if (err) res.json(new ErrorModel("Mongodb Error!"));
+		if (user.length > 0) {
+			res.json({"valid":false});
+		}else {
+			res.json({"valid":true});
+		}
+	});
+}
 
 
 

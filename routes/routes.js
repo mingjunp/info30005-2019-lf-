@@ -20,59 +20,57 @@ const controller_likes = require("../controllers/controller_likes");
 
 
 
-<<<<<<< HEAD
+
 //find all user
-router.get('/getUser', controller_users.getUser);
+router.get('/api/users/getUser', controller_users.getUser);
 //get create page
 //post user
-router.post('/createUser', controller_users.createUser);
+router.post('/api/users/createUser', controller_users.createUser);
 
 
 //find all review
-router.get('/getReview', controller_reviews.getReview);
+router.get('/api/reviews/getReview', controller_reviews.getReview);
 //get create page
-router.get('/createReview', function (req, res) {
+router.get('/api/reviews/createReview', function (req, res) {
     res.sendfile('./public/HTML/reviewTest.html');
 });
 //post review
-router.post('/createReview', upload.single('reviewPictures'), controller_reviews.createReview);
-=======
+router.post('/api/reviews/createReview', upload.single('reviewPictures'), controller_reviews.createReview);
+
 // get create page
 
 //post toilet
-router.post('/createToilet', controller_toilets.createToilet);
->>>>>>> sddua
+router.post('/api/toilets/createToilet', controller_toilets.createToilet);
 
 //load reviews of certain toilet
-router.get('/loadReviews', controller_reviews.loadReviews);
+router.get('/api/reviews/loadReviews', controller_reviews.loadReviews);
 
 
 //find all toilet
 router.get('/getToilet', controller_toilets.getToilet);
 
-<<<<<<< HEAD
+
 // get create page
 
 //post toilet
 router.post('/createToilet', controller_toilets.createToilet);
-=======
+
 //get create page
 
-//post user
-router.post('/createUser', controller_users.createUser);
+
 
 //user login
-router.post('/userLogin', controller_users.userLogin);
+router.post('/api/users/login', controller_users.login);
 
 //user logout
-router.get('/userLogout', controller_users.userLogout);
+router.get('/api/users/logout', controller_users.logout);
 
-//user signup
-router.post('/userSignUp', controller_users.userSignUp);
+
 
 //check login
 router.get('/checkLogin', controller_users.checkLogin);
->>>>>>> sddua
+
+router.get('/api/users/checkUserName',controller_users.checkUserName);
 
 // searching and sorting based on current location
 router.get('/autoSearch', controller_toilets.autoSearch);
@@ -83,7 +81,6 @@ router.get('/contentSearch', controller_toilets.contentSearch);
 // searching and sorting by key words
 router.get('/keywordSearch', controller_toilets.keywordSearch);
 
-<<<<<<< HEAD
 
 // router.get('/', controller_toilet.);
 
@@ -94,9 +91,8 @@ router.get('/', function (req, res) {
 // map toiletpage.html to '/toiletDetail' path
 router.get('/toiletDetail', function (req, res) {
     res.sendfile('./public/HTML/toiletpage.html');
-=======
 //get create page
-
+});
 
 //post review
 router.post('/createReview', controller_reviews.createReview);
@@ -108,7 +104,7 @@ router.get('/loadReviews', controller_reviews.loadReviews);
 // map homepage.html to '/' path
 router.get('/',function (req, res) {
     res.sendfile('./public/HTML/homepage.html');
->>>>>>> sddua
+
 });
 // map toiletpage.html to '/toiletDetail' path
 router.get('/toiletDetail',function (req, res) {
