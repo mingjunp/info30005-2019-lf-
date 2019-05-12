@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -323,4 +324,212 @@ $(function(){
 
 </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Toiletinfo</title>
+	<link rel="stylesheet" href="../CSS/toiletpage.css">
+</head>
+<body>
+<header>
+	<div class="container">
+		<span class="star">4.5</span>Toilet14-Flinders Street <a href="#" class="btn">Go</a>
+	</div>
+</header>
+
+<div class="container slider">
+	<div class="slider_wrapper">
+		<div class="diff_logo">
+			<div class="logo_item">
+				<img src="../images/toilet1.jpg">
+			</div>
+			<div class="logo_item">
+				<img src="../images/toilet2.jpg">
+			</div>
+			<div class="logo_item">
+				<img src="../images/toilet3.jpg">
+			</div>
+		</div>
+	</div>
+	<div class="lbtn lrbtn"></div>
+	<div class="rbtn lrbtn"></div>
+</div>
+
+<div class="container detail">
+	<p><span>Opening hours:</span><span>May-Sep 6:30am-9pm, Oct-Apr 6:30am-10pm</span></p>
+	<p><span>Location:</span><span class="location"></span></p>
+	<p><span>Wheelchair:</span><input type="checkbox" class="chair" disabled></p>
+	<p><span>Shower:</span><input type="checkbox" class="shower" disabled></p>
+	<p><span>Female:</span><input type="checkbox" class="female" disabled></p>
+	<p><span>male:</span><input type="checkbox" class="male" disabled></p>
+	<p><span>babyFacil:</span><input type="checkbox" class="baby" disabled></p>
+	<a href="" class="btn fix">Fix</a>
+</div>
+
+<div class="container comments">
+	<h2 class="clearfix"><span>Comments</span> <span class="btn-down"></span></h2>
+	<div class="main">
+		<a href="" class="addc">Add my comments +</a>
+		<div class="comm">
+			<p>John Snow <span class="time">2019/4/26</span></p>
+			<p>The toilet paper towels are used up but no one cares. The government should consider having more staff. </p>
+		</div>
+		<div class="comm">
+			<p>Lily Gilbert <span class="time">2019/4/26</span></p>
+			<p>This toilet is very clean and easy to find. I think it is quite good. </p>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="../JS/jquery.js"></script>
+<script>
+$(function(){
+	var index= 2;
+	var length = $('.logo_item').length;
+	var reduce=0.15;
+	var step =110;
+	var startX;
+	var canslider=false;
+	$('.logo_item').click(function(){
+		index= $(this).index();
+		calcSequence(index);
+	})
+	function calcSequence(currentIndex){
+		var arr=[];
+		var zIndex = 99;
+		for (var i = 0; i < length; i++) {
+			var num=(currentIndex+i)%length;
+			arr.push((currentIndex+i)%length);
+		}
+		var half= (arr.length-1)/2;
+		$(".logo_item")[arr[0]].style.zIndex=zIndex;
+		$(".logo_item")[arr[0]].style.transform="translateX(0px) scale(1)";
+		for (var j = 1; j < half+1; j++) {
+			zIndex--;
+			$(".logo_item")[arr[j]].style.zIndex=zIndex;
+			$(".logo_item")[arr[j]].style.transform="translateX("+step*j+"px) scale("+(1-reduce*j)+")";
+		}
+		for (var t = length - 1; t > half; t--) {
+			zIndex--;
+			$(".logo_item")[arr[t]].style.zIndex=zIndex;
+			$(".logo_item")[arr[t]].style.transform="translateX("+-step*(length-t)+"px) scale("+(1-reduce*(length-t))+")";
+		}
+	}
+	$(window).resize(changeStep);
+	function changeStep(){
+		var width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
+		if(width<1200&&width>=768){
+			step=80;
+		}else if(width<768){
+			step=60;
+		}else{
+			step=110
+		}
+		calcSequence(index);
+	}
+	changeStep();
+	calcSequence(index);
+	$(".slider_wrapper").on('touchstart',function(e){
+		 startX=e.touches[0].pageX;
+		 canslider=true;
+		})
+		$(".slider_wrapper").on('touchmove',function(e){
+		if(!canslider){
+			return
+		}
+		 curX=e.touches[0].pageX;
+		 var delt = curX-startX;
+		 if(delt>0){
+		 	index--;
+		 	if(index<0){
+		 		index=length-1;
+		 	}
+		 }else{
+		 	index=(index+1)%length
+		 }
+		 calcSequence(index);
+		 canslider=false;
+	})
+	function next_part(){
+		index--;
+	 	if(index<0){
+	 		index=length-1;
+	 	}
+		calcSequence(index);
+	}
+	function pre_part(){
+		index=(index+1)%length;
+		calcSequence(index);
+	}
+
+	var myEfficientFn = debounce(next_part,500,true);
+	var myEfficientFn1 = debounce(pre_part,500,true);
+	
+	$('.lbtn').click(function(){
+		myEfficientFn1();
+	});
+
+	$('.rbtn').click(function(){
+		myEfficientFn();
+	});
+
+
+	function debounce(func, wait, immediate) {
+	   let timeout, args, context, timestamp, result
+
+	   const later = function() {
+
+	     const last = +new Date() - timestamp
+
+
+	     if (last < wait && last > 0) {
+	       timeout = setTimeout(later, wait - last)
+	     } else {
+	       timeout = null
+
+	       if (!immediate) {
+	         result = func.apply(context, args)
+	         if (!timeout) context = args = null
+	       }
+	     }
+	   }
+
+	   return function(...args) {
+	     context = this
+	     timestamp = +new Date()
+	     const callNow = immediate && !timeout
+
+	     if (!timeout) timeout = setTimeout(later, wait)
+	     if (callNow) {
+	       result = func.apply(context, args)
+	       context = args = null
+	     }
+
+	     return result
+	   }
+	}
+
+
+
+	$(".btn-down").click(function(){
+		if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			$('.comments .main').hide(500);
+		}else{
+			$(this).addClass('active');
+			$('.comments .main').show(500);
+		}
+	});
+
+});
+
+
+
+</script>
+</body>
+>>>>>>> sddua
 </html>

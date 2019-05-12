@@ -99,6 +99,10 @@ module.exports.contentSearch = function (req, res) {
 };
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> sddua
 module.exports.createToilet = function (req, res) {
     const toilet = new Toilet({
         "userName": req.body.userName,
@@ -143,4 +147,34 @@ module.exports.createToilet = function (req, res) {
 };
 
 
+<<<<<<< HEAD
+=======
+//share my own toilet
+module.exports.shareMyToilet = function (req, res) {
+ 	const toilet = new Toilet({
+        "userName": req.body.userName,
+        "toiletName": req.body.toiletName,
+        "toiletPicture": req.body.toiletPicture,
+        "location": {
+            "type": "Point",
+            "coordinates": req.body.location.coordinates,
+        },
+        "female": req.body.female,
+        "male": req.body.male,
+        "wheelchair": req.body.wheelchair,
+        "babyFacil": req.body.babyFacil,
+        "shower": req.body.shower
+    });
+
+    toilet.save(function (err, newToilet) {
+        if (!err) {
+            res.send(newToilet);
+        } else {
+            res.sendStatus(400);
+        }
+    });
+};
+
+
+>>>>>>> sddua
 

@@ -17,12 +17,22 @@
   },
   "homepage": "https://github.com/mingjunp/info30005-2019-lf-#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
+    "connect-redis": "^3.4.1",
+    "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
+<<<<<<< HEAD
     "fuzzy-search": "^3.0.1",
     "mongoose": "^5.5.0",
     "mongoose-fuzzy-searching": "^1.0.4",
     "multer": "^1.4.1",
+=======
+    "express-session": "^1.16.1",
+    "fuzzy-search": "^3.0.1",
+    "mongoose": "^5.5.0",
+    "mongoose-fuzzy-searching": "^1.0.4",
+>>>>>>> sddua
     "nodemon": "^1.18.11",
     "pug": "^2.0.3"
   }
