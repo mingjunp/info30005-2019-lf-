@@ -14,7 +14,7 @@ module.exports.getUser = function (req, res) {
 
 //user log in function
 module.exports.login = function (req, res) {
-    User.findOne({"userName": req.body.userName}, function (err, userInfo) {
+    User.findOne({"userName": req.body.userName.toString()}, function (err, userInfo) {
         if (!err) {
             if (!userInfo) {
                 return res.json({errno: -1, message: "no such user!"});
@@ -49,17 +49,17 @@ module.exports.logout = function (req, res) {
 module.exports.createUser = function (req, res) {
 
     User.findOne({
-        "userName": req.body.userName,
+        "userName": req.body.userName.toString(),
     }).then(function (userInfo) {
 
         if (!userInfo) {
             // insert new user if they don't exist
             const user = new User({
-                "userName": req.body.userName,
-                "password": req.body.password,
+                "userName": req.body.userName.toString(),
+                "password": req.body.password.toString(),
             });
             user.save();
-            res.send(user);
+            return res.json({errno: 0, data: user});
 
         } else {
             return res.json({errno: -1, message: "That user already exists!"});

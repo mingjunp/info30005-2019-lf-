@@ -11,7 +11,7 @@ module.exports.getByUserToilet = function (req, res) {
             if (err) {
                 return res.json({errno: -1, message: "MongoDb Error"});
             } else {
-                return res.json({errno: 0, data: like.isLike});
+                return res.json({errno: 0, message: like.isLike});
             }
         });
     }

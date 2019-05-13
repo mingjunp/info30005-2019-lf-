@@ -5,20 +5,24 @@ const path = require("path");
 
 module.exports.createReview = function (req, res) {
 
-    const review = new Review({
-        "userName": req.body.userName,
-        "toiletName": req.body.toiletName,
-        "comments": req.body.comments,
-        "rating": req.body.rating,
-    });
+    if (req.session.userName) {
+        const review = new Review({
+            "userName": req.body.userName,
+            "toiletName": req.body.toiletName,
+            "comments": req.body.comments,
+            "rating": req.body.rating,
+        });
 
-    review.save(function (err, newReview) {
-        if (!err) {
-            return res.json({errno: 0, data: newReview});
-        } else {
-            return res.json({errno: -1, message: "MongoDb Error"});
-        }
-    });
+        review.save(function (err, newReview) {
+            if (!err) {
+                return res.json({errno: 0, data: newReview});
+            } else {
+                return res.json({errno: -1, message: "MongoDb Error"});
+            }
+        });
+    } else {
+        res.json({errno: -1, message: 'Login first'})
+    }
 };
 
 module.exports.uploadReviewPicture = function (req, res) {
