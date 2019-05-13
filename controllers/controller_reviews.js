@@ -11,6 +11,7 @@ module.exports.createReview = function (req, res) {
             "toiletName": req.body.toiletName,
             "comments": req.body.comments,
             "rating": req.body.rating,
+            "date": Date.now()
         });
 
         review.save(function (err, newReview) {
