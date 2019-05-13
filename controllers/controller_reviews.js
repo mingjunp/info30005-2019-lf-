@@ -7,7 +7,7 @@ module.exports.createReview = function (req, res) {
 
     if (req.session.userName) {
         const review = new Review({
-            "userName": req.body.userName,
+            "userName": req.session.userName,
             "toiletName": req.body.toiletName,
             "comments": req.body.comments,
             "rating": req.body.rating,

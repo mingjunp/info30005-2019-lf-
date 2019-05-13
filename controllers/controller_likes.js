@@ -1,8 +1,6 @@
 const like = require("../models/like");
 
 module.exports.getByUserToilet = function (req, res) {
-    console.log("--------");
-    console.log(req.session.userName);
     if (!req.session.userName) {
         return res.json({errno: 0, data: "no"});
     } else {
@@ -11,7 +9,11 @@ module.exports.getByUserToilet = function (req, res) {
             if (err) {
                 return res.json({errno: -1, message: "MongoDb Error"});
             } else {
-                return res.json({errno: 0, message: like.isLike});
+                if (like) {
+                    return res.json({errno: 0, message: like.isLike});
+                }else{
+                    return res.json({errno: -1, message:"No like toilets"});
+                }
             }
         });
     }
