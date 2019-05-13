@@ -4,9 +4,11 @@
 
 ---
 ## Functions:
-1. Sign up: This is a function for user to register an account for our website. User needs to create a username and a password, and then confirm the password. When user types the username, there is a function that will check whether this user has already existed, and will tell him/her “username exist, please try again.” When it is OK, there will be a green tick. And when the password and the confirm password is not the same, there will also be an reminder to tell users to consist their passwords. When user successfully login, he/she will be automatically logged in.
+### 1. Sign up:
+This is a function for user to register an account for our website. User needs to create a username and a password, and then confirm the password. When user types the username, there is a function that will check whether this user has already existed, and will tell him/her “username exist, please try again.” When it is OK, there will be a green tick. And when the password and the confirm password is not the same, there will also be an reminder to tell users to consist their passwords. When user successfully login, he/she will be automatically logged in.
 
-Login: This is a function for user to login to our website. User needs to input username and password. When username or password is wrong, he/she will be told “username or password error!”. When user successfully login, the login button will change to “hi, <username>”. And we also set cookie, the system will remember the login status for one day. When user close the website and open again within one day, he/she will always remain login status. User doesn’t need to login when they search a toilet or check details of it. Login request only in add comment, rating and add comments.
+### Login: 
+This is a function for user to login to our website. User needs to input username and password. When username or password is wrong, he/she will be told “username or password error!”. When user successfully login, the login button will change to “hi, <username>”. And we also set cookie, the system will remember the login status for one day. When user close the website and open again within one day, he/she will always remain login status. User doesn’t need to login when they search a toilet or check details of it. Login request only in add comment, rating and add comments.
 
 Models: user
 
@@ -34,7 +36,7 @@ router.get('/api/users/checkLogin', controller_users.checkLogin);
 
 router.get('/api/users/checkUserName', controller_users.checkUserName);
 
-2. Searching, checking details and adding comments about toilets :
+### 2. Searching, checking details and adding comments about toilets :
 
 The functionality enables users to search public toilets in Melbourne. On the homepage, users can view all the toilets on the Google map. They can type a location in the search box and then they can see the toilets near it. Besides, users can also select different filters: female, male, wheelchair, baby Facility. To see more information of one particular toilet, users can click the icon on the map, there will be a pop-up window to show some basic information about the toilet: name(the description of the address) and other facilities. They can then click the “open google map to go” , and it will jump up to the google map, and the destination will be the toilet address. If users want to check more details, they can just click it and then it will jump to a new page. Apart from the basic information, it will show pictures, the operator, facilities and comments. Users can also see the rating of the toilet at the top left of the page. Users can also add the toilet to their collection. The comments will display in a drag down window, user can click the Triangle to see all the comments or close them.
 
