@@ -16,6 +16,7 @@ function login(){
         success:function(result){
             // login fail
             if (result.errno == -1){
+                $('#login-erro-info').text(result.message);
                 $('#login-erro-info').removeClass("hide");
             }
             // login success
