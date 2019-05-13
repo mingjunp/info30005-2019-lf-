@@ -67,7 +67,7 @@ function initAutocomplete() {
             var marker = new google.maps.Marker({
                 position: pos,
                 map: map,
-                icon: '../images/3.png',
+                icon: '../images/run.gif',
                 // draggable: true,
                 animation: google.maps.Animation.DROP,
             });
