@@ -16,9 +16,9 @@ Sign up: This is a function for user to register an account for our website. Use
 
 Login: This is a function for user to login to our website. User needs to input username and password. When username or password is wrong, he/she will be told “username or password error!”. When user successfully login, the login button will change to “hi, <username>”. And we also set cookie, the system will remember the login status for one day. When user close the website and open again within one day, he/she will always remain login status. User doesn’t need to login when they search a toilet or check details of it. Login request only in add comment, rating and add comments.
 
-Models: user
-Controllers: controller_users
-Routers: 
+###Models: user
+###Controllers: controller_users
+###Routers: 
 //post user
 router.post('/api/users/createUser', controller_users.createUser);
 
@@ -37,9 +37,9 @@ router.get('/api/users/checkUserName', controller_users.checkUserName);
 Search function:
 The functionality enables users to search public toilets in Melbourne. On the homepage, users can view all the toilets on the Google map. They can type a location in the search box and then they can see the toilets near it. Besides, users can also select different filters: female, male, wheelchair, baby Facility. To see more information of one particular toilet, users can click the icon on the map, there will be a pop-up window to show some basic information about the toilet: name(the description of the address) and other facilities. They can then click the “open google map to go” , and it will jump up to the google map, and the destination will be the toilet address. If users want to check more details, they can just click it and then it will jump to a new page. Apart from the basic information, it will show pictures, the operator, facilities and comments. Users can also see the rating of the toilet at the top left of the page. Users can also add the toilet to their collection. The comments will display in a drag down window, user can click the Triangle to see all the comments or close them.
 
-Model: toilet,like,review
-Controllers: controller_toilets, controller_reviews, controller_likes
-Routers: 
+###Model: toilet,like,review
+###Controllers: controller_toilets, controller_reviews, controller_likes
+###Routers: 
 //load reviews of certain toilet
 router.get('/api/reviews/getReviewsByToilet', controller_reviews.getReviewsByToilet);
 
