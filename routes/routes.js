@@ -36,6 +36,10 @@ router.get('/api/users/checkLogin', controller_users.checkLogin);
 
 router.get('/api/users/checkUserName', controller_users.checkUserName);
 
+router.get('/api/users/userHomepage', function (req, res) {
+    res.sendfile('./public/HTML/userHomepage.html');
+});
+
 
 //get create page
 router.get('/api/reviews/createReview', function (req, res) {
@@ -47,8 +51,6 @@ router.post('/api/reviews/createReview', controller_reviews.createReview);
 router.post('/api/reviews/uploadReviewPicture', upload.single('reviewPictures'), controller_reviews.uploadReviewPicture);
 //load reviews of certain toilet
 router.get('/api/reviews/getReviewsByToilet', controller_reviews.getReviewsByToilet);
-
-
 
 
 router.post('/api/toilets/creatToilet', controller_toilets.creatToilet);
