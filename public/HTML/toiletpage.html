@@ -11,7 +11,7 @@
 	<script src="../JS/login.js"></script>
 	<script src="../JS/logout.js"></script>
 	<meta charset="UTF-8">
-	<title>Toiletinfo</title>
+	<title></title>
 	<link rel="stylesheet" href="../CSS/toiletpage.css">
 </head>
 <body>
@@ -303,6 +303,7 @@
 				if (result.errno == -1){
 				}
 				if (result.errno == 0){
+					$('title').html(result.data.name);
 					//$('#toilet-rate').text(result.data.rate);
 					$('#toilet-name').text(result.data.name);
 					$('#toilet-operator').text(result.data.operator);
