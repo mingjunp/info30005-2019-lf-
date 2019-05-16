@@ -17,7 +17,7 @@ body{
 }
 
 .container{
-	width:800px;
+	width:850px;
 	margin:0 auto;
 }
 
@@ -33,6 +33,7 @@ body{
 
 header{
 	height:60px;
+	margin: 0 auto;
 	/*box-shadow: 0 0 5px #e5e5e5;*/
 	text-align: center;
 	line-height: 60px;
@@ -50,13 +51,6 @@ header .star{
 	font-size: 12px;
 	color:#666;
 }
-header a{
-	float:right;
-
-	text-decoration: none;
-
-}
-
 
 .slider_wrapper{
 	position:relative;
