@@ -157,10 +157,10 @@
 	<p><span>Operator:</span><span id="toilet-operator"></span></p>
 	<p>
 		<span>Facilities:</span>
-		<span><img src="../images/wheelchairLarge.png">: <span id="toilet-wheelchair"></span></span>
-		<span><img src="../images/girl.png">: <span id="toilet-female"></span></span>
-		<span><img src="../images/boy.png">: <span id="toilet-male"></span></span>
-		<span><img src="../images/babyLarge.png">: <span id="toilet-baby"></span></span>
+		<span id="toilet-wheelchair"></span>
+		<span id="toilet-female"></span>
+		<span id="toilet-male"></span>
+		<span id="toilet-baby"></span>
 	</p>
 
 </div>
@@ -307,10 +307,18 @@
 					//$('#toilet-rate').text(result.data.rate);
 					$('#toilet-name').text(result.data.name);
 					$('#toilet-operator').text(result.data.operator);
-					$('#toilet-wheelchair').text(result.data.wheelchair);
-					$('#toilet-female').text(result.data.female);
-					$('#toilet-male').text(result.data.male);
-					$('#toilet-baby').text(result.data.baby_facil);
+					if (result.data.wheelchair == "yes"){
+						$('#toilet-wheelchair').append(`<img src="../images/wheelchairLarge.png" title="Wheelchair">`);
+					}
+					if (result.data.female == "yes"){
+						$('#toilet-female').append(`<img src="../images/girl.png" title="Female">`);
+					}
+					if (result.data.male == "yes"){
+						$('#toilet-male').append(`<img src="../images/boy.png" title="Male">`);
+					}
+					if (result.data.baby_facil == "yes"){
+						$('#toilet-baby').append(`<img src="../images/babyLarge.png" title="Baby Facility">`)
+					}
 					$('#form-toiletId').val(result.data._id);
 				}
 				console.log(result);
