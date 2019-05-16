@@ -123,8 +123,8 @@
 		<div class="row">
 			<div id="toilet-rate" class="star col-lg-1"></div>
 			<div id="toilet-name" class="col-lg-10"></div>
-			<div id="toilet-name" class="col-lg-1">
-				<button class="btn btn-info">Go</button>
+			<div class="col-lg-1">
+				<button class="btn btn-info"><a id="go" target='blank'>Go</a></button>
 			</div>
 		</div>
 	</div>
@@ -324,6 +324,9 @@
 						$('#toilet-baby').append(`<img src="../images/babyLarge.png" title="Baby Facility">`)
 					}
 					$('#form-toiletId').val(result.data._id);
+
+					var url = "https://www.google.com/maps/dir//" + result.data.lat + "," + result.data.lon + "/";
+					$('#go').attr("href",url);
 				}
 				console.log(result);
 			},
@@ -343,10 +346,14 @@
 				if (result.errno == -1){
 				}
 				if (result.errno == 0){
+					// console.log("------------");
+					// var commentDate = new Date(result.data[1].date);
+					// console.log(commentDate.getFullYear());
 					$(".comm").empty();
 					$(".comm").removeClass("comm");
 					var totalRate = 0;
 					for (var i=0;i<result.data.length;i++){
+						// var commentDate = new Date(result.data[i].date);
 						$('#show-comments').append($(`
 					<div class="comm">
 						<p>`+ result.data[i].userName +`<span> rate: `+ result.data[i].rating +`</span><span class="time">`+ result.data[i].date +`</span></p>

@@ -225,3 +225,9 @@ input[type="checkbox"]:checked:after{
 	font-size:28px;
 }
 
+#go {
+	color: #eeeeee;
+	text-decoration: none;
+
+}
+
