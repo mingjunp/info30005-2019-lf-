@@ -155,10 +155,10 @@
 	<div class="like">
 		<button id="like-btn" onclick="changeLike()" class="fav btn btn-default btn-md">
 			<span id="like" class="glyphicon" aria-hidden="true"></span>
-			<span id="addCollection">add to my collection</span>
+			<span>Add to my collection</span>
 		</button>
-
 	</div>
+
 	<p><span>Operator:</span><span id="toilet-operator"></span></p>
 	<p>
 		<span>Facilities:</span>
@@ -268,6 +268,9 @@
 			data:"toiletID="+toiletID,
 			success:function(result){
 				if (result.errno == -1){
+					$("#like").removeClass("glyphicon-heart-empty");
+					$("#like").removeClass("glyphicon-heart");
+					$("#like").addClass("glyphicon-heart-empty");
 				}
 				if (result.errno == 0){
 					$("#like").removeClass("glyphicon-heart-empty");

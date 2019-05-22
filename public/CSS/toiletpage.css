@@ -219,12 +219,13 @@ input[type="checkbox"]:checked:after{
 }
 
 .glyphicon-heart-empty{
-	font-size:28px;
+	font-size:16px;
 }
 .glyphicon-heart {
 	color: red;
-	font-size:28px;
+	font-size:16px;
 }
+
 
 #go {
 	color: #eeeeee;
