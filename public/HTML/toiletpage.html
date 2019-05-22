@@ -353,14 +353,20 @@
 					// console.log("------------");
 					// var commentDate = new Date(result.data[1].date);
 					// console.log(commentDate.getFullYear());
+					var monthShortName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 					$(".comm").empty();
 					$(".comm").removeClass("comm");
 					var totalRate = 0;
 					for (var i=0;i<result.data.length;i++){
-						// var commentDate = new Date(result.data[i].date);
+						var commentDate = new Date(result.data[i].date);
+						var nowDate = new Date();
+						console.log("------------");
+						console.log(commentDate);
+						console.log(nowDate);
+						var showDate = commentDate.getDate()+" "+monthShortName[commentDate.getMonth()]+" "+ commentDate.getFullYear()+ "  "+commentDate.getHours()+":"+commentDate.getMinutes();
 						$('#show-comments').append($(`
 					<div class="comm">
-						<p>`+ result.data[i].userName +`<span> rate: `+ result.data[i].rating +`</span><span class="time">`+ result.data[i].date +`</span></p>
+						<p>`+ result.data[i].userName +`<span> rate: `+ result.data[i].rating +`</span><span class="time">`+ showDate +`</span></p>
 						<p>`+ result.data[i].comments +`</p>
 					</div>
 					`));

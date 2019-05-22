@@ -31,7 +31,7 @@ function initAutocomplete() {
             map: map
         });
         allMarks.push(myMarker);
-        var toiletInfo = "<h5>Toilet Name: </h5>"+allToilet[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+allToilet[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+allToilet[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+allToilet[i].male+"<br/>"+"<image src='../images/female.png'> : "+allToilet[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ allToilet[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+allToilet[i].lat+","+ allToilet[i].lon+"/"+"'>open google map to go</a>";
+        var toiletInfo = "<h5>Toilet Name: </h5>"+allToilet[i].name+"<br/>"+ "<image style='margin-top: 5px;' src='../images/wheelchair.png'> : "+allToilet[i].wheelchair+"<br/>"+"<image style='margin-top: 5px;' src='../images/baby.png'> : "+allToilet[i].baby_facil+"<br/>"+"<image style='margin-top: 5px;' src='../images/male.png'> : "+allToilet[i].male+"<br/>"+"<image style='margin-top: 5px;' src='../images/female.png'> : "+allToilet[i].female+"<br/>"+"<br/><a href='/toiletDetail?id="+ allToilet[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+allToilet[i].lat+","+ allToilet[i].lon+"/"+"'>open google map to go</a>";
         attachSecretMessage(myMarker, toiletInfo)
     }
 
@@ -115,7 +115,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image style='margin-top: 5px;' src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image style='margin-top: 5px;' src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image style='margin-top: 5px;' src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image style='margin-top: 5px;' src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
@@ -143,7 +143,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image style='margin-top: 5px;' src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image style='margin-top: 5px;' src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image style='margin-top: 5px;' src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image style='margin-top: 5px;' src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
@@ -171,7 +171,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image style='margin-top: 5px;' src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image style='margin-top: 5px;' src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image style='margin-top: 5px;' src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image style='margin-top: 5px;' src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
@@ -199,7 +199,7 @@ function initAutocomplete() {
                 map: map
             });
             allMarks.push(myMarker);
-            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
+            var toiletInfo = "<h5>Toilet Name: </h5>"+temAllToile[i].name+"<br/>"+ "<image style='margin-top: 5px;' src='../images/wheelchair.png'> : "+temAllToile[i].wheelchair+"<br/>"+"<image style='margin-top: 5px;' src='../images/baby.png'> : "+temAllToile[i].baby_facil+"<br/>"+"<image style='margin-top: 5px;' src='../images/male.png'> : "+temAllToile[i].male+"<br/>"+"<image style='margin-top: 5px;' src='../images/female.png'> : "+temAllToile[i].female+"<br/>"+"<br/><a href='/toiletDetail?id="+ temAllToile[i]._id +"'>check detail</a><br><a target='blank' href='https://www.google.com/maps/dir//"+temAllToile[i].lat+","+ temAllToile[i].lon+"/"+"'>open google map to go</a>";
             attachSecretMessage(myMarker, toiletInfo)
         }
     });
