@@ -213,6 +213,7 @@ input[type="checkbox"]:checked:after{
 .like {
 	height: 50px;
 }
+
 .fav {
 	float: right;
 }
@@ -230,4 +231,5 @@ input[type="checkbox"]:checked:after{
 	text-decoration: none;
 
 }
+
 

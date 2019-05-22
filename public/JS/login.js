@@ -22,7 +22,7 @@ function login(){
             // login success
             if (result.errno == 0){
                 $('#nav-right').children('li').remove();
-                $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="api/users/userHomepage" class="navbar-link">`+ result.data.userName +`</a></p></li>
+                $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="/users/userHomepage" class="navbar-link">`+ result.data.userName +`</a></p></li>
                             <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
 
                 $('#login').modal('hide');
