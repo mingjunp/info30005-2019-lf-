@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User homepage</title>
-    <link rel="shortcut icon" href="../images/favicon.ico" />
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -14,21 +14,24 @@
             checkLogin();
         });
         $('#myTabs a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
+            e.preventDefault();
+            $(this).tab('show');
         });
     </script>
     <style>
         .jumbotron {
             margin-top: -20px;
         }
+
         .panel {
             margin-top: 20px;
         }
+
         #map {
             height: 100%;
         }
-        #mapHolder{
+
+        #mapHolder {
             height: 400px;
             width: 550px;
         }
@@ -38,14 +41,14 @@
     </style>
 </head>
 <body>
-    <!--header-->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="/"><span class="glyphicon glyphicon-home"></span></a>
-                </li>
-            </ul>
+<!--header-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="/"><span class="glyphicon glyphicon-home"></span></a>
+            </li>
+        </ul>
 
             <ul id="nav-right" class="nav navbar-nav navbar-right">
                 <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -59,171 +62,156 @@
             <p>Welcome to visiting public toilet website</p>
         </div>
     </div>
-
-    <!--content-->
+</nav>
+<!--page header-->
+<div class="jumbotron">
     <div class="container">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#collection" aria-controls="collection" role="tab" data-toggle="tab">Collection</a></li>
-            <li role="presentation"><a href="#myToilet" aria-controls="myToilet" role="tab" data-toggle="tab">My Toilet</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="collection">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Toilet Name: Public Toilet - Toilet 131 - Royal Park (Flemington Rd - Near North Park Tennis Club)
-                    </div>
-                    <div class="panel-body">
-                        facility: Wheelchair, male&female
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="myToilet">
+        <h1>Hi, <span id="welcomeUserName">username!</span></h1>
+        <p>Welcome to visiting public toilet website</p>
+    </div>
+</div>
 
-                <div class="shareToilet">
-                    <h4><span class="glyphicon glyphicon-hand-down"></span>Click button below to share your toilet!</h4>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#shareToilet">Share your own toilet</button>
+<!--content-->
+<div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#collection" aria-controls="collection" role="tab"
+                                                  data-toggle="tab">Collection</a></li>
+        <li role="presentation"><a href="#myToilet" aria-controls="myToilet" role="tab" data-toggle="tab">My Toilet</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="collection">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Toilet Name: Public Toilet - Toilet 131 - Royal Park (Flemington Rd - Near North Park Tennis Club)
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4>My Shared Toilets</h4>
-                    </div>
-                    <div id="sharedToilets" class="panel-body">
-                        Shared Toilet
-                    </div>
-                    <div class="panel-body">
-                        有就显示这张表出来 没有就不显示
-                    </div>
-
+                <div class="panel-body">
+                    facility: Wheelchair, male&female
                 </div>
             </div>
         </div>
-    </div>
-    <!--Share toilet pop-up window-->
-    <div id="shareToilet" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div class="modal-title">
-                    <h1 class="text-center">Share your toilet</h1>
-                </div>
-                <div class="modal-body">
-                    <form id="create-toilet-form" class="form-group" action="">
+        <div role="tabpanel" class="tab-pane" id="myToilet">
 
-                        <div class="form-group">
-                            <h5>Toilet Name</h5>
-                            <input class="form-control" name="name" id="name" type="text" placeholder="Enter your toilet name">
-                        </div>
-                        <div class="checkbox-custom checkbox-default">
-                            <h5>Please select tags from below</h5>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="female" name="filter" value="female">female
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="male" name="filter" value="male">male
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
-                            </label>
-                        </div>
-                        <h5>Please click the map to get your toilet location</h5>
-                        <div id="mapHolder" class="mapContainer">
-                            <div id="map"></div>
-                            <input type="hidden" name="lat" id="lat" value="">
-                            <input type="hidden" name="lng" id="lng" value="">
-                        </div>
-                        <div>
-                            <h5>Please select pictures form your devices</h5>
-                            <input type="file" name="file" id="file1">
-                            <input type="file" name="file" id="file2">
-                            <input type="file" name="file" id="file3">
-                        </div>
-
-
-                        <br>
-                        <div class="text-right">
-                            <input class="btn btn-primary" onclick="createToilet()" value="Submit">
-                            <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
-                        </div>
-                    </form>
-                </div>
+            <div class="shareToilet">
+                <h4><span class="glyphicon glyphicon-hand-down"></span>Click button below to share your toilet!</h4>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#shareToilet">Share your own
+                    toilet
+                </button>
             </div>
         </div>
     </div>
-    <script>
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: {lat: -37.812326, lng: 144.961971}
+</div>
+<!--Share toilet pop-up window-->
+<div id="shareToilet" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">Share your toilet</h1>
+            </div>
+            <div class="modal-body">
+                <form id="review-form" class="form-group" action="">
+                    <div class="form-group">
+                        <label>Toilet Name</label>
+                        <input class="form-control" id="name" name="name" type="text"
+                               placeholder="Enter your toilet name">
+                    </div>
+                    <label>Choose your toilet picture</label>
+                    <input id="toiletPictures" name="toiletPictures" type="file">
+                    <div class="checkbox-custom checkbox-default">
+                        <p>Please select tags from below</p>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="female" name="female" value="female">female
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="male" name="male" value="male">male
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="wheelchair" name="wheelchair" value="wheelchair">wheelchair
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="babyFacility" name="baby_facil" value="baby_facil">baby facility
+                        </label>
+                    </div>
+                    <div id="mapHolder" class="mapContainer">
+                        <div id="map"></div>
+                        <input type="hidden" id="lat">
+                        <input type="hidden" id="lng">
+                    </div>
+                    <br>
+                    <div class="text-right">
+                        <input class="btn btn-primary" onclick="test()" value="Submit">
+                        <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: {lat: -37.812326, lng: 144.961971}
+        });
+        var marker = new google.maps.Marker();
+        map.addListener('click', function (e) {
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+                position: e.latLng,
+                map: map
             });
-            var marker= new google.maps.Marker();
-            map.addListener('click', function(e) {
-                marker.setMap(null);
-                marker = new google.maps.Marker({
-                    position: e.latLng,
-                    map: map
-                });
-                console.log("---------");
-                console.log(e.latLng.lat());
-                console.log(e.latLng.lng());
-                $('#lat').val(e.latLng.lat());
-                $('#lng').val(e.latLng.lng());
-            });
-        }
-        function createToilet() {
-            var formdata=new FormData();
-            var obj = document.getElementsByName("filter");
-            for(k in obj){
-                if (obj[k].checked){
-                    formdata.append(obj[k].value,"yes");
-                } else{
-                    formdata.append(obj[k].value,"no");
+            console.log("---------");
+            console.log(e.latLng.lat());
+            console.log(e.latLng.lng());
+            $('#lat').val(e.latLng.lat());
+            $('#lng').val(e.latLng.lng());
+        });
+    }
+</script>
+<script src="../JS/checkLogin.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&callback=initMap">
+</script>
+<script>
+    function test() {
+        let form = new FormData();
+        let formArray = $("#review-form").serializeArray();
+        console.log(formArray);
+        // append normal text data
+        $.each(formArray, function (i, item) {
+            form.append(item.name, item.value);
+        });
+        // append image file into from data
+        form.append('toiletPictures', document.getElementById('toiletPictures').files[0]);
+        // append location data
+        form.append('lat', document.getElementById('lat').value);
+        form.append('lon', document.getElementById('lng').value);
+
+        $.ajax({
+            url: '/api/toilets/creatToilet',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: form,
+            success: function (result) {
+                if (result.errno == -1) {
+                    console.log(result.message)
                 }
-            }
-            formdata.append("name",$('#name').val());
-            var lat = $('#lat').val();
-            var lng = $('#lng').val();
-            if (lat == '' || lng == ''){
-                alert("please select location!");
-                return;
-            }
-            formdata.append("lat",lat);
-            formdata.append('lng',lng);
-            formdata.append("picture1",$('#file1'));
-            formdata.append("picture1",$('#file2'));
-            formdata.append("picture1",$('#file3'));
-            $.ajax({
-                //add url
-                url:'/api/',
-                type:'post',
-                contentType: "application/json; charset=utf-8",
-                dataType:'json',
-                data:formdata,
-                success:function(result){
-                    // sign up fail
-                    if (result.errno == -1){
-                    }
-                    // sign up success
-                    if (result.errno == 0){
-                    }
-                    console.log(result);
-                },
-                error:function(e){
-                    console.log(e);
-                },
-            });
-        }
-    </script>
-    <script src="../JS/checkLogin.js"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&callback=initMap">
-    </script>
+                if (result.errno == 0) {
+                    console.log(result.data);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
+</script>
 </body>
 </html>
 
