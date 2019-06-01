@@ -125,7 +125,7 @@ module.exports.creatToilet = function (req, res) {
     const toilet = new Toilet({
         "toiletPictures": createFilePath(req.file),
         "name": req.body.name,
-        "operator": req.body.operator,
+        "operator": req.session.userName,
         "female": YesOrNo(req.body.female),
         "male": YesOrNo(req.body.male),
         "baby_facil": YesOrNo(req.body.baby_facil),

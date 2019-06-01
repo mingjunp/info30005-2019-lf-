@@ -74,14 +74,6 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="collection">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Toilet Name: Public Toilet - Toilet 131 - Royal Park (Flemington Rd - Near North Park Tennis Club)
-                </div>
-                <div class="panel-body">
-                    facility: Wheelchair, male&female
-                </div>
-            </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="myToilet">
 
@@ -165,6 +157,35 @@
             $('#lng').val(e.latLng.lng());
         });
     }
+    function loadCollection() {
+        $.ajax({
+            url: 'api/likes/getUserCollections',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (result) {
+                if (result.errno == -1) {
+                }
+                if (result.errno == 0) {
+                    for (var i=0;i<result.data.length;i++){
+                        $('#collection').append(`            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="/toiletDetail?id=`+ result.data[i]._id +`">Toilet Name: `+ result.data[i].name +`</a>
+                </div>
+                <div class="panel-body">
+                    Male: `+ result.data[i].male +`  Female: `+ result.data[i].female +`  Baby Facility: `+ result.data[i].baby_facil +`   Wheelchair: `+ result.data[i].wheelchair +`
+                </div>
+            </div>`);
+                    }
+                   console.log(result.data);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
+    loadCollection();
 </script>
 <script src="../JS/checkLogin.js"></script>
 <script async defer
