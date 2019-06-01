@@ -44,7 +44,6 @@ module.exports.logout = function (req, res) {
     }
 };
 
-
 //user sign up function
 module.exports.createUser = function (req, res) {
 
@@ -90,6 +89,7 @@ module.exports.checkUserName = function (req, res) {
         }
     });
 };
+
 
 
 

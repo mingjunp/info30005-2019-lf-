@@ -1,4 +1,6 @@
 const like = require("../models/like");
+const Toilet = require("../models/toilet");
+const mongoose = require("mongoose");
 
 module.exports.getByUserToilet = function (req, res) {
     if (!req.session.userName) {
@@ -11,8 +13,8 @@ module.exports.getByUserToilet = function (req, res) {
             } else {
                 if (like) {
                     return res.json({errno: 0, message: like.isLike});
-                }else{
-                    return res.json({errno: -1, message:"No like toilets"});
+                } else {
+                    return res.json({errno: -1, message: "No like toilets"});
                 }
             }
         });
@@ -41,5 +43,38 @@ module.exports.setLike = function (req, res) {
                     return res.json({errno: -1, message: "MongoDb Error"});
                 }
             });
+    }
+};
+
+// get all user favourite toilets by username in the session
+// return all toilets information
+module.exports.getCollections = function (req, res) {
+    if (!req.session.userName) {
+        return res.json({errno: -1, message: "please login first!"});
+    } else {
+        like.find({userName: req.session.userName, isLike: "yes"}, function (err, likes) {
+            if (!err) {
+                let IDList = [];
+
+                likes.map(function (item, index) {
+                    IDList.push(mongoose.Types.ObjectId(item.toiletID));
+                });
+
+                Toilet.find({
+                    _id: {
+                        $in: IDList
+                    }
+                }, function (err, toilets) {
+                    if (!err) {
+                        return res.json({errno: 0, data: toilets});
+                    } else {
+                        return res.json({errno: -1, message: "MongoDb Error"});
+                    }
+                });
+            } else {
+                return res.json({errno: -1, message: "MongoDb Error"});
+            }
+        });
+
     }
 };

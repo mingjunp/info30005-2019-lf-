@@ -1,87 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
-	<script src="../JS/signup.js"></script>
-	<script src="../JS/checkLogin.js"></script>
-	<script src="../JS/login.js"></script>
-	<script src="../JS/logout.js"></script>
-	<meta charset="UTF-8">
-	<title></title>
-	<link rel="shortcut icon" href="../images/favicon.ico" />
-	<link rel="stylesheet" href="../CSS/toiletpage.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+    <script src="../JS/signup.js"></script>
+    <script src="../JS/checkLogin.js"></script>
+    <script src="../JS/login.js"></script>
+    <script src="../JS/logout.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../CSS/toiletpage.css">
 </head>
 <body>
 <nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<ul class="nav navbar-nav">
-			<li>
-				<a href="/"><span class="glyphicon glyphicon-home"></span></a>
-			</li>
-		</ul>
-		<ul id="nav-right" class="nav navbar-nav navbar-right">
-			<li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-			<li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
-		</ul>
-	</div>
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="/"><span class="glyphicon glyphicon-home"></span></a>
+            </li>
+        </ul>
+        <ul id="nav-right" class="nav navbar-nav navbar-right">
+            <li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span>
+                Login</a></li>
+            <li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign
+                up</a></li>
+        </ul>
+    </div>
 </nav>
 <!--sign up success pop-up window-->
 <div class="modal fade" id="infoModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h3>Info</h3>
-			</div>
-			<div class="modal-body">
-				<p>Sign up Success!</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-info" data-dismiss="modal">close</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Info</h3>
+            </div>
+            <div class="modal-body">
+                <p>Sign up Success!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" data-dismiss="modal">close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--Sign up pop-up window-->
 <div id="register" class="modal fade" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-			</div>
-			<div class="modal-title">
-				<h1 class="text-center">Sign up</h1>
-			</div>
-			<div class="modal-body">
-				<form id="myForm" class="form-group" action="">
-					<div class="form-group">
-						<label>User Name</label>
-						<input class="form-control" id="ruserName" name="userName" type="text" required placeholder="Enter your user name">
-					</div>
-					<div class="form-group">
-						<label>Password</label>
-						<input class="form-control" name="password" type="password" placeholder="Enter your password">
-					</div>
-					<div class="form-group">
-						<label>Enter password again</label>
-						<input class="form-control" name="password2" type="password" placeholder="Enter your password">
-					</div>
-					<div class="text-right">
-						<input class="btn btn-primary" onclick="singup()" value="Sign Up">
-						<input class="btn btn-danger" data-dismiss="modal" value="Cancel">
-					</div>
-					<br>
-					<a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">Already having an account? Click here to login</a>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">Sign up</h1>
+            </div>
+            <div class="modal-body">
+                <form id="myForm" class="form-group" action="">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input class="form-control" id="ruserName" name="userName" type="text" required
+                               placeholder="Enter your user name">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" name="password" type="password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label>Enter password again</label>
+                        <input class="form-control" name="password2" type="password" placeholder="Enter your password">
+                    </div>
+                    <div class="text-right">
+                        <input class="btn btn-primary" onclick="singup()" value="Sign Up">
+                        <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                    </div>
+                    <br>
+                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">Already having an account?
+                        Click here to login</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <!--Login pop-up window-->
 <div id="login" class="modal fade">
@@ -120,71 +126,71 @@
 	</div>
 </div>
 <header>
-	<div class="container">
-		<div class="row">
-			<div id="toilet-rate" class="star col-lg-1"></div>
-			<div id="toilet-name" class="col-lg-10"></div>
-			<div class="col-lg-1">
-				<button class="btn btn-info"><a id="go" target='blank'>Go</a></button>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div id="toilet-rate" class="star col-lg-1"></div>
+            <div id="toilet-name" class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="btn btn-info"><a id="go" target='blank'>Go</a></button>
+            </div>
+        </div>
+    </div>
 </header>
 
 <div class="container slider">
-	<div class="slider_wrapper">
-		<div class="diff_logo">
-			<div class="logo_item">
-				<img src="../images/toilet1.jpg">
-			</div>
-			<div class="logo_item">
-				<img src="../images/toilet2.jpg">
-			</div>
-			<div class="logo_item">
-				<img src="../images/toilet3.jpg">
-			</div>
-		</div>
-	</div>
-	<div class="lbtn lrbtn"></div>
-	<div class="rbtn lrbtn"></div>
+    <div id="toiletPicsSlider" class="slider_wrapper">
+        <div id="toiletPictures" class="diff_logo">
+            <div class="logo_item">
+                <img src="../images/toilet1.jpg">
+            </div>
+            <div class="logo_item">
+                <img src="../images/toilet2.jpg">
+            </div>
+            <div class="logo_item">
+                <img src="../images/toilet3.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="lbtn lrbtn"></div>
+    <div class="rbtn lrbtn"></div>
 </div>
 
 <div class="container detail">
-	<p></p>
-	<br>
-	<div class="like">
-		<button id="like-btn" onclick="changeLike()" class="fav btn btn-default btn-md">
-			<span id="like" class="glyphicon" aria-hidden="true"></span>
-			<span>Add to my collection</span>
-		</button>
-	</div>
+    <p></p>
+    <br>
+    <div class="like">
+        <button id="like-btn" onclick="changeLike()" class="fav btn btn-default btn-md">
+            <span id="like" class="glyphicon" aria-hidden="true"></span>
+            <span>Add to my collection</span>
+        </button>
+    </div>
 
-	<p><span>Operator:</span><span id="toilet-operator"></span></p>
-	<p>
-		<span>Facilities:</span>
-		<span id="toilet-wheelchair"></span>
-		<span id="toilet-female"></span>
-		<span id="toilet-male"></span>
-		<span id="toilet-baby"></span>
-	</p>
+    <p><span>Operator:</span><span id="toilet-operator"></span></p>
+    <p>
+        <span>Facilities:</span>
+        <span id="toilet-wheelchair"></span>
+        <span id="toilet-female"></span>
+        <span id="toilet-male"></span>
+        <span id="toilet-baby"></span>
+    </p>
 
 </div>
 
 <div class="container comments">
-	<h2 class="clearfix"><span>Comments</span> <span class="btn-down"></span></h2>
-	<div id="show-comments" class="main">
-		<div id="click-add-comment">
-			<a href="" class="addc btn btn-info" data-toggle="modal" data-target="#addReview">Add my comments +</a>
-		</div>
-		<!--<div class="comm">-->
-			<!--<p>John Snow <span class="time">2019/4/26</span></p>-->
-			<!--<p>The toilet paper towels are used up but no one cares. The government should consider having more staff. </p>-->
-		<!--</div>-->
-		<!--<div class="comm">-->
-			<!--<p>Lily Gilbert <span class="time">2019/4/26</span></p>-->
-			<!--<p>This toilet is very clean and easy to find. I think it is quite good. </p>-->
-		<!--</div>-->
-	</div>
+    <h2 class="clearfix"><span>Comments</span> <span class="btn-down"></span></h2>
+    <div id="show-comments" class="main">
+        <div id="click-add-comment">
+            <a href="" class="addc btn btn-info" data-toggle="modal" data-target="#addReview">Add my comments +</a>
+        </div>
+        <!--<div class="comm">-->
+        <!--<p>John Snow <span class="time">2019/4/26</span></p>-->
+        <!--<p>The toilet paper towels are used up but no one cares. The government should consider having more staff. </p>-->
+        <!--</div>-->
+        <!--<div class="comm">-->
+        <!--<p>Lily Gilbert <span class="time">2019/4/26</span></p>-->
+        <!--<p>This toilet is very clean and easy to find. I think it is quite good. </p>-->
+        <!--</div>-->
+    </div>
 </div>
 <!--add comments pop-up window-->
 <div id="addReview" class="modal fade" tabindex="-1">
@@ -223,7 +229,6 @@
 </div>
 
 
-
 <!--<script src="../JS/jquery.js"></script>-->
 <script>
 	//form validation rule
@@ -258,346 +263,395 @@
 		})
 	}
 
-	checkLogin();
-	toiletID = getQueryVariable("id");
+    checkLogin();
+    toiletID = getQueryVariable("id");
 
-	function changeLike() {
-		toiletID = getQueryVariable("id");
-		var likeSpan = $('#like');
-		var isLike;
-		if(likeSpan.hasClass("glyphicon-heart-empty")){
-			isLike = "yes";
-		}else{
-			isLike = "no";
-		}
-		$.ajax({
-			url:'/api/likes/setLike',
-			type:'get',
-			contentType: "application/json; charset=utf-8",
-			dataType:'json',
-			data:"toiletID="+toiletID+"&isLike="+isLike,
-			success:function(result){
-				if (result.errno == -1){
-					alert(result.message);
-				}
-				if (result.errno == 0){
-					loadLike(toiletID);
-				}
-				console.log(result);
-			},
-			error:function(e){
-				console.log(e);
-			},
-		});
-	}
+    function changeLike() {
+        toiletID = getQueryVariable("id");
+        var likeSpan = $('#like');
+        var isLike;
+        if (likeSpan.hasClass("glyphicon-heart-empty")) {
+            isLike = "yes";
+        } else {
+            isLike = "no";
+        }
+        $.ajax({
+            url: '/api/likes/setLike',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: "toiletID=" + toiletID + "&isLike=" + isLike,
+            success: function (result) {
+                if (result.errno == -1) {
+                    alert(result.message);
+                }
+                if (result.errno == 0) {
+                    loadLike(toiletID);
+                }
+                console.log(result);
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
 
-	function loadLike(toiletID) {
-		$.ajax({
-			url:'/api/likes/getByUserToilet',
-			type:'get',
-			contentType: "application/json; charset=utf-8",
-			dataType:'json',
-			data:"toiletID="+toiletID,
-			success:function(result){
-				if (result.errno == -1){
-					$("#like").removeClass("glyphicon-heart-empty");
-					$("#like").removeClass("glyphicon-heart");
-					$("#like").addClass("glyphicon-heart-empty");
-				}
-				if (result.errno == 0){
-					$("#like").removeClass("glyphicon-heart-empty");
-					$("#like").removeClass("glyphicon-heart");
-					if(result.message == "yes"){
-						$("#like").addClass("glyphicon-heart");
-					}else {
-						$("#like").addClass("glyphicon-heart-empty");
-					}
-				}
-				console.log(result);
-			},
-			error:function(e){
-				console.log(e);
-			},
-		});
-	}
-	loadLike(toiletID);
+    function loadLike(toiletID) {
+        $.ajax({
+            url: '/api/likes/getByUserToilet',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: "toiletID=" + toiletID,
+            success: function (result) {
+                if (result.errno == -1) {
+                    $("#like").removeClass("glyphicon-heart-empty");
+                    $("#like").removeClass("glyphicon-heart");
+                    $("#like").addClass("glyphicon-heart-empty");
+                }
+                if (result.errno == 0) {
+                    $("#like").removeClass("glyphicon-heart-empty");
+                    $("#like").removeClass("glyphicon-heart");
+                    if (result.message == "yes") {
+                        $("#like").addClass("glyphicon-heart");
+                    } else {
+                        $("#like").addClass("glyphicon-heart-empty");
+                    }
+                }
+                console.log(result);
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
 
-	function getQueryVariable(variable)
-	{
-		var query = window.location.search.substring(1);
-		var vars = query.split("&");
-		for (var i=0;i<vars.length;i++) {
-			var pair = vars[i].split("=");
-			if(pair[0] == variable){return pair[1];}
-		}
-		return(false);
-	}
-	function loadToiletDetail(toiletID){
-		$.ajax({
-			url:'/api/toilets/getById',
-			type:'get',
-			contentType: "application/json; charset=utf-8",
-			dataType:'json',
-			data:"id="+toiletID,
-			success:function(result){
-				if (result.errno == -1){
-				}
-				if (result.errno == 0){
-					$('title').html(result.data.name);
-					//$('#toilet-rate').text(result.data.rate);
-					$('#toilet-name').text(result.data.name);
-					$('#toilet-operator').text(result.data.operator);
-					if (result.data.wheelchair == "yes"){
-						$('#toilet-wheelchair').append(`<img src="../images/wheelchairLarge.png" title="Wheelchair">`);
-					}
-					if (result.data.female == "yes"){
-						$('#toilet-female').append(`<img src="../images/girl.png" title="Female">`);
-					}
-					if (result.data.male == "yes"){
-						$('#toilet-male').append(`<img src="../images/boy.png" title="Male">`);
-					}
-					if (result.data.baby_facil == "yes"){
-						$('#toilet-baby').append(`<img src="../images/babyLarge.png" title="Baby Facility">`)
-					}
-					$('#form-toiletId').val(result.data._id);
+    loadLike(toiletID);
 
-					var url = "https://www.google.com/maps/dir//" + result.data.lat + "," + result.data.lon + "/";
-					$('#go').attr("href",url);
-				}
-				console.log(result);
-			},
-			error:function(e){
-				console.log(e);
-			},
-		});
-	}
-	function loadComments(toiletID) {
-		$.ajax({
-			url:'/api/reviews/getReviewsByToilet',
-			type:'get',
-			contentType: "application/json; charset=utf-8",
-			dataType:'json',
-			data:"toiletID="+toiletID,
-			success:function(result){
-				if (result.errno == -1){
-				}
-				if (result.errno == 0){
-					// console.log("------------");
-					// var commentDate = new Date(result.data[1].date);
-					// console.log(commentDate.getFullYear());
-					var monthShortName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-					$(".comm").empty();
-					$(".comm").removeClass("comm");
-					var totalRate = 0;
-					for (var i=0;i<result.data.length;i++){
-						var commentDate = new Date(result.data[i].date);
-						var nowDate = new Date();
-						console.log("------------");
-						console.log(commentDate);
-						console.log(nowDate);
-						var showDate = commentDate.getDate()+" "+monthShortName[commentDate.getMonth()]+" "+ commentDate.getFullYear()+ "  "+commentDate.getHours()+":"+commentDate.getMinutes();
-						$('#show-comments').append($(`
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+    function loadToiletDetail(toiletID) {
+        $.ajax({
+            url: '/api/toilets/getById',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: "id=" + toiletID,
+            success: function (result) {
+                if (result.errno == -1) {
+                }
+                if (result.errno == 0) {
+                    $('title').html(result.data.name);
+                    //$('#toilet-rate').text(result.data.rate);
+                    $('#toilet-name').text(result.data.name);
+                    $('#toilet-operator').text(result.data.operator);
+                    if (result.data.wheelchair == "yes") {
+                        $('#toilet-wheelchair').append(`<img src="../images/wheelchairLarge.png" title="Wheelchair">`);
+                    }
+                    if (result.data.female == "yes") {
+                        $('#toilet-female').append(`<img src="../images/girl.png" title="Female">`);
+                    }
+                    if (result.data.male == "yes") {
+                        $('#toilet-male').append(`<img src="../images/boy.png" title="Male">`);
+                    }
+                    if (result.data.baby_facil == "yes") {
+                        $('#toilet-baby').append(`<img src="../images/babyLarge.png" title="Baby Facility">`)
+                    }
+                    $('#form-toiletId').val(result.data._id);
+
+                    var url = "https://www.google.com/maps/dir//" + result.data.lat + "," + result.data.lon + "/";
+                    $('#go').attr("href", url);
+                }
+                console.log(result);
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
+
+    function loadComments(toiletID) {
+        $.ajax({
+            url: '/api/reviews/getReviewsByToilet',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: "toiletID=" + toiletID,
+            success: function (result) {
+                if (result.errno == -1) {
+                }
+                if (result.errno == 0) {
+                    // console.log("------------");
+                    // var commentDate = new Date(result.data[1].date);
+                    // console.log(commentDate.getFullYear());
+                    var monthShortName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    $(".comm").empty();
+                    $(".comm").removeClass("comm");
+                    var totalRate = 0;
+                    for (var i = 0; i < result.data.length; i++) {
+                        var commentDate = new Date(result.data[i].date);
+                        var nowDate = new Date();
+                        console.log("------------");
+                        console.log(commentDate);
+                        console.log(nowDate);
+                        var showDate = commentDate.getDate() + " " + monthShortName[commentDate.getMonth()] + " " + commentDate.getFullYear() + "  " + commentDate.getHours() + ":" + commentDate.getMinutes();
+                        $('#show-comments').append($(`
 					<div class="comm">
-						<p>`+ result.data[i].userName +`<span> rate: `+ result.data[i].rating +`</span><span class="time">`+ showDate +`</span></p>
-						<p>`+ result.data[i].comments +`</p>
+						<p>` + result.data[i].userName + `<span> rate: ` + result.data[i].rating + `</span><span class="time">` + showDate + `</span></p>
+						<p>` + result.data[i].comments + `</p>
 					</div>
 					`));
-						totalRate += Number(result.data[i].rating);
+                        totalRate += Number(result.data[i].rating);
 
-					}
-					if (result.data.length == 0){
-						$('#toilet-rate').text('0.00');
-					}else{
-						$('#toilet-rate').text((totalRate/result.data.length).toFixed(2));
-					}
-				}
-				console.log(result);
-			},
-			error:function(e){
-				console.log(e);
-			},
-		});
-	}
-	loadComments(toiletID);
-	loadToiletDetail(toiletID);
+                    }
+                    if (result.data.length == 0) {
+                        $('#toilet-rate').text('0.00');
+                    } else {
+                        $('#toilet-rate').text((totalRate / result.data.length).toFixed(2));
+                    }
+                }
+                console.log(result);
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
 
-	function sendComment(){
-		var flag = $('#addReview').data('bootstrapValidator').isValid() //true/false
-		if (flag == false){
-			$('#addReview').data('bootstrapValidator').validate();
-			return;
-		}else {
-			var formObject = {};
-			var formArray =$("#review-form").serializeArray();
-			$.each(formArray,function(i,item){
-				formObject[item.name] = item.value;
-			});
-			console.log(formObject);
-			$.ajax({
-				url:'/api/reviews/createReview',
-				type:'post',
-				contentType: "application/json; charset=utf-8",
-				dataType:'json',
-				data:JSON.stringify(formObject),
-				success:function(result){
-					if (result.errno == -1){
-						alert(result.message);
-					}
-					if (result.errno == 0){
-						$('#addReview').modal('hide');
-						loadComments(toiletID);
-					}
-					console.log(result);
-				},
-				error:function(e){
-					console.log(e);
-				},
-			});
-		}
-	}
+    // load toilet images
+    function loadToiletPictures(toiletID) {
+        $.ajax({
+            url: '/api/toilets/loadToiletPictures',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: "toiletID=" + toiletID,
+            success: function (result) {
+                if (result.errno === 0) {
+                    if (result.data.length !== 0) {
+                        $("#toiletPictures").remove();
+                        $("#toiletPicsSlider").append(`<div id="toiletPictures" class="diff_logo"> </div>`);
+                        result.data.map(function (image, index) {
+                            // slice the "public" prefix
+                            $("#toiletPictures").append(
+                                `<div class="logo_item">
+                                        <img src=` + image.slice('./public'.length, image.length) + `>
+                                </div>`
+                            );
+                        });
+                    }
+                }
 
-$(function(){
-	var index= 2;
-	var length = $('.logo_item').length;
-	var reduce=0.15;
-	var step =110;
-	var startX;
-	var canslider=false;
-	$('.logo_item').click(function(){
-		index= $(this).index();
-		calcSequence(index);
-	})
-	function calcSequence(currentIndex){
-		var arr=[];
-		var zIndex = 99;
-		for (var i = 0; i < length; i++) {
-			var num=(currentIndex+i)%length;
-			arr.push((currentIndex+i)%length);
-		}
-		var half= (arr.length-1)/2;
-		$(".logo_item")[arr[0]].style.zIndex=zIndex;
-		$(".logo_item")[arr[0]].style.transform="translateX(0px) scale(1)";
-		for (var j = 1; j < half+1; j++) {
-			zIndex--;
-			$(".logo_item")[arr[j]].style.zIndex=zIndex;
-			$(".logo_item")[arr[j]].style.transform="translateX("+step*j+"px) scale("+(1-reduce*j)+")";
-		}
-		for (var t = length - 1; t > half; t--) {
-			zIndex--;
-			$(".logo_item")[arr[t]].style.zIndex=zIndex;
-			$(".logo_item")[arr[t]].style.transform="translateX("+-step*(length-t)+"px) scale("+(1-reduce*(length-t))+")";
-		}
-	}
-	$(window).resize(changeStep);
-	function changeStep(){
-		var width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
-		if(width<1200&&width>=768){
-			step=80;
-		}else if(width<768){
-			step=60;
-		}else{
-			step=110
-		}
-		calcSequence(index);
-	}
-	changeStep();
-	calcSequence(index);
-	$(".slider_wrapper").on('touchstart',function(e){
-		 startX=e.touches[0].pageX;
-		 canslider=true;
-		})
-		$(".slider_wrapper").on('touchmove',function(e){
-		if(!canslider){
-			return
-		}
-		 curX=e.touches[0].pageX;
-		 var delt = curX-startX;
-		 if(delt>0){
-		 	index--;
-		 	if(index<0){
-		 		index=length-1;
-		 	}
-		 }else{
-		 	index=(index+1)%length
-		 }
-		 calcSequence(index);
-		 canslider=false;
-	})
-	function next_part(){
-		index--;
-	 	if(index<0){
-	 		index=length-1;
-	 	}
-		calcSequence(index);
-	}
-	function pre_part(){
-		index=(index+1)%length;
-		calcSequence(index);
-	}
+                if (result.errno === -1) {
+                    console.log(result.message);
+                }
+            }
+        });
+    }
 
-	var myEfficientFn = debounce(next_part,500,true);
-	var myEfficientFn1 = debounce(pre_part,500,true);
-	
-	$('.lbtn').click(function(){
-		myEfficientFn1();
-	});
+    loadComments(toiletID);
+    loadToiletDetail(toiletID);
+    loadToiletPictures(toiletID);
 
-	$('.rbtn').click(function(){
-		myEfficientFn();
-	});
+    // send comments
+    function sendComment() {
+        let form = new FormData();
+        var formArray = $("#review-form").serializeArray();
+        // append normal text data
+        $.each(formArray, function (i, item) {
+            form.append(item.name, item.value);
+        });
+        // append image file into from data
+        form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
+
+        // var formObject = {};
+        // var formArray = $("#review-form").serializeArray();
+        // console.log(formArray);
+        // $.each(formArray, function (i, item) {
+        //     formObject[item.name] = item.value;
+        // });
+        // console.log(formObject);
+        $.ajax({
+            url: '/api/reviews/createReview',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: form,
+            // contentType: "application/json; charset=utf-8",
+            // dataType: 'json',
+            // data: JSON.stringify(formObject),
+            // data: formObject,
+            success: function (result) {
+                if (result.errno == -1) {
+                    alert(result.message);
+                }
+                if (result.errno == 0) {
+                    $('#addReview').modal('hide');
+                    loadComments(toiletID);
+                    loadToiletPictures(toiletID);
+                    document.reload();
+                }
+                console.log(result);
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
+
+    $(function () {
+        var index = 2;
+        var length = $('.logo_item').length;
+        var reduce = 0.15;
+        var step = 110;
+        var startX;
+        var canslider = false;
+        $('.logo_item').click(function () {
+            index = $(this).index();
+            calcSequence(index);
+        });
+
+        function calcSequence(currentIndex) {
+            var arr = [];
+            var zIndex = 99;
+            for (var i = 0; i < length; i++) {
+                var num = (currentIndex + i) % length;
+                arr.push((currentIndex + i) % length);
+            }
+            var half = (arr.length - 1) / 2;
+            $(".logo_item")[arr[0]].style.zIndex = zIndex;
+            $(".logo_item")[arr[0]].style.transform = "translateX(0px) scale(1)";
+            for (var j = 1; j < half + 1; j++) {
+                zIndex--;
+                $(".logo_item")[arr[j]].style.zIndex = zIndex;
+                $(".logo_item")[arr[j]].style.transform = "translateX(" + step * j + "px) scale(" + (1 - reduce * j) + ")";
+            }
+            for (var t = length - 1; t > half; t--) {
+                zIndex--;
+                $(".logo_item")[arr[t]].style.zIndex = zIndex;
+                $(".logo_item")[arr[t]].style.transform = "translateX(" + -step * (length - t) + "px) scale(" + (1 - reduce * (length - t)) + ")";
+            }
+        }
+
+        $(window).resize(changeStep);
+
+        function changeStep() {
+            var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (width < 1200 && width >= 768) {
+                step = 80;
+            } else if (width < 768) {
+                step = 60;
+            } else {
+                step = 110
+            }
+            calcSequence(index);
+        }
+
+        changeStep();
+        calcSequence(index);
+        $(".slider_wrapper").on('touchstart', function (e) {
+            startX = e.touches[0].pageX;
+            canslider = true;
+        });
+        $(".slider_wrapper").on('touchmove', function (e) {
+            if (!canslider) {
+                return
+            }
+            curX = e.touches[0].pageX;
+            var delt = curX - startX;
+            if (delt > 0) {
+                index--;
+                if (index < 0) {
+                    index = length - 1;
+                }
+            } else {
+                index = (index + 1) % length
+            }
+            calcSequence(index);
+            canslider = false;
+        });
+
+        function next_part() {
+            index--;
+            if (index < 0) {
+                index = length - 1;
+            }
+            calcSequence(index);
+        }
+
+        function pre_part() {
+            index = (index + 1) % length;
+            calcSequence(index);
+        }
+
+        var myEfficientFn = debounce(next_part, 500, true);
+        var myEfficientFn1 = debounce(pre_part, 500, true);
+
+        $('.lbtn').click(function () {
+            myEfficientFn1();
+        });
+
+        $('.rbtn').click(function () {
+            myEfficientFn();
+        });
 
 
-	function debounce(func, wait, immediate) {
-	   let timeout, args, context, timestamp, result
+        function debounce(func, wait, immediate) {
+            let timeout, args, context, timestamp, result;
 
-	   const later = function() {
+            const later = function () {
 
-	     const last = +new Date() - timestamp
-
-
-	     if (last < wait && last > 0) {
-	       timeout = setTimeout(later, wait - last)
-	     } else {
-	       timeout = null
-
-	       if (!immediate) {
-	         result = func.apply(context, args)
-	         if (!timeout) context = args = null
-	       }
-	     }
-	   }
-
-	   return function(...args) {
-	     context = this
-	     timestamp = +new Date()
-	     const callNow = immediate && !timeout
-
-	     if (!timeout) timeout = setTimeout(later, wait)
-	     if (callNow) {
-	       result = func.apply(context, args)
-	       context = args = null
-	     }
-
-	     return result
-	   }
-	}
+                const last = +new Date() - timestamp;
 
 
+                if (last < wait && last > 0) {
+                    timeout = setTimeout(later, wait - last)
+                } else {
+                    timeout = null;
 
-	$(".btn-down").click(function(){
-		if($(this).hasClass('active')){
-			$(this).removeClass('active');
-			$('.comments .main').hide(500);
-		}else{
-			$(this).addClass('active');
-			$('.comments .main').show(500);
-		}
-	});
+                    if (!immediate) {
+                        result = func.apply(context, args);
+                        if (!timeout) context = args = null
+                    }
+                }
+            };
 
-});
+            return function (...args) {
+                context = this;
+                timestamp = +new Date();
+                const callNow = immediate && !timeout;
 
+                if (!timeout) timeout = setTimeout(later, wait);
+                if (callNow) {
+                    result = func.apply(context, args);
+                    context = args = null
+                }
 
+                return result
+            }
+        }
 
+        $(".btn-down").click(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $('.comments .main').hide(500);
+            } else {
+                $(this).addClass('active');
+                $('.comments .main').show(500);
+            }
+        });
+
+    });
 </script>
 </body>
 </html>
