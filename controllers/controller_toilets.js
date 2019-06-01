@@ -1,5 +1,6 @@
 const Toilet = require("../models/toilet");
 const Review = require("../models/review");
+const User = require("../models/user");
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -97,14 +98,38 @@ module.exports.keywordSearch = function (req, res) {
 
 //share my own toilet
 module.exports.creatToilet = function (req, res) {
+
+    /**
+     * @return {string}
+     */
+    function YesOrNo(name) {
+        if (name) {
+            return 'yes';
+        }
+        return 'no';
+    }
+
+    /**
+     * if no file return empty path
+     * @param file
+     * @returns {string}
+     */
+    function createFilePath(file) {
+        if (!file) {
+            return "";
+        } else {
+            return file.destination + file.filename;
+        }
+    }
+
     const toilet = new Toilet({
-        "toiletPictures": req.body.toiletPictures,
+        "toiletPictures": createFilePath(req.file),
         "name": req.body.name,
         "operator": req.body.operator,
-        "female": req.body.female,
-        "male": req.body.male,
-        "baby_facil": req.body.baby_facil,
-        "wheelchair": req.body.wheelchair,
+        "female": YesOrNo(req.body.female),
+        "male": YesOrNo(req.body.male),
+        "baby_facil": YesOrNo(req.body.baby_facil),
+        "wheelchair": YesOrNo(req.body.wheelchair),
         "lat": req.body.lat,
         "lon": req.body.lon,
         "location_address": req.body.location_address,
@@ -115,7 +140,14 @@ module.exports.creatToilet = function (req, res) {
 
     toilet.save(function (err, newToilet) {
         if (!err) {
-            return res.json({errno: 0, data: newToilet});
+            // add the new toilet id to user toilets list
+            User.update({userName: req.session.userName}, {$push: {toilets: newToilet._id}}, function (err, user) {
+                if (!err) {
+                    return res.json({errno: 0, data: newToilet});
+                } else {
+                    return res.json({errno: -1, message: "MongoDb Error!"});
+                }
+            });
         } else {
             return res.json({errno: -1, message: "MongoDb Error!"});
         }
@@ -183,20 +215,60 @@ module.exports.uploadToiletPhoto = function (req, res) {
 
 // load the images url based on toilet id
 module.exports.loadToiletPictures = function (req, res) {
-    let reviewPics = [];
 
+    let toiletPics = [];
     // use toilet ID to find all reviews and get their pics paths
-    Review.find({toiletID: req.query['toiletID']}, function (err, reviews) {
+    Toilet.findOne({_id: mongoose.Types.ObjectId(req.query['toiletID'])}, function (err, toilet) {
         if (!err) {
-            if (reviews) {
-                reviews.map(function (review, index) {
-                    // only push when review has a picture
-                    if (review.reviewPictures) {
-                        reviewPics.push(review.reviewPictures);
+            if (toilet) {
+                if (toilet.toiletPictures) {
+                    toiletPics.push(toilet.toiletPictures);
+                }
+
+                // use toilet ID to find all reviews and get their pics paths
+                Review.find({toiletID: req.query['toiletID']}, function (err, reviews) {
+                    if (!err) {
+                        if (reviews) {
+                            reviews.map(function (review, index) {
+                                // only push when review has a picture
+                                if (review.reviewPictures) {
+                                    toiletPics.push(review.reviewPictures);
+                                }
+                            });
+                        }
+                        return res.json({errno: 0, data: toiletPics});
+                    } else {
+                        return res.json({errno: -1, message: "MongoDb Error"});
                     }
                 });
+
             }
-            return res.json({errno: 0, data: reviewPics});
+        } else {
+            return res.json({errno: -1, message: "MongoDb Error"});
+        }
+    });
+};
+
+// get all toilets created by a specific user
+module.exports.getUserToilets = function (req, res) {
+    // find the user by user name
+    User.find({userName: req.session.userName}, function (err, user) {
+        if (!err) {
+            // find all toilets in user toilets array
+            Toilet.find({
+                    _id: {
+                        $in: user.toilets.map(function (item, index) {
+                            return mongoose.Types.ObjectId(item);
+                        })
+                    }
+                },
+                function (err, toilets) {
+                    if (!err) {
+                        return res.json({errno: 0, data: toilets});
+                    } else {
+                        return res.json({errno: -1, message: "MongoDb Error"});
+                    }
+                });
         } else {
             return res.json({errno: -1, message: "MongoDb Error"});
         }

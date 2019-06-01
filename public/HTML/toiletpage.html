@@ -402,9 +402,40 @@
         });
     }
 
+    // load toilet images
+    function loadToiletPictures(toiletID) {
+        $.ajax({
+            url: '/api/toilets/loadToiletPictures',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: "toiletID=" + toiletID,
+            success: function (result) {
+                if (result.errno === 0) {
+                    if (result.data.length !== 0) {
+                        $("#toiletPictures").remove();
+                        $("#toiletPicsSlider").append(`<div id="toiletPictures" class="diff_logo"> </div>`);
+                        result.data.map(function (image, index) {
+                            // slice the "public" prefix
+                            $("#toiletPictures").append(
+                                `<div class="logo_item">
+                                        <img src=` + image.slice('./public'.length, image.length) + `>
+                                </div>`
+                            );
+                        });
+                    }
+                }
+
+                if (result.errno === -1) {
+                    console.log(result.message);
+                }
+            }
+        });
+    }
+
     loadComments(toiletID);
     loadToiletDetail(toiletID);
-    loadToiletImages(toiletID);
+    loadToiletPictures(toiletID);
 
     // send comments
     function sendComment() {
@@ -441,7 +472,7 @@
                 if (result.errno == 0) {
                     $('#addReview').modal('hide');
                     loadComments(toiletID);
-                    loadToiletImages(toiletID);
+                    loadToiletPictures(toiletID);
                     document.reload();
                 }
                 console.log(result);
@@ -449,37 +480,6 @@
             error: function (e) {
                 console.log(e);
             },
-        });
-    }
-
-    // load toilet images
-    function loadToiletImages(toiletID) {
-        $.ajax({
-            url: '/api/toilets/loadToiletPictures',
-            type: 'get',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            data: "toiletID=" + toiletID,
-            success: function (result) {
-                if (result.errno === 0) {
-                    if (result.data.length !== 0) {
-                        $("#toiletPictures").remove();
-                        $("#toiletPicsSlider").append(`<div id="toiletPictures" class="diff_logo"> </div>`);
-                        result.data.map(function (image, index) {
-                            // slice the "public" prefix
-                            $("#toiletPictures").append(
-                                `<div class="logo_item">
-                                        <img src=` + image.slice('./public'.length, image.length) + `>
-                                </div>`
-                            );
-                        });
-                    }
-                }
-
-                if (result.errno === -1) {
-                    console.log(result.message);
-                }
-            }
         });
     }
 

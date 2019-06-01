@@ -55,12 +55,16 @@ router.post('/api/reviews/uploadReviewPicture', upload.single('reviewPictures'),
 //load reviews of certain toilet
 router.get('/api/reviews/getReviewsByToilet', controller_reviews.getReviewsByToilet);
 
-router.post('/api/toilets/creatToilet', controller_toilets.creatToilet);
+// user creates a toilet, toiletPicture can be null
+router.post('/api/toilets/creatToilet', upload.single('toiletPictures'), controller_toilets.creatToilet);
 
 //find all toilet
 router.get('/api/toilets/getAllToilets', controller_toilets.getAllToilets);
 
 router.get('/api/toilets/getById', controller_toilets.getById);
+
+// get toilets created by user
+router.get('/api/toilets/getUserToilets', controller_toilets.getUserToilets);
 
 // searching and sorting based on current location
 router.get('/autoSearch', controller_toilets.autoSearch);
@@ -91,6 +95,8 @@ router.get('/toiletDetail', function (req, res) {
 router.get('/api/likes/setLike', controller_likes.setLike);
 
 router.get('/api/likes/getByUserToilet', controller_likes.getByUserToilet);
+// get user collections
+router.get('/api/likes/getUserCollections', controller_likes.getCollections);
 
 module.exports = router;
 

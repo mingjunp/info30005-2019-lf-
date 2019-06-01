@@ -103,24 +103,26 @@
             </div>
             <div class="modal-body">
                 <form id="review-form" class="form-group" action="">
-
                     <div class="form-group">
-                        <label for="">Toilet Name</label>
-                        <input class="form-control" name="rating" type="text" placeholder="Enter your toilet name">
+                        <label>Toilet Name</label>
+                        <input class="form-control" id="name" name="name" type="text"
+                               placeholder="Enter your toilet name">
                     </div>
+                    <label>Choose your toilet picture</label>
+                    <input id="toiletPictures" name="toiletPictures" type="file">
                     <div class="checkbox-custom checkbox-default">
                         <p>Please select tags from below</p>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="female" name="filter" value="female">female
+                            <input type="checkbox" id="female" name="female" value="female">female
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="male" name="filter" value="male">male
+                            <input type="checkbox" id="male" name="male" value="male">male
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="wheelchair" name="filter" value="wheelchair">wheelchair
+                            <input type="checkbox" id="wheelchair" name="wheelchair" value="wheelchair">wheelchair
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
+                            <input type="checkbox" id="babyFacility" name="baby_facil" value="baby_facil">baby facility
                         </label>
                     </div>
                     <div id="mapHolder" class="mapContainer">
@@ -130,7 +132,7 @@
                     </div>
                     <br>
                     <div class="text-right">
-                        <input class="btn btn-primary" onclick="sendComment()" value="Submit">
+                        <input class="btn btn-primary" onclick="test()" value="Submit">
                         <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
                     </div>
                 </form>
@@ -162,6 +164,41 @@
 <script src="../JS/checkLogin.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&callback=initMap">
+</script>
+<script>
+    function test() {
+        let form = new FormData();
+        let formArray = $("#review-form").serializeArray();
+        console.log(formArray);
+        // append normal text data
+        $.each(formArray, function (i, item) {
+            form.append(item.name, item.value);
+        });
+        // append image file into from data
+        form.append('toiletPictures', document.getElementById('toiletPictures').files[0]);
+        // append location data
+        form.append('lat', document.getElementById('lat').value);
+        form.append('lon', document.getElementById('lng').value);
+
+        $.ajax({
+            url: '/api/toilets/creatToilet',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: form,
+            success: function (result) {
+                if (result.errno == -1) {
+                    console.log(result.message)
+                }
+                if (result.errno == 0) {
+                    console.log(result.data);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
 </script>
 </body>
 </html>
