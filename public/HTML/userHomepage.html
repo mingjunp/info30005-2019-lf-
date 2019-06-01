@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
     <script src="../JS/checkLogin.js"></script>
     <script src="../JS/logout.js"></script>
     <script>
@@ -99,16 +103,16 @@
                 <h1 class="text-center">Share your toilet</h1>
             </div>
             <div class="modal-body">
-                <form id="review-form" class="form-group" action="">
+                <form id="create-toilet-form" class="form-group" action="">
                     <div class="form-group">
-                        <label>Toilet Name</label>
+                        <h5>Toilet Name</h5>
                         <input class="form-control" id="name" name="name" type="text"
                                placeholder="Enter your toilet name">
                     </div>
-                    <label>Choose your toilet picture</label>
+                    <h5>Choose your toilet picture</h5>
                     <input id="toiletPictures" name="toiletPictures" type="file">
                     <div class="checkbox-custom checkbox-default">
-                        <p>Please select tags from below</p>
+                        <h5>Please select tags from below</h5>
                         <label class="checkbox-inline">
                             <input type="checkbox" id="female" name="female" value="female">female
                         </label>
@@ -122,14 +126,15 @@
                             <input type="checkbox" id="babyFacility" name="baby_facil" value="baby_facil">baby facility
                         </label>
                     </div>
+                    <h5>Please click map to get your toilet location</h5>
                     <div id="mapHolder" class="mapContainer">
                         <div id="map"></div>
-                        <input type="hidden" id="lat">
-                        <input type="hidden" id="lng">
+                        <input type="hidden" name="lat" id="lat">
+                        <input type="hidden" name="lng" id="lng">
                     </div>
                     <br>
                     <div class="text-right">
-                        <input class="btn btn-primary" onclick="test()" value="Submit">
+                        <input class="btn btn-primary" onclick="createToilet()" value="Submit">
                         <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
                     </div>
                 </form>
@@ -192,38 +197,85 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiziRhHD1URUINIQH3V3p1N9vsZzu3UUk&callback=initMap">
 </script>
 <script>
-    function test() {
-        let form = new FormData();
-        let formArray = $("#review-form").serializeArray();
-        console.log(formArray);
-        // append normal text data
-        $.each(formArray, function (i, item) {
-            form.append(item.name, item.value);
-        });
-        // append image file into from data
-        form.append('toiletPictures', document.getElementById('toiletPictures').files[0]);
-        // append location data
-        form.append('lat', document.getElementById('lat').value);
-        form.append('lon', document.getElementById('lng').value);
+    //form validation rule
+    function formValidator() {
+        $("#shareToilet").bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                name: {
+                    message: 'fail',
+                    validators: {
+                        notEmpty: {
+                            message: 'toilet name cannot be empty'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: 'cannot over 50 chars'
+                        },
+                    }
+                },
+                toiletPictures: {
+                    validators: {
+                        notEmpty: {
+                            message: 'picture cannot be empty'
+                        },
+                    }
+                },
+                lat: {
+                    validators: {
+                        notEmpty: {
+                            message: 'please click location on the map'
+                        },
+                    }
+                }
+            },
+        })
+    }
+    function createToilet() {
+        $('#shareToilet').data('bootstrapValidator').validate();
+        var flag = $('#shareToilet').data('bootstrapValidator').isValid() //true/false
+        if (flag == false){
+            $('#shareToilet').data('bootstrapValidator').validate();
+            return;
+        }else{
+            let form = new FormData();
+            let formArray = $("#create-toilet-form").serializeArray();
+            console.log(formArray);
+            // append normal text data
+            $.each(formArray, function (i, item) {
+                form.append(item.name, item.value);
+            });
+            // append image file into from data
+            form.append('toiletPictures', document.getElementById('toiletPictures').files[0]);
+            // append location data
+            form.append('lat', document.getElementById('lat').value);
+            form.append('lon', document.getElementById('lng').value);
 
-        $.ajax({
-            url: '/api/toilets/creatToilet',
-            type: 'post',
-            contentType: false,
-            processData: false,
-            data: form,
-            success: function (result) {
-                if (result.errno == -1) {
-                    console.log(result.message)
-                }
-                if (result.errno == 0) {
-                    console.log(result.data);
-                }
-            },
-            error: function (e) {
-                console.log(e);
-            },
-        });
+            $.ajax({
+                url: '/api/toilets/creatToilet',
+                type: 'post',
+                contentType: false,
+                processData: false,
+                data: form,
+                success: function (result) {
+                    if (result.errno == -1) {
+                        console.log(result.message)
+                    }
+                    if (result.errno == 0) {
+                        console.log(result.data);
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                },
+            });
+        }
     }
 </script>
 </body>
