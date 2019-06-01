@@ -187,6 +187,8 @@ input[type="checkbox"]:checked:after{
 }
 .comments .comm p:first-child{
 	line-height: 40px;
+	font-size:12px;
+	color:#666;
 }
 .comments .comm p:first-child span{
 	margin-left:35px;
@@ -196,7 +198,7 @@ input[type="checkbox"]:checked:after{
 
 .comments .comm p:last-child{
 	line-height:1.4;
-	font-size:13px;
+	font-size:18px;
 	color:#555;
 }
 

@@ -2,6 +2,12 @@ function login(){
     if(!$('#login-erro-info').hasClass("hide")){
         $('#login-erro-info').addClass("hide");
     }
+
+    if ($('#loginUserName').val() == '' || $('#loginPassword') == ''){
+        $('#login-erro-info').text("user name or password cannot be empty!");
+        $('#login-erro-info').removeClass("hide");
+        return
+    }
     var formObject = {};
     var formArray =$("#login-form").serializeArray();
     $.each(formArray,function(i,item){

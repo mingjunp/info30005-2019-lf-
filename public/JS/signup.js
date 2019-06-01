@@ -41,6 +41,9 @@ function formValidator() {
             },
             password: {
                 validators: {
+                    notEmpty: {
+                        message: 'password cannot be empty'
+                    },
                     identical: {
                         field: 'password2',
                         message: 'consist your password'
@@ -49,6 +52,9 @@ function formValidator() {
             },
             password2: {
                 validators: {
+                    notEmpty: {
+                        message: 'password cannot be empty'
+                    },
                     identical: {
                         field: 'password',
                         message: 'consist your password'
@@ -65,6 +71,7 @@ function singup(){
 
     var flag = $('#register').data('bootstrapValidator').isValid() //true/false
     if (flag == false){
+        $('#register').data('bootstrapValidator').validate();
         return;
     } else{
         var formObject = {};
