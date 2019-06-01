@@ -186,6 +186,7 @@
 		<!--</div>-->
 	</div>
 </div>
+<!--add comments pop-up window-->
 <div id="addReview" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -205,7 +206,7 @@
 					</div>
 					<div class="form-group">
 						<label>Rating</label>
-						<input class="form-control" name="rating" type="text" placeholder="rating from 1-5">
+						<input class="form-control" name="rating" type="text" placeholder="rating from 0-5">
 					</div>
 					<div class="form-group">
 						<label>Your comment</label>
@@ -225,6 +226,37 @@
 
 <!--<script src="../JS/jquery.js"></script>-->
 <script>
+	//form validation rule
+	function formValidator() {
+		$("#addReview").bootstrapValidator({
+			message: 'This value is not valid',
+			feedbackIcons: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			fields: {
+				rating: {
+					message: 'fail',
+					validators: {
+						notEmpty: {
+							message: 'rating cannot be empty'
+						},
+						regexp: { //regular expression
+							// .\.[0-9][0-9]$
+							regexp: /^(0|[1-5])(\.([0-9]{1,2}))?$/,
+							message: 'rating should be a number from 0-5，cannot exceed two digits after decimal point'
+						},
+						// between: {
+						// 	min: 0,
+						// 	max: 5,
+						// 	message: '输入值必须在1到10之间'
+						// },
+					}
+				},
+			},
+		})
+	}
 
 	checkLogin();
 	toiletID = getQueryVariable("id");
@@ -390,32 +422,38 @@
 	loadToiletDetail(toiletID);
 
 	function sendComment(){
-		var formObject = {};
-		var formArray =$("#review-form").serializeArray();
-		$.each(formArray,function(i,item){
-			formObject[item.name] = item.value;
-		});
-		console.log(formObject);
-		$.ajax({
-			url:'/api/reviews/createReview',
-			type:'post',
-			contentType: "application/json; charset=utf-8",
-			dataType:'json',
-			data:JSON.stringify(formObject),
-			success:function(result){
-				if (result.errno == -1){
-					alert(result.message);
-				}
-				if (result.errno == 0){
-					$('#addReview').modal('hide');
-					loadComments(toiletID);
-				}
-				console.log(result);
-			},
-			error:function(e){
-				console.log(e);
-			},
-		});
+		var flag = $('#addReview').data('bootstrapValidator').isValid() //true/false
+		if (flag == false){
+			$('#addReview').data('bootstrapValidator').validate();
+			return;
+		}else {
+			var formObject = {};
+			var formArray =$("#review-form").serializeArray();
+			$.each(formArray,function(i,item){
+				formObject[item.name] = item.value;
+			});
+			console.log(formObject);
+			$.ajax({
+				url:'/api/reviews/createReview',
+				type:'post',
+				contentType: "application/json; charset=utf-8",
+				dataType:'json',
+				data:JSON.stringify(formObject),
+				success:function(result){
+					if (result.errno == -1){
+						alert(result.message);
+					}
+					if (result.errno == 0){
+						$('#addReview').modal('hide');
+						loadComments(toiletID);
+					}
+					console.log(result);
+				},
+				error:function(e){
+					console.log(e);
+				},
+			});
+		}
 	}
 
 $(function(){

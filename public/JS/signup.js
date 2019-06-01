@@ -2,7 +2,7 @@
 $(document).ready(function () {
     formValidator();
     /*manual validate form when it is normal button*/
-    $('#register').data('bootstrapValidator').validate();
+    // $('#register').data('bootstrapValidator').validate();
 });
 //form validation rule
 function formValidator() {
