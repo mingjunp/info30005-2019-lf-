@@ -16,8 +16,11 @@ function checkLogin() {
             // login success
             if (result.errno == 0){
                 $('#nav-right').children('li').remove();
-                $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="#" class="navbar-link">`+ result.data +`</a></p></li>
+                $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="/userHomepage" id="loginUserName" class="navbar-link">`+ result.data +`</a></p></li>
                             <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
+                if ($('#userName')) {
+                    $('#userName').text(result.data);
+                }
             }
             console.log(result);
         },

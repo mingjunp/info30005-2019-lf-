@@ -36,7 +36,7 @@ router.get('/api/users/checkLogin', controller_users.checkLogin);
 
 router.get('/api/users/checkUserName', controller_users.checkUserName);
 
-router.get('/api/users/userHomepage', function (req, res) {
+router.get('/userHomepage', function (req, res) {
     res.sendfile('./public/HTML/userHomepage.html');
 });
 

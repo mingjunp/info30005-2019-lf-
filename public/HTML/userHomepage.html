@@ -8,8 +8,11 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../JS/checkLogin.js"></script>
+    <script src="../JS/logout.js"></script>
     <script>
-        checkLogin();
+        $(document).ready(function () {
+            checkLogin();
+        });
         $('#myTabs a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')
@@ -45,15 +48,14 @@
             </ul>
 
             <ul id="nav-right" class="nav navbar-nav navbar-right">
-                <li><a data-toggle="modal" data-target="#login" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a data-toggle="modal" data-target="#register" href=""><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
+                <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
     <!--page header-->
     <div style="background-color: aliceblue !important;" class="jumbotron">
         <div class="container">
-            <h1>Hi, <span>username!</span></h1>
+            <h1>Hi, <span id="userName"></span></h1>
             <p>Welcome to visiting public toilet website</p>
         </div>
     </div>
