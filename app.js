@@ -12,8 +12,6 @@ app.use(express.static(__dirname + '/public'));
 // Database setup
 require('./models/db.js');
 
-
-
 app.use(session({
     secret: 'DDD',
     cookie: {

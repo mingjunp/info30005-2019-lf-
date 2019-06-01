@@ -11,8 +11,8 @@ module.exports.getByUserToilet = function (req, res) {
             } else {
                 if (like) {
                     return res.json({errno: 0, message: like.isLike});
-                }else{
-                    return res.json({errno: -1, message:"No like toilets"});
+                } else {
+                    return res.json({errno: -1, message: "No like toilets"});
                 }
             }
         });

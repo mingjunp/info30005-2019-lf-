@@ -15,6 +15,5 @@ const otherParam = {
 function create() {
     fetch(url, otherParam).then(function (res) {
         console.log(res);
-
     });
-};
+}

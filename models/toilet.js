@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const toiletSchema = new mongoose.Schema({
     "toiletPictures": String,
-    "reviewPictures":{
-        type:[String],
-    },
+    "reviewPictures": [String],
     "name": String,
 
     // who own this toilet
@@ -29,5 +27,4 @@ const toiletSchema = new mongoose.Schema({
 });
 
 // toiletSchema.index({location: "2dsphere"}) ;
-
 module.exports = mongoose.model("toilet", toiletSchema, "toilets");

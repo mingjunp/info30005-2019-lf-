@@ -4,6 +4,7 @@ $(document).ready(function () {
     /*manual validate form when it is normal button*/
     $('#register').data('bootstrapValidator').validate();
 });
+
 //form validation rule
 function formValidator() {
     $("#register").bootstrapValidator({
@@ -31,9 +32,9 @@ function formValidator() {
                         message: 'username exist, please try again',
                         delay: 1000,//ajax request every 1 second
                         type: 'GET',
-                        data: function(validator) {
+                        data: function (validator) {
                             return {
-                                userName : $("#ruserName").val(),
+                                userName: $("#ruserName").val(),
                             };
                         }
                     }
@@ -60,31 +61,30 @@ function formValidator() {
 }
 
 
-
-function singup(){
+function singup() {
 
     var flag = $('#register').data('bootstrapValidator').isValid() //true/false
-    if (flag == false){
+    if (flag == false) {
         return;
-    } else{
+    } else {
         var formObject = {};
-        var formArray =$("#myForm").serializeArray();
-        $.each(formArray,function(i,item){
+        var formArray = $("#myForm").serializeArray();
+        $.each(formArray, function (i, item) {
             formObject[item.name] = item.value;
         });
         $.ajax({
-            url:'/api/users/createUser',
-            type:'post',
+            url: '/api/users/createUser',
+            type: 'post',
             contentType: "application/json; charset=utf-8",
-            dataType:'json',
-            data:JSON.stringify(formObject),
-            success:function(result){
+            dataType: 'json',
+            data: JSON.stringify(formObject),
+            success: function (result) {
                 // sign up fail
-                if (result.errno == -1){
+                if (result.errno == -1) {
                     alert(result.message);
                 }
                 // sign up success
-                if (result.errno == 0){
+                if (result.errno == 0) {
                     //alert(result.data);
                     $('#infoModal').modal('show');
                     $('#register').modal('hide');
@@ -92,7 +92,7 @@ function singup(){
                 }
                 console.log(result);
             },
-            error:function(e){
+            error: function (e) {
                 console.log(e);
             },
         });
@@ -101,27 +101,27 @@ function singup(){
 
 function loginAftersignup(formObject) {
     $.ajax({
-        url:'/api/users/login',
-        type:'post',
+        url: '/api/users/login',
+        type: 'post',
         contentType: "application/json; charset=utf-8",
-        dataType:'json',
-        data:JSON.stringify(formObject),
-        success:function(result){
+        dataType: 'json',
+        data: JSON.stringify(formObject),
+        success: function (result) {
             // login fail
-            if (result.errno == -1){
+            if (result.errno == -1) {
                 $('#login-erro-info').removeClass("hide");
             }
             // login success
-            if (result.errno == 0){
+            if (result.errno == 0) {
                 $('#nav-right').children('li').remove();
-                $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="#" class="navbar-link">`+ result.data.userName +`</a></p></li>
+                $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="api/users/userHomepage" class="navbar-link">` + result.data.userName + `</a></p></li>
                             <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
 
                 $('#login').modal('hide');
             }
             console.log(result);
         },
-        error:function(e){
+        error: function (e) {
             console.log(e);
         },
     });

@@ -1,25 +1,26 @@
 const Toilet = require("../models/toilet");
-const FuzzySearch = require('fuzzy-search');
+const Review = require("../models/review");
+const mongoose = require('mongoose');
 const path = require('path');
 
 module.exports.getAllToilets = function (req, res) {
     Toilet.find(function (err, toilets) {
         if (!err) {
-            return res.json({errno: 0, data:toilets});
+            return res.json({errno: 0, data: toilets});
         } else {
             return res.json({errno: -1, message: "MongoDb Error!"});
         }
     });
 };
 
-module.exports.getById = function(req, res){
+module.exports.getById = function (req, res) {
     id = req.query.id;
     Toilet.findById(id, function (err, toilet) {
         if (err) {
             return res.json({errno: -1, message: "MongoDb Error!"})
         }
-        else{
-            return res.json({errno: 0, data:toilet});
+        else {
+            return res.json({errno: 0, data: toilet});
         }
 
     });
@@ -94,46 +95,9 @@ module.exports.keywordSearch = function (req, res) {
     });
 };
 
-
-// based on searching box content & "Check Detail" linked
-module.exports.contentSearch = function (req, res) {
-    let toiletName = req.query.toiletName;
-    Toilet.find(function (err, toilets) {
-        if (!err) {
-            const searcher = new FuzzySearch(toilets, ['toiletName'], {
-                caseSensitive: false,
-            });
-            const result = searcher.search(toiletName);
-
-            res.send(result);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
-
-    // test example
-// {       "toiletPictures": "toiletPictures",
-//     "name": "name",
-//     "operator": "re",
-//     "female": "yes",
-//     "male": "yes",
-//     "baby_facil": "yes",
-//     "wheelchair":"yes",
-//     "lat": -88,
-//     "lon": -94,
-//     "location_address": "toiletPicture",
-//     "location_city": "toiletPicture",
-//     "location_state":"toiletPicture",
-//     "location_zip": "toiletPicture"
-//
-// }
-    //
-
-
 //share my own toilet
 module.exports.creatToilet = function (req, res) {
- 	const toilet = new Toilet({
+    const toilet = new Toilet({
         "toiletPictures": req.body.toiletPictures,
         "name": req.body.name,
         "operator": req.body.operator,
@@ -158,7 +122,7 @@ module.exports.creatToilet = function (req, res) {
     });
 };
 
-module.exports.updateToilet = function(req, res) {
+module.exports.updateToilet = function (req, res) {
     let id = req.body._id;
     let updateData = {
         "toiletPictures": req.body.toiletPictures,
@@ -176,32 +140,32 @@ module.exports.updateToilet = function(req, res) {
         "location_zip": req.body.location_zip,
 
     };
-    Toilet.updateOne({'_id': id}, updateData, function(err, updateToilet) {
-        if (err){
+    Toilet.updateOne({'_id': id}, updateData, function (err, updateToilet) {
+        if (err) {
             return res.json({errno: -1, message: "MongoDb Error"});
         }
-        else{
-            return res.json({errno: 0, data:updateToilet});
+        else {
+            return res.json({errno: 0, data: updateToilet});
         }
     });
 };
 
-module.exports.deletToilet = function(req, res){
+module.exports.deletToilet = function (req, res) {
     let id = req.body.id;
-    Toilet.remove({'_id': id}, function(err, deletToilet){
-        if (err){
+    Toilet.remove({'_id': id}, function (err, deletToilet) {
+        if (err) {
             return res.json({errno: -1, message: "MongoDb Error"});
         }
-        else{
-            return res.json({errno: 0, data:deletToilet});
+        else {
+            return res.json({errno: 0, data: deletToilet});
         }
     });
 };
 
-module.exports.uploadToiletPhoto = function(req, res){
+module.exports.uploadToiletPhoto = function (req, res) {
     // no file
     if (!req.file) {
-        res.json({ ok: false });
+        res.json({ok: false});
         return;
     }
     // output file info
@@ -214,6 +178,27 @@ module.exports.uploadToiletPhoto = function(req, res){
     console.log('destination: ' + req.file.destination);
     console.log('filename: ' + req.file.filename);
     console.log('path: ' + req.file.path);
-    return res.json({errno: 0, data: req.file.destination+req.file.filename});
+    return res.json({errno: 0, data: req.file.destination + req.file.filename});
 };
 
+// load the images url based on toilet id
+module.exports.loadToiletPictures = function (req, res) {
+    let reviewPics = [];
+
+    // use toilet ID to find all reviews and get their pics paths
+    Review.find({toiletID: req.query['toiletID']}, function (err, reviews) {
+        if (!err) {
+            if (reviews) {
+                reviews.map(function (review, index) {
+                    // only push when review has a picture
+                    if (review.reviewPictures) {
+                        reviewPics.push(review.reviewPictures);
+                    }
+                });
+            }
+            return res.json({errno: 0, data: reviewPics});
+        } else {
+            return res.json({errno: -1, message: "MongoDb Error"});
+        }
+    });
+};
