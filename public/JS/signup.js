@@ -1,8 +1,9 @@
 //initial form validation
 $(document).ready(function () {
     formValidator();
+    formValidatorComment();
     /*manual validate form when it is normal button*/
-    // $('#register').data('bootstrapValidator').validate();
+    $('#register').data('bootstrapValidator').validate();
 });
 
 //form validation rule

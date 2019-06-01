@@ -232,7 +232,7 @@
 <!--<script src="../JS/jquery.js"></script>-->
 <script>
 	//form validation rule
-	function formValidator() {
+	function formValidatorComment() {
 		$("#addReview").bootstrapValidator({
 			message: 'This value is not valid',
 			feedbackIcons: {
@@ -465,48 +465,54 @@
 
     // send comments
     function sendComment() {
-        let form = new FormData();
-        var formArray = $("#review-form").serializeArray();
-        // append normal text data
-        $.each(formArray, function (i, item) {
-            form.append(item.name, item.value);
-        });
-        // append image file into from data
-        form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
+        var flag = $('#addReview').data('bootstrapValidator').isValid() //true/false
+        if (flag == false){
+            $('#addReview').data('bootstrapValidator').validate();
+            return;
+        } else {
+            let form = new FormData();
+            var formArray = $("#review-form").serializeArray();
+            // append normal text data
+            $.each(formArray, function (i, item) {
+                form.append(item.name, item.value);
+            });
+            // append image file into from data
+            form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
 
-        // var formObject = {};
-        // var formArray = $("#review-form").serializeArray();
-        // console.log(formArray);
-        // $.each(formArray, function (i, item) {
-        //     formObject[item.name] = item.value;
-        // });
-        // console.log(formObject);
-        $.ajax({
-            url: '/api/reviews/createReview',
-            type: 'post',
-            contentType: false,
-            processData: false,
-            data: form,
-            // contentType: "application/json; charset=utf-8",
-            // dataType: 'json',
-            // data: JSON.stringify(formObject),
-            // data: formObject,
-            success: function (result) {
-                if (result.errno == -1) {
-                    alert(result.message);
-                }
-                if (result.errno == 0) {
-                    $('#addReview').modal('hide');
-                    loadComments(toiletID);
-                    loadToiletPictures(toiletID);
-                    document.reload();
-                }
-                console.log(result);
-            },
-            error: function (e) {
-                console.log(e);
-            },
-        });
+            // var formObject = {};
+            // var formArray = $("#review-form").serializeArray();
+            // console.log(formArray);
+            // $.each(formArray, function (i, item) {
+            //     formObject[item.name] = item.value;
+            // });
+            // console.log(formObject);
+            $.ajax({
+                url: '/api/reviews/createReview',
+                type: 'post',
+                contentType: false,
+                processData: false,
+                data: form,
+                // contentType: "application/json; charset=utf-8",
+                // dataType: 'json',
+                // data: JSON.stringify(formObject),
+                // data: formObject,
+                success: function (result) {
+                    if (result.errno == -1) {
+                        alert(result.message);
+                    }
+                    if (result.errno == 0) {
+                        $('#addReview').modal('hide');
+                        loadComments(toiletID);
+                        loadToiletPictures(toiletID);
+                        document.reload();
+                    }
+                    console.log(result);
+                },
+                error: function (e) {
+                    console.log(e);
+                },
+            });
+        }
     }
 
     $(function () {
