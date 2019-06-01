@@ -29,6 +29,9 @@
             height: 400px;
             width: 550px;
         }
+        #sharedToilets {
+            border-bottom: 2px solid #eeeeee;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +81,18 @@
                     <h4><span class="glyphicon glyphicon-hand-down"></span>Click button below to share your toilet!</h4>
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#shareToilet">Share your own toilet</button>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>My Shared Toilets</h4>
+                    </div>
+                    <div id="sharedToilets" class="panel-body">
+                        Shared Toilet
+                    </div>
+                    <div class="panel-body">
+                        有就显示这张表出来 没有就不显示
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -94,14 +109,14 @@
                     <h1 class="text-center">Share your toilet</h1>
                 </div>
                 <div class="modal-body">
-                    <form id="review-form" class="form-group" action="">
+                    <form id="create-toilet-form" class="form-group" action="">
 
                         <div class="form-group">
-                            <label for="">Toilet Name</label>
-                            <input class="form-control" name="rating" type="text" placeholder="Enter your toilet name">
+                            <h5>Toilet Name</h5>
+                            <input class="form-control" name="name" id="name" type="text" placeholder="Enter your toilet name">
                         </div>
                         <div class="checkbox-custom checkbox-default">
-                            <p>Please select tags from below</p>
+                            <h5>Please select tags from below</h5>
                             <label class="checkbox-inline">
                                 <input type="checkbox" id="female" name="filter" value="female">female
                             </label>
@@ -115,13 +130,19 @@
                                 <input type="checkbox" id="babyFacility" name="filter" value="baby_facil">baby facility
                             </label>
                         </div>
-                        <div>Please click the map to get your toilet location</div>
+                        <h5>Please click the map to get your toilet location</h5>
                         <div id="mapHolder" class="mapContainer">
                             <div id="map"></div>
-                            <input type="hidden" id="lat">
-                            <input type="hidden" id="lng">
+                            <input type="hidden" name="lat" id="lat" value="">
+                            <input type="hidden" name="lng" id="lng" value="">
                         </div>
-                        <input type="file">
+                        <div>
+                            <h5>Please select pictures form your devices</h5>
+                            <input type="file" name="file" id="file1">
+                            <input type="file" name="file" id="file2">
+                            <input type="file" name="file" id="file3">
+                        </div>
+
 
                         <br>
                         <div class="text-right">
@@ -151,6 +172,49 @@
                 console.log(e.latLng.lng());
                 $('#lat').val(e.latLng.lat());
                 $('#lng').val(e.latLng.lng());
+            });
+        }
+        function createToilet() {
+            var formdata=new FormData();
+            var obj = document.getElementsByName("filter");
+            for(k in obj){
+                if (obj[k].checked){
+                    formdata.append(obj[k].value,"yes");
+                } else{
+                    formdata.append(obj[k].value,"no");
+                }
+            }
+            formdata.append("name",$('#name').val());
+            var lat = $('#lat').val();
+            var lng = $('#lng').val();
+            if (lat == '' || lng == ''){
+                alert("please select location!");
+                return;
+            }
+            formdata.append("lat",lat);
+            formdata.append('lng',lng);
+            formdata.append("picture1",$('#file1'));
+            formdata.append("picture1",$('#file2'));
+            formdata.append("picture1",$('#file3'));
+            $.ajax({
+                //add url
+                url:'/api/',
+                type:'post',
+                contentType: "application/json; charset=utf-8",
+                dataType:'json',
+                data:formdata,
+                success:function(result){
+                    // sign up fail
+                    if (result.errno == -1){
+                    }
+                    // sign up success
+                    if (result.errno == 0){
+                    }
+                    console.log(result);
+                },
+                error:function(e){
+                    console.log(e);
+                },
             });
         }
     </script>
