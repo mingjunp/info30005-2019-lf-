@@ -91,39 +91,42 @@
 </div>
 <!--Login pop-up window-->
 <div id="login" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-			</div>
-			<div class="modal-title">
-				<h1 class="text-center">Login</h1>
-			</div>
-			<div class="modal-body">
-				<form id="login-form" class="form-group" action="">
-					<div class="form-group">
-						<label>User Name</label>
-						<input class="form-control" id="loginUserName" name="userName" type="text" placeholder="Username">
-					</div>
-					<div class="form-group">
-						<label>Password</label>
-						<input class="form-control" id="loginPassword" name="password" type="password" placeholder="Password">
-					</div>
-					<div id="login-erro-info" class="hide" style="color: red">
-						username or password error!
-					</div>
-					<div class="text-right">
-						<input class="btn btn-primary" onclick="login()" value="Login">
-						<input class="btn btn-danger" data-dismiss="modal" value="Cancel">
-					</div>
-					<br>
-					<a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">Don't have an account? Click here to sign up</a>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">Login</h1>
+            </div>
+            <div class="modal-body">
+                <form id="login-form" class="form-group" action="">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input class="form-control" id="loginUserName" name="userName" type="text"
+                               placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" id="loginPassword" name="password" type="password"
+                               placeholder="Password">
+                    </div>
+                    <div id="login-erro-info" class="hide" style="color: red">
+                        username or password error!
+                    </div>
+                    <div class="text-right">
+                        <input class="btn btn-primary" onclick="login()" value="Login">
+                        <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                    </div>
+                    <br>
+                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">Don't have an account?
+                        Click here to sign up</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <header>
     <div class="container">
@@ -194,38 +197,43 @@
 </div>
 <!--add comments pop-up window-->
 <div id="addReview" class="modal fade" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-			</div>
-			<div class="modal-title">
-				<h1 class="text-center">Add your comment</h1>
-			</div>
-			<div class="modal-body">
-				<form id="review-form" class="form-group" action="">
-					<div class="form-group">
-						<label></label>
-						<input id="form-toiletId" class="form-control" name="toiletID" type="hidden" value="">
-					</div>
-					<div class="form-group">
-						<label>Rating</label>
-						<input class="form-control" name="rating" type="text" placeholder="rating from 0-5">
-					</div>
-					<div class="form-group">
-						<label>Your comment</label>
-						<textarea class="form-control" name="comments" rows="6" cols="20" placeholder="Enter your comment"></textarea>
-					</div>
-					<div class="text-right">
-						<input class="btn btn-primary" onclick="sendComment()" value="Submit">
-						<input class="btn btn-danger" data-dismiss="modal" value="Cancel">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">Add your comment</h1>
+            </div>
+            <div class="modal-body">
+                <form id="review-form" class="form-group" action="">
+                    <div class="form-group">
+                        <label></label>
+                        <input id="form-toiletId" class="form-control" name="toiletID" type="hidden" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <input class="form-control" name="rating" type="text" placeholder="rating from 0-5">
+                    </div>
+                    <div class="form-group">
+                        <label>Add Picture</label>
+                        <input id="reviewPictures" name="reviewPictures" type="file">
+                    </div>
+                    <div class="form-group">
+                        <label>Your comment</label>
+                        <textarea class="form-control" name="comments" rows="6" cols="20"
+                                  placeholder="Enter your comment"></textarea>
+                    </div>
+                    <div class="text-right">
+                        <input class="btn btn-primary" onclick="sendComment()" value="Submit">
+                        <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -237,32 +245,33 @@
         /*manual validate form when it is normal button*/
         $('#register').data('bootstrapValidator').validate();
     });
-	//form validation rule
-	function formValidatorComment() {
-		$("#addReview").bootstrapValidator({
-			message: 'This value is not valid',
-			feedbackIcons: {
-				valid: 'glyphicon glyphicon-ok',
-				invalid: 'glyphicon glyphicon-remove',
-				validating: 'glyphicon glyphicon-refresh'
-			},
-			fields: {
-				rating: {
-					message: 'fail',
-					validators: {
-						notEmpty: {
-							message: 'rating cannot be empty'
-						},
-						regexp: { //regular expression
-							// .\.[0-9][0-9]$
-							regexp: /^(0|[1-5])(\.([0-9]{1,2}))?$/,
-							message: 'rating should be a number from 0-5，cannot exceed two digits after decimal point'
-						},
-					}
-				},
-			},
-		})
-	}
+
+    //form validation rule
+    function formValidatorComment() {
+        $("#addReview").bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                rating: {
+                    message: 'fail',
+                    validators: {
+                        notEmpty: {
+                            message: 'rating cannot be empty'
+                        },
+                        regexp: { //regular expression
+                            // .\.[0-9][0-9]$
+                            regexp: /^(0|[1-5])(\.([0-9]{1,2}))?$/,
+                            message: 'rating should be a number from 0-5，cannot exceed two digits after decimal point'
+                        },
+                    }
+                },
+            },
+        })
+    }
 
     checkLogin();
     toiletID = getQueryVariable("id");
@@ -471,7 +480,7 @@
     // send comments
     function sendComment() {
         var flag = $('#addReview').data('bootstrapValidator').isValid() //true/false
-        if (flag == false){
+        if (flag == false) {
             $('#addReview').data('bootstrapValidator').validate();
             return;
         } else {
@@ -482,7 +491,7 @@
                 form.append(item.name, item.value);
             });
             // append image file into from data
-            // form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
+            form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
 
             $.ajax({
                 url: '/api/reviews/createReview',
