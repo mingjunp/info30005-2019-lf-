@@ -6,7 +6,7 @@
 ## Functions:
 ### 1. Searching, checking details about toilets :
 
-The functionality enables users to search public toilets in Melbourne. On the homepage, users can view all the toilets on the Google map. They can type a location in the search box and then they can see the toilets near it. Besides, users can also select different filters: female, male, wheelchair, baby Facility. To see more information of one particular toilet, users can click the icon on the map, there will be a pop-up window to show some basic information about the toilet: name(the description of the address) and other facilities. They can then click the “open google map to go” , and it will jump up to the google map, and the destination will be the toilet address. If users want to check more details, they can just click it and then it will jump to a new page. Apart from the basic information, it will show pictures, the operator, facilities and comments. Users can also see the rating of the toilet at the top left of the page. Users can also add the toilet to their collection. The comments will display in a drag down window, user can click the Triangle to see all the comments or close them.
+The functionality enables users to search public toilets in Melbourne. Users can type a location and also select different filters: female, male, wheelchair, baby Facility. To see more information of one particular toilet, users can click the icon on the map, there will be a pop-up window to show some basic information about the toilet. They can then click the “open google map to go”, and it will jump up to the google map, and the destination will be the toilet address. If users want to check more details, they can just click it and then it will jump to a new page. Apart from the basic information, it will show pictures, the operator, facilities, ratings and comments. he comments will display in a drag down window, user can click the Triangle to see all the comments or close them.
 
 Model: toilet,like,review
 
@@ -14,15 +14,8 @@ Controllers: controller_toilets, controller_reviews, controller_likes
 
 Routers: 
 
-//load reviews of certain toilet
-
-router.get('/api/reviews/getReviewsByToilet', controller_reviews.getReviewsByToilet);
-
-//create toilet
-
-router.post('/api/toilets/creatToilet', controller_toilets.creatToilet);
-
 //find all toilet
+
 router.get('/api/toilets/getAllToilets', controller_toilets.getAllToilets);
 
 //find toilet by id
@@ -31,16 +24,19 @@ router.get('/api/toilets/getById', controller_toilets.getById);
 
 // searching and sorting based on current location
 
-
 router.get('/autoSearch', controller_toilets.autoSearch);
-
-// based on searching box content & "Check Detail" linked
-
-router.get('/contentSearch', controller_toilets.contentSearch);
 
 // searching and sorting by key words
 
 router.get('/keywordSearch', controller_toilets.keywordSearch);
+
+// get all toilet pictures based on toilet ID
+
+router.get('/api/toilets/loadToiletPictures', controller_toilets.loadToiletPictures);
+
+//load reviews of certain toilet
+
+router.get('/api/reviews/getReviewsByToilet', controller_reviews.getReviewsByToilet);
 
 ### 2. Add comments
 This is a function for users to make some comments about the toilets. Users can give it a rating, make some comments as well as upload some photos. The posted photos will be showed in the toilet detail page.
@@ -50,6 +46,14 @@ Model: review
 Controllers: controller_reviews
 
 Routers:
+
+// post review
+
+router.post('/api/reviews/createReview', upload.single('reviewPictures'), controller_reviews.createReview);
+
+// upload review picture
+
+router.post('/api/reviews/uploadReviewPicture', upload.single('reviewPictures'), controller_reviews.uploadReviewPicture);
 
 ### 3. User related functions
 #### 3.1 Sign up:
@@ -94,6 +98,31 @@ Models: user,like,toilet
 Controllers: controller_users,controller_toilets,controller_likes
 
 Routers: 
+
+// user creates a toilet, toiletPicture can be null
+
+router.post('/api/toilets/creatToilet', upload.single('toiletPictures'), controller_toilets.creatToilet);
+
+// get toilets created by user
+
+router.get('/api/toilets/getUserToilets', controller_toilets.getUserToilets);
+
+// get all toilet pictures based on toilet ID
+
+router.get('/api/toilets/loadToiletPictures', controller_toilets.loadToiletPictures);
+
+// like toilet
+
+router.get('/api/likes/setLike', controller_likes.setLike);
+
+// check whether user likes this toilet
+
+router.get('/api/likes/getByUserToilet', controller_likes.getByUserToilet);
+
+// get user collections
+
+router.get('/api/likes/getUserCollections', controller_likes.getCollections);
+
 
 ##  Run
 ###  node app.js
