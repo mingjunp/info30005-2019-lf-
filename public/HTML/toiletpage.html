@@ -231,6 +231,12 @@
 
 <!--<script src="../JS/jquery.js"></script>-->
 <script>
+    $(document).ready(function () {
+        formValidator();
+        formValidatorComment();
+        /*manual validate form when it is normal button*/
+        $('#register').data('bootstrapValidator').validate();
+    });
 	//form validation rule
 	function formValidatorComment() {
 		$("#addReview").bootstrapValidator({
