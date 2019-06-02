@@ -39,6 +39,7 @@
             height: 400px;
             width: 550px;
         }
+
         #sharedToilets {
             border-bottom: 2px solid #eeeeee;
         }
@@ -54,18 +55,18 @@
             </li>
         </ul>
 
-            <ul id="nav-right" class="nav navbar-nav navbar-right">
-                <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </ul>
-        </div>
-    </nav>
-    <!--page header-->
-    <div style="background-color: aliceblue !important;" class="jumbotron">
-        <div class="container">
-            <h1>Hi, <span id="userName"></span></h1>
-            <p>Welcome to visiting public toilet website</p>
-        </div>
+        <ul id="nav-right" class="nav navbar-nav navbar-right">
+            <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
     </div>
+</nav>
+<!--page header-->
+<div style="background-color: aliceblue !important;" class="jumbotron">
+    <div class="container">
+        <h1>Hi, <span id="userName"></span></h1>
+        <p>Welcome to visiting public toilet website</p>
+    </div>
+</div>
 </nav>
 
 <!--content-->
@@ -151,6 +152,7 @@
     </div>
 </div>
 <script>
+    // initialize google map
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 13,
@@ -170,6 +172,8 @@
             $('#lng').val(e.latLng.lng());
         });
     }
+
+    // load user liked toilets
     function loadCollection() {
         $.ajax({
             url: 'api/likes/getUserCollections',
@@ -180,41 +184,13 @@
                 if (result.errno == -1) {
                 }
                 if (result.errno == 0) {
-                    for (var i=0;i<result.data.length;i++){
+                    for (var i = 0; i < result.data.length; i++) {
                         $('#collection').append(`            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="/toiletDetail?id=`+ result.data[i]._id +`">Toilet Name: `+ result.data[i].name +`</a>
+                    <a href="/toiletDetail?id=` + result.data[i]._id + `">Toilet Name: ` + result.data[i].name + `</a>
                 </div>
                 <div class="panel-body">
-                    Male: `+ result.data[i].male +`  Female: `+ result.data[i].female +`  Baby Facility: `+ result.data[i].baby_facil +`   Wheelchair: `+ result.data[i].wheelchair +`
-                </div>
-            </div>`);
-                    }
-                   console.log(result.data);
-                }
-            },
-            error: function (e) {
-                console.log(e);
-            },
-        });
-    }
-    function loadMySharedToilet() {
-        $.ajax({
-            url: '/api/likes/getByUserToilet',
-            type: 'get',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            success: function (result) {
-                if (result.errno == -1) {
-                }
-                if (result.errno == 0) {
-                    for (var i=0;i<result.data.length;i++){
-                        $('#myShared').append(`            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="/toiletDetail?id=`+ result.data[i]._id +`">Toilet Name: `+ result.data[i].name +`</a>
-                </div>
-                <div class="panel-body">
-                    Male: `+ result.data[i].male +`  Female: `+ result.data[i].female +`  Baby Facility: `+ result.data[i].baby_facil +`   Wheelchair: `+ result.data[i].wheelchair +`
+                    Male: ` + result.data[i].male + `  Female: ` + result.data[i].female + `  Baby Facility: ` + result.data[i].baby_facil + `   Wheelchair: ` + result.data[i].wheelchair + `
                 </div>
             </div>`);
                     }
@@ -226,6 +202,37 @@
             },
         });
     }
+
+    // load user shared toilets
+    function loadMySharedToilet() {
+        $.ajax({
+            url: '/api/likes/getByUserToilet',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (result) {
+                if (result.errno == -1) {
+                }
+                if (result.errno == 0) {
+                    for (var i = 0; i < result.data.length; i++) {
+                        $('#myShared').append(`            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="/toiletDetail?id=` + result.data[i]._id + `">Toilet Name: ` + result.data[i].name + `</a>
+                </div>
+                <div class="panel-body">
+                    Male: ` + result.data[i].male + `  Female: ` + result.data[i].female + `  Baby Facility: ` + result.data[i].baby_facil + `   Wheelchair: ` + result.data[i].wheelchair + `
+                </div>
+            </div>`);
+                    }
+                    console.log(result.data);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
+
     loadCollection();
     loadMySharedToilet()
 </script>
@@ -241,21 +248,22 @@
         var toiletName = $('#name').val();
         var pic = $('#toiletPictures').val();
         var location = $('#lat').val();
-        if (toiletName == ''){
+        if (toiletName == '') {
             $('#share-erro-info').text("toilet name cannot be empty");
             $('#share-erro-info').removeClass("hide");
             return;
         }
-        if (pic == ''){
+        if (pic == '') {
             $('#share-erro-info').text("please choose toilet picture");
             $('#share-erro-info').removeClass("hide");
             return;
         }
-        if (location == ''){
+        if (location == '') {
             $('#share-erro-info').text("please click location on the map");
             $('#share-erro-info').removeClass("hide");
             return;
         }
+
         let form = new FormData();
         let formArray = $("#create-toilet-form").serializeArray();
         console.log(formArray);

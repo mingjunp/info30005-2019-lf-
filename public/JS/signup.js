@@ -106,6 +106,7 @@ function singup() {
     }
 }
 
+// make user login directly after signing up
 function loginAftersignup(formObject) {
     $.ajax({
         url: '/api/users/login',

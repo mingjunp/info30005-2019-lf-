@@ -26,5 +26,4 @@ const toiletSchema = new mongoose.Schema({
     "rate": {type: Number, default: 0}
 });
 
-// toiletSchema.index({location: "2dsphere"}) ;
 module.exports = mongoose.model("toilet", toiletSchema, "toilets");
