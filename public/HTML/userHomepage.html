@@ -375,7 +375,7 @@
 <!--upload.addEventListener('click', uploadFile, false);-->
 <!--file.addEventListener('change', previewImage, false);-->
 
-<!--// 点击上传-->
+<!--// click upload-->
 <!--function uploadFile(event) {-->
 <!--var formData = new FormData();-->
 <!--formData.append('test-upload', file.files[0]);-->
@@ -385,14 +385,14 @@
 <!--xhr.send(formData);-->
 <!--}-->
 
-<!--// 成功上传-->
+<!--// upload successful-->
 <!--function uploadSuccess(event) {-->
 <!--if (xhr.readyState === 4) {-->
 <!--console.log(xhr.responseText);-->
 <!--}-->
 <!--}-->
 
-<!--// 进度条-->
+<!--// loading-->
 <!--function setProgress(event) {-->
 <!--if (event.lengthComputable) {-->
 <!--var complete = Number.parseInt(event.loaded / event.total * 100);-->
@@ -400,7 +400,7 @@
 <!--}-->
 <!--}-->
 
-<!--// 图片预览-->
+<!--// picture review-->
 <!--function previewImage(event) {-->
 <!--var reader = new FileReader();-->
 <!--reader.onload = function (event) {-->
