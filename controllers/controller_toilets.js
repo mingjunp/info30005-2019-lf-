@@ -4,6 +4,7 @@ const User = require("../models/user");
 const mongoose = require('mongoose');
 const path = require('path');
 
+// get all toilet
 module.exports.getAllToilets = function (req, res) {
     Toilet.find(function (err, toilets) {
         if (!err) {
@@ -14,6 +15,7 @@ module.exports.getAllToilets = function (req, res) {
     });
 };
 
+// get toilet by id
 module.exports.getById = function (req, res) {
     id = req.query.id;
     Toilet.findById(id, function (err, toilet) {
@@ -58,11 +60,8 @@ module.exports.autoSearch = function (req, res) {
         });
     };
 
-
     let lng = parseFloat(req.query.lng);
     let lat = parseFloat(req.query.lat);
-    //let lng = -37.792820;
-    //let lat = 144.969070;
     let maxDistance = 1000;
     let result = constraintSearch(lng, lat, maxDistance);
     if (result !== []) {
@@ -99,7 +98,7 @@ module.exports.keywordSearch = function (req, res) {
 //share my own toilet
 module.exports.creatToilet = function (req, res) {
 
-    /**
+    /** mapping the tags to be "yes" or "no"
      * @return {string}
      */
     function YesOrNo(name) {
@@ -154,6 +153,7 @@ module.exports.creatToilet = function (req, res) {
     });
 };
 
+// update toilet information by id
 module.exports.updateToilet = function (req, res) {
     let id = req.body._id;
     let updateData = {
@@ -182,6 +182,7 @@ module.exports.updateToilet = function (req, res) {
     });
 };
 
+// delete a specific toilet
 module.exports.deletToilet = function (req, res) {
     let id = req.body.id;
     Toilet.remove({'_id': id}, function (err, deletToilet) {
@@ -194,6 +195,7 @@ module.exports.deletToilet = function (req, res) {
     });
 };
 
+// test function for uploading toilet photo
 module.exports.uploadToiletPhoto = function (req, res) {
     // no file
     if (!req.file) {
@@ -221,6 +223,7 @@ module.exports.loadToiletPictures = function (req, res) {
     Toilet.findOne({_id: mongoose.Types.ObjectId(req.query['toiletID'])}, function (err, toilet) {
         if (!err) {
             if (toilet) {
+                // push toilet pictures
                 if (toilet.toiletPictures) {
                     toiletPics.push(toilet.toiletPictures);
                 }

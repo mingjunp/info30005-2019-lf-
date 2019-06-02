@@ -266,6 +266,7 @@
     checkLogin();
     toiletID = getQueryVariable("id");
 
+    // change user to like and unlike the toilet
     function changeLike() {
         toiletID = getQueryVariable("id");
         var likeSpan = $('#like');
@@ -296,6 +297,7 @@
         });
     }
 
+    // load whether user like this toilet
     function loadLike(toiletID) {
         $.ajax({
             url: '/api/likes/getByUserToilet',
@@ -340,6 +342,7 @@
         return (false);
     }
 
+    // load toilet detail information
     function loadToiletDetail(toiletID) {
         $.ajax({
             url: '/api/toilets/getById',
@@ -380,6 +383,7 @@
         });
     }
 
+    // load all comments(reviews) on this toilet
     function loadComments(toiletID) {
         $.ajax({
             url: '/api/reviews/getReviewsByToilet',
@@ -442,7 +446,7 @@
                         $("#toiletPictures").remove();
                         $("#toiletPicsSlider").append(`<div id="toiletPictures" class="diff_logo"> </div>`);
                         result.data.map(function (image, index) {
-                            // slice the "public" prefix
+                            // slice the "public" prefix and append image into carousel
                             $("#toiletPictures").append(
                                 `<div class="logo_item">
                                         <img src=` + image.slice('./public'.length, image.length) + `>
@@ -479,23 +483,12 @@
             // append image file into from data
             form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
 
-            // var formObject = {};
-            // var formArray = $("#review-form").serializeArray();
-            // console.log(formArray);
-            // $.each(formArray, function (i, item) {
-            //     formObject[item.name] = item.value;
-            // });
-            // console.log(formObject);
             $.ajax({
                 url: '/api/reviews/createReview',
                 type: 'post',
                 contentType: false,
                 processData: false,
                 data: form,
-                // contentType: "application/json; charset=utf-8",
-                // dataType: 'json',
-                // data: JSON.stringify(formObject),
-                // data: formObject,
                 success: function (result) {
                     if (result.errno == -1) {
                         alert(result.message);
@@ -515,6 +508,7 @@
         }
     }
 
+    // initialize the carousel
     $(function () {
         var index = 2;
         var length = $('.logo_item').length;

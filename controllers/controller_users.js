@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-
+// get all users
 module.exports.getUser = function (req, res) {
     User.find(function (err, users) {
         if (!err) {
@@ -10,7 +10,6 @@ module.exports.getUser = function (req, res) {
         }
     });
 };
-
 
 //user log in function
 module.exports.login = function (req, res) {
@@ -32,7 +31,6 @@ module.exports.login = function (req, res) {
 
     });
 };
-
 
 //logout function
 module.exports.logout = function (req, res) {
@@ -76,6 +74,7 @@ module.exports.checkLogin = function (req, res) {
     }
 };
 
+// check whether the user name is already existed in db
 module.exports.checkUserName = function (req, res) {
     let userName = req.query.userName;
     User.find({"userName": userName}, (err, user) => {

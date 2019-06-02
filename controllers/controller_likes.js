@@ -2,6 +2,7 @@ const like = require("../models/like");
 const Toilet = require("../models/toilet");
 const mongoose = require("mongoose");
 
+// check whether user like this toilet
 module.exports.getByUserToilet = function (req, res) {
     if (!req.session.userName) {
         return res.json({errno: 0, data: "no"});
@@ -21,6 +22,7 @@ module.exports.getByUserToilet = function (req, res) {
     }
 };
 
+// set user to like specific toilet
 module.exports.setLike = function (req, res) {
     if (!req.session.userName) {
         return res.json({errno: -1, message: "please login first!"});

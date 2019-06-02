@@ -2,6 +2,7 @@ const Review = require("../models/review");
 const Toilet = require("../models/toilet");
 const mongoose = require("mongoose");
 
+// create a new review
 module.exports.createReview = function (req, res) {
     if (req.session.userName) {
         const review = new Review({
@@ -38,6 +39,7 @@ module.exports.createReview = function (req, res) {
     }
 };
 
+// used to debug for upload review picture
 module.exports.uploadReviewPicture = function (req, res) {
 
     Review.findOneAndUpdate({userName: req.session.userName}, {reviewPictures: req.file.destination + req.file.filename},
