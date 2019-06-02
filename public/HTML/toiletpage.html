@@ -487,7 +487,7 @@
                 form.append(item.name, item.value);
             });
             // append image file into from data
-            form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
+            // form.append('reviewPictures', document.getElementById('reviewPictures').files[0]);
 
             $.ajax({
                 url: '/api/reviews/createReview',
