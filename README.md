@@ -1,7 +1,6 @@
 # info30005-2019-lf-
 # Try [Click Here](https://polar-peak-30495.herokuapp.com/)
 
-
 ---
 ## Functions:
 ### 1. Searching, checking details about toilets :
