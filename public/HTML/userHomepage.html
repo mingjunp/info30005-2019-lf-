@@ -7,15 +7,35 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-    <script type="text/javascript"
-            src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
     <script src="../JS/checkLogin.js"></script>
-    <script src="../JS/logout.js"></script>
     <script>
         $(document).ready(function () {
-            checkLogin();
+            $.ajax({
+                url: '/api/users/checkLogin',
+                type: 'get',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify(""),
+                success: function (result) {
+                    // login fail redirect to home page
+                    if (result.errno == -1) {
+                        window.location.href="/";
+                    }
+                    // login success
+                    if (result.errno == 0) {
+                        $('#nav-right').children('li').remove();
+                        $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="/userHomepage" id="loginUserName" class="navbar-link">`+ result.data +`</a></p></li>
+                            <li><a href="#" onclick="logoutAtUserHomePage()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
+                        if ($('#userName')) {
+                            $('#userName').text(result.data);
+                        }
+                    }
+                    console.log(result);
+                },
+                error: function (e) {
+                    console.log(e);
+                },
+            });
         });
         $('#myTabs a').click(function (e) {
             e.preventDefault();
@@ -39,7 +59,6 @@
             height: 400px;
             width: 550px;
         }
-
         #sharedToilets {
             border-bottom: 2px solid #eeeeee;
         }
@@ -56,7 +75,7 @@
         </ul>
 
         <ul id="nav-right" class="nav navbar-nav navbar-right">
-            <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="#" onclick="logoutAtUserHomePage()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -79,6 +98,7 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="collection">
+
         </div>
         <div role="tabpanel" class="tab-pane" id="myToilet">
 
@@ -89,6 +109,7 @@
                 </button>
             </div>
             <div role="tabpanel" class="tab-pane active" id="myShared">
+
             </div>
         </div>
     </div>
@@ -112,12 +133,10 @@
                         <input class="form-control" id="name" name="name" type="text"
                                placeholder="Enter your toilet name">
                     </div>
-                    <div>
-                        <label>Choose your toilet picture</label>
-                        <input id="toiletPictures" name="toiletPictures" type="file">
-                    </div>
+                    <label>Choose your toilet picture</label>
+                    <input id="toiletPictures" name="toiletPictures" type="file">
                     <div class="checkbox-custom checkbox-default">
-                        <label>Please select tags from below</label>
+                        <label>Please select facility from below</label><br>
                         <label class="checkbox-inline">
                             <input type="checkbox" id="female" name="female" value="female">female
                         </label>
@@ -131,11 +150,11 @@
                             <input type="checkbox" id="babyFacility" name="baby_facil" value="baby_facil">baby facility
                         </label>
                     </div>
-                    <label>Please click map to get your toilet location</label>
+                    <br><label>Please click location on the map</label><br>
                     <div id="mapHolder" class="mapContainer">
                         <div id="map"></div>
-                        <input type="hidden" name="lat" id="lat" >
-                        <input type="hidden" name="lng" id="lng" >
+                        <input type="hidden" id="lat">
+                        <input type="hidden" id="lng">
                     </div>
                     <br>
                     <div id="share-erro-info" class="hide" style="color: red">
@@ -143,7 +162,7 @@
                     </div>
                     <br>
                     <div class="text-right">
-                        <input class="btn btn-primary" onclick="createToilet()" value="Submit">
+                        <input class="btn btn-primary" id="btnCreateToilet" onclick="createToilet()" value="Submit">
                         <input class="btn btn-danger" data-dismiss="modal" value="Cancel">
                     </div>
                 </form>
@@ -152,7 +171,6 @@
     </div>
 </div>
 <script>
-    // initialize google map
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 13,
@@ -172,7 +190,6 @@
             $('#lng').val(e.latLng.lng());
         });
     }
-
     // load user liked toilets
     function loadCollection() {
         $.ajax({
@@ -184,6 +201,9 @@
                 if (result.errno == -1) {
                 }
                 if (result.errno == 0) {
+                    if (result.data.length == 0) {
+                        $('#collection').append(`<h3 style="color:#555">Oooops, Now there are no collection add by you! Come to <a href="/">add one</a> :)</h3>`);
+                    }
                     for (var i = 0; i < result.data.length; i++) {
                         $('#collection').append(`            <div class="panel panel-default">
                 <div class="panel-heading">
@@ -205,15 +225,20 @@
 
     // load user shared toilets
     function loadMySharedToilet() {
+        $('#myShared').empty();
         $.ajax({
-            url: '/api/likes/getByUserToilet',
+            url: '/api/toilets/getUserToilets',
             type: 'get',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (result) {
                 if (result.errno == -1) {
+                    console.log("loadMySharedToilet error");
                 }
                 if (result.errno == 0) {
+                    if (result.data.length == 0) {
+                        $('#myShared').append(`<h3 style="color:#555">Oooops, you have not shared any toilets, click blue button to share one :)</h3>`);
+                    }
                     for (var i = 0; i < result.data.length; i++) {
                         $('#myShared').append(`            <div class="panel panel-default">
                 <div class="panel-heading">
@@ -234,7 +259,7 @@
     }
 
     loadCollection();
-    loadMySharedToilet()
+    loadMySharedToilet();
 </script>
 <script src="../JS/checkLogin.js"></script>
 <script async defer
@@ -242,6 +267,7 @@
 </script>
 <script>
     function createToilet() {
+        $('#btnCreateToilet').attr("disabled",true);
         if (!$('#share-erro-info').hasClass("hide")) {
             $('#share-erro-info').addClass("hide");
         }
@@ -251,19 +277,21 @@
         if (toiletName == '') {
             $('#share-erro-info').text("toilet name cannot be empty");
             $('#share-erro-info').removeClass("hide");
+            $('#btnCreateToilet').attr("disabled",false);
             return;
         }
         if (pic == '') {
             $('#share-erro-info').text("please choose toilet picture");
             $('#share-erro-info').removeClass("hide");
+            $('#btnCreateToilet').attr("disabled",false);
             return;
         }
         if (location == '') {
             $('#share-erro-info').text("please click location on the map");
             $('#share-erro-info').removeClass("hide");
+            $('#btnCreateToilet').attr("disabled",false);
             return;
         }
-
         let form = new FormData();
         let formArray = $("#create-toilet-form").serializeArray();
         console.log(formArray);
@@ -285,11 +313,41 @@
             data: form,
             success: function (result) {
                 if (result.errno == -1) {
-                    console.log(result.message)
+                    $('#share-erro-info').text(result.message);
+                    $('#share-erro-info').removeClass("hide");
+                    console.log(result.message);
+                    $('#btnCreateToilet').attr("disabled",false);
+                    return;
                 }
                 if (result.errno == 0) {
+                    $('#shareToilet').modal('hide');
+                    loadMySharedToilet();
+                    $('#btnCreateToilet').attr("disabled",false);
                     console.log(result.data);
                 }
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+    }
+
+    function logoutAtUserHomePage() {
+        $.ajax({
+            url: '/api/users/logout',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (result) {
+                // login fail
+                if (result.errno == -1) {
+                    alert(result.message);
+                }
+                // login success
+                if (result.errno == 0) {
+                    window.location.href="/";
+                }
+                console.log(result);
             },
             error: function (e) {
                 console.log(e);

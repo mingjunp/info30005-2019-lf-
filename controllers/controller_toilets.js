@@ -254,26 +254,34 @@ module.exports.loadToiletPictures = function (req, res) {
 
 // get all toilets created by a specific user
 module.exports.getUserToilets = function (req, res) {
-    // find the user by user name
-    User.find({userName: req.session.userName}, function (err, user) {
+    // find toilets shared by current user
+    Toilet.find({operator: req.session.userName}, function (err, toilets) {
         if (!err) {
-            // find all toilets in user toilets array
-            Toilet.find({
-                    _id: {
-                        $in: user.toilets.map(function (item, index) {
-                            return mongoose.Types.ObjectId(item);
-                        })
-                    }
-                },
-                function (err, toilets) {
-                    if (!err) {
-                        return res.json({errno: 0, data: toilets});
-                    } else {
-                        return res.json({errno: -1, message: "MongoDb Error"});
-                    }
-                });
-        } else {
+            return res.json({errno: 0, data: toilets});
+        }else {
             return res.json({errno: -1, message: "MongoDb Error"});
         }
     });
+    // // find the user by user name
+    // User.find({userName: req.session.userName}, function (err, user) {
+    //     if (!err) {
+    //         // find all toilets in user toilets array
+    //         Toilet.find({
+    //                 _id: {
+    //                     $in: user.toilets.map(function (item, index) {
+    //                         return mongoose.Types.ObjectId(item);
+    //                     })
+    //                 }
+    //             },
+    //             function (err, toilets) {
+    //                 if (!err) {
+    //                     return res.json({errno: 0, data: toilets});
+    //                 } else {
+    //                     return res.json({errno: -1, message: "MongoDb Error"});
+    //                 }
+    //             });
+    //     } else {
+    //         return res.json({errno: -1, message: "MongoDb Error"});
+    //     }
+    // });
 };
