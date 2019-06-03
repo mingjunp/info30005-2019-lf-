@@ -1,0 +1,46 @@
+public class Calculator {
+    private double value1;
+    private double value2;
+
+    public Calculator(double v1, double v2) {
+        value1 = v1;
+        value2 = v2;
+    }
+
+    public void setValue(double v1, double v2) {
+        value1 = v1;
+        value2 = v2;
+    }
+
+    public double sum() {
+        return value1 + value2;
+    }
+
+    public double difference() {
+        return value1 - value2;
+    }
+
+    public double product() {
+        return value1 * value2;
+    }
+
+    public double quotinet() {
+        return value1 / value2;
+    }
+
+    public static void main(String[] args) {
+        Calculator c = new Calculator(0, 0);
+        c.setValue(3, 4);
+        System.out.println("sum " + c.sum());
+        System.out.println("diffrence " + c.difference());
+        System.out.println("product " + c.product());
+        System.out.println("quotient " + c.quotinet());
+        double sum = 0;
+        for (int i = 0; i < 20; i++) {
+            Calculator cal = new Calculator(i + 1, i + 1);
+            sum += cal.product();
+        }
+        System.out.println(sum);
+    }
+}
+

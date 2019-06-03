@@ -19,12 +19,12 @@
                 success: function (result) {
                     // login fail redirect to home page
                     if (result.errno == -1) {
-                        window.location.href="/";
+                        window.location.href = "/";
                     }
                     // login success
                     if (result.errno == 0) {
                         $('#nav-right').children('li').remove();
-                        $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="/userHomepage" id="loginUserName" class="navbar-link">`+ result.data +`</a></p></li>
+                        $('#nav-right').append($(`<li><p class="navbar-text">Hi, <a href="/userHomepage" id="loginUserName" class="navbar-link">` + result.data + `</a></p></li>
                             <li><a href="#" onclick="logoutAtUserHomePage()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`));
                         if ($('#userName')) {
                             $('#userName').text(result.data);
@@ -59,8 +59,21 @@
             height: 400px;
             width: 550px;
         }
+
         #sharedToilets {
             border-bottom: 2px solid #eeeeee;
+        }
+
+        #background {
+            width: 100%;
+            margin-top: -20px;
+            margin-bottom: 20px;
+            background-image: url("../images/background.jpg");
+            height: 250px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
         }
     </style>
 </head>
@@ -75,15 +88,18 @@
         </ul>
 
         <ul id="nav-right" class="nav navbar-nav navbar-right">
-            <li><a href="#" onclick="logoutAtUserHomePage()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="#" onclick="logoutAtUserHomePage()"><span class="glyphicon glyphicon-log-out"></span>
+                Logout</a></li>
         </ul>
     </div>
 </nav>
 <!--page header-->
-<div style="background-color: aliceblue !important;" class="jumbotron">
-    <div class="container">
-        <h1>Hi, <span id="userName"></span></h1>
-        <p>Welcome to visiting public toilet website</p>
+<div id="background">
+    <div class="container" style="color: antiquewhite;">
+        <div style="margin-top: 30px; margin-bottom: 30px;">
+            <h1>Hi, <span id="userName" style="font-size: 50px;"></span></h1>
+        </div>
+        <p style="font-size: 20px">Welcome to visiting public toilet website</p>
     </div>
 </div>
 </nav>
@@ -190,6 +206,7 @@
             $('#lng').val(e.latLng.lng());
         });
     }
+
     // load user liked toilets
     function loadCollection() {
         $.ajax({
@@ -267,7 +284,7 @@
 </script>
 <script>
     function createToilet() {
-        $('#btnCreateToilet').attr("disabled",true);
+        $('#btnCreateToilet').attr("disabled", true);
         if (!$('#share-erro-info').hasClass("hide")) {
             $('#share-erro-info').addClass("hide");
         }
@@ -277,19 +294,19 @@
         if (toiletName == '') {
             $('#share-erro-info').text("toilet name cannot be empty");
             $('#share-erro-info').removeClass("hide");
-            $('#btnCreateToilet').attr("disabled",false);
+            $('#btnCreateToilet').attr("disabled", false);
             return;
         }
         if (pic == '') {
             $('#share-erro-info').text("please choose toilet picture");
             $('#share-erro-info').removeClass("hide");
-            $('#btnCreateToilet').attr("disabled",false);
+            $('#btnCreateToilet').attr("disabled", false);
             return;
         }
         if (location == '') {
             $('#share-erro-info').text("please click location on the map");
             $('#share-erro-info').removeClass("hide");
-            $('#btnCreateToilet').attr("disabled",false);
+            $('#btnCreateToilet').attr("disabled", false);
             return;
         }
         let form = new FormData();
@@ -316,13 +333,13 @@
                     $('#share-erro-info').text(result.message);
                     $('#share-erro-info').removeClass("hide");
                     console.log(result.message);
-                    $('#btnCreateToilet').attr("disabled",false);
+                    $('#btnCreateToilet').attr("disabled", false);
                     return;
                 }
                 if (result.errno == 0) {
                     $('#shareToilet').modal('hide');
                     loadMySharedToilet();
-                    $('#btnCreateToilet').attr("disabled",false);
+                    $('#btnCreateToilet').attr("disabled", false);
                     console.log(result.data);
                 }
             },
@@ -345,7 +362,7 @@
                 }
                 // login success
                 if (result.errno == 0) {
-                    window.location.href="/";
+                    window.location.href = "/";
                 }
                 console.log(result);
             },
