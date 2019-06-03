@@ -21,7 +21,7 @@ app.use(session({
 
 app.use("/", routes);   //router
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT || 4000, function () {
     console.log("let's do something fun.")
 });
 
